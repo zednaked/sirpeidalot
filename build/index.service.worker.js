@@ -4,7 +4,7 @@
 // Incrementing CACHE_VERSION will kick off the install event and force
 // previously cached resources to be updated from the network.
 /** @type {string} */
-const CACHE_VERSION = '1752080297|1971228396';
+const CACHE_VERSION = '1752080526|2200122334';
 /** @type {string} */
 const CACHE_PREFIX = 'Trama-sw-cache-';
 const CACHE_NAME = CACHE_PREFIX + CACHE_VERSION;

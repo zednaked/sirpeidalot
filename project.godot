@@ -23,7 +23,7 @@ window/stretch/mode="canvas_items"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/markdownlabel/plugin.cfg", "res://addons/sticky_scribe/plugin.cfg")
+enabled=PackedStringArray("res://addons/coi_serviceworker/plugin.cfg")
 
 [input]
 
