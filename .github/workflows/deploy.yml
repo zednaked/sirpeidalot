@@ -1,0 +1,54 @@
+# Workflow para construir e publicar um jogo Godot no GitHub Pages
+name: Deploy Godot to GitHub Pages
+
+on:
+  # Executa sempre que houver um push para a branch 'main'
+  push:
+    branches: [ "main" ]
+  # Permite que você execute este workflow manualmente a partir da aba Actions
+  workflow_dispatch:
+
+# Define as permissões necessárias para o deploy
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  # O trabalho de construção (build)
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Baixa o código do seu repositório
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 2. Constrói o jogo Godot para a Web
+      # Usa uma ação da comunidade para facilitar o processo
+      - name: Godot Export
+        uses: abarichello/godot-ci:4.2
+        with:
+          # O nome exato do preset de exportação que você criou
+          preset: "Web-Pages"
+          # O caminho para onde o jogo será exportado
+          path: "build/"
+      
+      # 3. Carrega o resultado do build como um artefato
+      # Este artefato será usado pelo trabalho de deploy
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./build
+
+  # O trabalho de publicação (deploy)
+  deploy:
+    # Depende do sucesso do trabalho de 'build'
+    needs: build
+    runs-on: ubuntu-latest
+    
+    steps:
+      # 1. Publica o artefato carregado no GitHub Pages
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
