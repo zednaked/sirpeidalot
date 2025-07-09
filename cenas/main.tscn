@@ -1,18 +1,17 @@
-[gd_scene load_steps=12 format=4 uid="uid://c1vuc22tkpssy"]
+[gd_scene load_steps=13 format=4 uid="uid://c1vuc22tkpssy"]
 
 [ext_resource type="TileSet" uid="uid://74d8818b5tw4" path="res://cenas/tilemap.tres" id="1_1yycb"]
 [ext_resource type="Script" uid="uid://cfwe642akir1" path="res://scripts/dungeon_generator.gd" id="1_v1d1r"]
-[ext_resource type="PackedScene" uid="uid://df43caxqf3q3" path="res://cenas/arco.tscn" id="4_jdavq"]
+[ext_resource type="PackedScene" uid="uid://c2s5sud7m7blb" path="res://cenas/escada.tscn" id="4_jdavq"]
 [ext_resource type="PackedScene" uid="uid://cmdjbl5nkg0mx" path="res://cenas/esqueleto.tscn" id="5_bhvw8"]
-[ext_resource type="Texture2D" uid="uid://dichiiyly3dvq" path="res://sprites/2D Pixel Dungeon Asset Pack/character and tileset/Dungeon_Tileset.png" id="5_vhipe"]
+[ext_resource type="PackedScene" uid="uid://r1jhgwwpmq62" path="res://cenas/main2.tscn" id="5_vhipe"]
 [ext_resource type="PackedScene" uid="uid://b5a3sedway7cr" path="res://cenas/chave.tscn" id="6_l8342"]
 [ext_resource type="PackedScene" uid="uid://rnyckv2mqcuq" path="res://cenas/luz.tscn" id="7_l8342"]
 [ext_resource type="SpriteFrames" uid="uid://6dyc4c0q2ltw" path="res://cenas/itensmist.tres" id="8_g6klm"]
 [ext_resource type="PackedScene" uid="uid://l6yyfgkqa3sv" path="res://cenas/luzfrente.tscn" id="8_v1d1r"]
 [ext_resource type="PackedScene" uid="uid://brjnkob1iywis" path="res://cenas/Jogador.tscn" id="9_1yycb"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_iwfo7"]
-size = Vector2(17, 14)
+[ext_resource type="Script" uid="uid://c1h70hpe6lfcd" path="res://scripts/chave.gd" id="9_vhipe"]
+[ext_resource type="PackedScene" uid="uid://uhlbu8vso7at" path="res://cenas/porta.tscn" id="12_iwfo7"]
 
 [node name="main" type="Node2D" node_paths=PackedStringArray("player", "enemies_container", "floor_tilemap", "walls_tilemap")]
 modulate = Color(0.9764706, 1, 0.70980394, 1)
@@ -44,34 +43,21 @@ tile_map_data = PackedByteArray("AAD9//n/AAAIAAcAAAD9//r/AAAIAAcAAAD9//v/AAAIAAc
 tile_set = ExtResource("1_1yycb")
 metadata/_edit_lock_ = true
 
-[node name="portas" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAAGAPz/AAAGAAQAAAANAPz/AAAGAAQAAAAEAAEAAAAGAAQAAAAKAAEAAAAGAAQAAAAAAP7/AAAHAAMAAAA=")
-tile_set = ExtResource("1_1yycb")
-use_kinematic_bodies = true
-metadata/_edit_lock_ = true
-
 [node name="tranqueiras" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAD//wAAAAAEAAYAAAALAAAAAAAEAAYAAAAHAPv/AAAEAAYAAAABAAIAAAAHAAcAAAACAP3/AAAHAAcAAAAGAAAAAAAIAAYAAAAOAAIAAAAIAAYAAAD//wEAAAAIAAYAAAD///3/AAAIAAYAAAACAAAAAAAFAAYAAAAOAP3/AAAFAAYAAAAIAP3/AAAJAAUAAAAKAPv/AAAJAAUAAAAAAPv/AAAJAAUAAAAHAAEAAAAJAAUAAAANAAIAAAAJAAUAAAABAAEAAAAJAAUAAAAHAP//AAAFAAcAAAAOAAEAAAAFAAYAAAA=")
 tile_set = ExtResource("1_1yycb")
 metadata/_edit_lock_ = true
 
 [node name="Player" parent="." instance=ExtResource("9_1yycb")]
-position = Vector2(8, -54)
+position = Vector2(9, -54)
 disable_mode = 2
+metadata/_edit_group_ = true
 
-[node name="escada" type="StaticBody2D" parent="."]
+[node name="InteractionRayCast" parent="Player" index="2"]
+collide_with_areas = true
 
-[node name="sprite" parent="escada" instance=ExtResource("4_jdavq")]
-visible = true
-position = Vector2(233, -87)
-scale = Vector2(0.8, 0.8)
-texture = ExtResource("5_vhipe")
-region_enabled = true
-region_rect = Rect2(144, 48, 16, 16)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="escada"]
-position = Vector2(232.5, -75)
-shape = SubResource("RectangleShape2D_iwfo7")
+[node name="escada" parent="." instance=ExtResource("4_jdavq")]
+target_scene = ExtResource("5_vhipe")
 
 [node name="bandeiradeparede" type="AnimatedSprite2D" parent="."]
 position = Vector2(7.5, -88.5)
@@ -93,7 +79,7 @@ frame_progress = 0.3497669
 [node name="Node" type="Node" parent="."]
 
 [node name="esqueleto" parent="Node" instance=ExtResource("5_bhvw8")]
-position = Vector2(36.000008, -55)
+position = Vector2(153, -57)
 
 [node name="esqueleto2" parent="Node" instance=ExtResource("5_bhvw8")]
 position = Vector2(237, 7.999996)
@@ -101,8 +87,9 @@ position = Vector2(237, 7.999996)
 [node name="esqueleto3" parent="Node" instance=ExtResource("5_bhvw8")]
 position = Vector2(141, 7.9999995)
 
-[node name="chave" parent="." instance=ExtResource("6_l8342")]
+[node name="chave" parent="." groups=["key"] instance=ExtResource("6_l8342")]
 position = Vector2(209, 21)
+script = ExtResource("9_vhipe")
 
 [node name="Luz" parent="." instance=ExtResource("7_l8342")]
 light_mask = 7
@@ -276,6 +263,32 @@ energy = 2.11
 shadow_filter = 1
 shadow_item_cull_mask = 3
 
+[node name="porta" parent="." instance=ExtResource("12_iwfo7")]
+position = Vector2(82, -57)
+metadata/_edit_group_ = true
+
+[node name="sprite" parent="porta" index="0"]
+position = Vector2(-0.3, 1.1920929e-07)
+scale = Vector2(0.83750004, 1.25)
+
+[node name="porta3" parent="." instance=ExtResource("12_iwfo7")]
+position = Vector2(64, 23)
+metadata/_edit_group_ = true
+
+[node name="sprite" parent="porta3" index="0"]
+position = Vector2(-0.3, 1.1920929e-07)
+scale = Vector2(0.83750004, 1.25)
+
+[node name="porta2" parent="." instance=ExtResource("12_iwfo7")]
+position = Vector2(217, -57)
+metadata/_edit_group_ = true
+
+[node name="sprite" parent="porta2" index="0"]
+position = Vector2(-0.3, 1.1920929e-07)
+scale = Vector2(0.83750004, 1.25)
+
+[editable path="Player"]
+[editable path="chave"]
 [editable path="Luz"]
 [editable path="Luz2"]
 [editable path="Luz3"]
@@ -286,3 +299,6 @@ shadow_item_cull_mask = 3
 [editable path="Luzparede"]
 [editable path="Luzparede2"]
 [editable path="Luzparede3"]
+[editable path="porta"]
+[editable path="porta3"]
+[editable path="porta2"]

@@ -11,6 +11,7 @@ const MOVE_SPEED = 15.0
 # --- Attributes ---
 @export var health: int = 100
 @export var damage: int = 25
+var has_key: bool = true
 
 # --- References ---
 @onready var animated_sprite: AnimatedSprite2D = $animacao
@@ -70,10 +71,26 @@ func _try_move_or_attack(direction: Vector2):
 			collider.take_damage(damage)
 			consumed_turn = true
 		
-		elif collider is TileMapLayer and collider.name == "portas":
-			var collision_point = interaction_ray.get_collision_point()
-			var map_coords = collider.local_to_map(collider.to_local(collision_point))
-			collider.set_cell(map_coords, -1)
+		# --- KEY PICKUP LOGIC ---
+		elif collider.is_in_group("key"):
+			_pickup_key(collider)
+			consumed_turn = true
+			
+		# --- STAIRS INTERACTION LOGIC ---
+		elif collider.is_in_group("stairs"):
+			if has_key:
+				if collider.has_method("interact"):
+					collider.interact()
+			else:
+				print("The stairs are locked. You need a key.")
+			consumed_turn = true # Interacting with stairs takes a turn
+
+		elif collider is StaticBody2D and collider.is_in_group ("portas"):
+			print_debug ("porta")
+			#var collision_point = interaction_ray.get_collision_point()
+			#var map_coords = collider.local_to_map(collider.to_local(collision_point))
+			#collider.set_cell(map_coords, -1)
+			collider.collect()
 			consumed_turn = true
 			
 	else:
@@ -85,6 +102,12 @@ func _try_move_or_attack(direction: Vector2):
 
 	if consumed_turn:
 		emit_signal("action_taken")
+
+func _pickup_key(key_node):
+	if key_node.has_method("collect"):
+		key_node.collect()
+		has_key = true
+		print("Player picked up the key!")
 
 # --- Combat Functions ---
 

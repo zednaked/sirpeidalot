@@ -1,121 +1,134 @@
-# dungeon_generator.gd -> Conceptually the TurnManager
-# This script manages the turn-based game flow and pathfinding.
-# Attach this script to a root node in your main scene.
+# dungeon_generator.gd -> Gerenciador de Turnos e Estado do Jogo
+# Este script orquestra o fluxo do jogo baseado em turnos, gerencia o estado
+# geral (turno do jogador, turno do inimigo, etc.) e fornece serviços de
+# pathfinding para os inimigos. Ele deve ser anexado a um nó raiz na cena principal.
 
 extends Node2D
 
-# --- Constants ---
+# --- Constantes ---
 const TILE_SIZE = 16
 
-# --- Node References (Set in the Inspector) ---
-@export var player: CharacterBody2D
-@export var enemies_container: Node
-@export var floor_tilemap: TileMapLayer
-@export var walls_tilemap: TileMapLayer
+# --- Referências de Nós (Configuradas no Editor) ---
+@export var player: CharacterBody2D          # Referência ao nó do jogador.
+@export var enemies_container: Node         # Nó que contém todos os inimigos da cena.
+@export var floor_tilemap: TileMapLayer     # TileMapLayer para o chão (usado no pathfinding).
+@export var walls_tilemap: TileMapLayer     # TileMapLayer para as paredes (usado no pathfinding).
 
 # --- Pathfinding ---
-var astar_grid = AStar2D.new()
+var astar_grid = AStar2D.new() # Objeto A* para cálculo de caminhos.
 
-# --- Game State ---
+# --- Estado do Jogo ---
+# Enum para os diferentes estados do jogo.
 enum GameState { PLAYER_TURN, ENEMY_TURN, PAUSED, FREE_ROAM }
 var current_state: GameState = GameState.PAUSED
 
-# --- Signals ---
-signal player_turn_started
-signal enemy_turn_started
+# --- Sinais ---
+signal player_turn_started # Emitido quando o turno do jogador começa.
+signal enemy_turn_started  # Emitido quando o turno dos inimigos começa.
 
 func _ready():
-	# Validations
-	if not player: print_debug("Player not set in TurnManager."); return
-	if not enemies_container: print_debug("Enemies container not set."); return
-	if not floor_tilemap: print_debug("Floor TileMapLayer not set."); return
-	if not walls_tilemap: print_debug("Walls TileMapLayer not set."); return
+	# Validações para garantir que todas as referências foram configuradas no editor.
+	if not player: print_debug("Player não configurado no TurnManager."); return
+	if not enemies_container: print_debug("Container de inimigos não configurado."); return
+	if not floor_tilemap: print_debug("TileMapLayer de chão não configurado."); return
+	if not walls_tilemap: print_debug("TileMapLayer de paredes não configurado."); return
 
+	# Conecta o sinal 'action_taken' do jogador à função correspondente.
 	if not player.has_signal("action_taken"):
-		print_debug("Player node is missing the 'action_taken' signal.")
+		print_debug("Nó do jogador não possui o sinal 'action_taken'.")
 	else:
 		player.connect("action_taken", _on_player_action_taken)
 
+	# Adia a inicialização do jogo para o próximo frame.
 	call_deferred("start_game")
 
+# Inicia o jogo, cria o grid de pathfinding e define o estado inicial.
 func start_game():
-	print("Game has started!")
+	print("O jogo começou!")
 	
 	_create_astar_grid()
 	
+	# Configura cada inimigo com uma referência a este TurnManager.
 	var enemies = enemies_container.get_children()
 	for enemy in enemies:
 		if enemy.has_method("set_turn_manager"):
 			enemy.set_turn_manager(self)
 		else:
-			print_debug("Enemy %s is missing the 'set_turn_manager' method." % enemy.name)
+			print_debug("Inimigo %s não possui o método 'set_turn_manager'." % enemy.name)
 
+	# Inicia o primeiro turno do jogador.
 	current_state = GameState.PLAYER_TURN
 	if player.has_method("set_can_act"):
 		player.set_can_act(true)
 	emit_signal("player_turn_started")
-	print("--- Player's Turn ---")
+	print("--- Turno do Jogador ---")
 
+# Chamado quando o jogador realiza uma ação que consome o turno.
 func _on_player_action_taken():
 	if current_state != GameState.PLAYER_TURN:
 		return
 
-	# Check for win condition AFTER the player's action is resolved.
+	# Verifica a condição de vitória após a ação do jogador.
 	if _count_living_enemies() == 0:
-		print_debug("All enemies defeated! Switching to free roam mode.")
+		print_debug("Todos os inimigos derrotados! Mudando para o modo livre.")
 		current_state = GameState.FREE_ROAM
 		if player.has_method("set_can_act"):
 			player.set_can_act(true)
 		return
 	
-	print("Player acted. Ending turn.")
+	print("Jogador agiu. Finalizando turno.")
 	
+	# Desabilita a ação do jogador e inicia o turno dos inimigos.
 	if player.has_method("set_can_act"):
 		player.set_can_act(false)
 		
 	current_state = GameState.ENEMY_TURN
 	emit_signal("enemy_turn_started")
-	print("--- Enemies' Turn ---")
+	print("--- Turno dos Inimigos ---")
 	
 	call_deferred("_process_enemy_turns")
 
+# Processa o turno de cada inimigo sequencialmente.
 func _process_enemy_turns():
 	var enemies = enemies_container.get_children().duplicate()
 
 	for enemy in enemies:
-		# Skip dead or invalid enemies
+		# Pula inimigos que já estão mortos ou inválidos.
 		if not is_instance_valid(enemy) or enemy.is_dead:
 			continue
 
 		enemy.take_turn()
-		await enemy.action_taken
+		await enemy.action_taken # Espera o inimigo completar sua ação.
 	
 	_end_enemy_turn_sequence()
 
+# Finaliza a sequência de turnos dos inimigos e devolve o controle ao jogador.
 func _end_enemy_turn_sequence():
-	# A check to see if the last enemy was killed during this turn sequence.
+	# Verifica se o último inimigo foi morto nesta sequência de turnos.
 	if _count_living_enemies() == 0:
 		current_state = GameState.FREE_ROAM
 		if player.has_method("set_can_act"):
 			player.set_can_act(true)
-		print_debug("Last enemy defeated! Switching to free roam mode.")
+		print_debug("Último inimigo derrotado! Mudando para o modo livre.")
 		return
 
 	if current_state == GameState.FREE_ROAM:
 		return
 		
-	print("All enemies have acted. Ending turn.")
+	print("Todos os inimigos agiram. Finalizando turno.")
 	
+	# Devolve o controle ao jogador.
 	current_state = GameState.PLAYER_TURN
 	
 	if player.has_method("set_can_act"):
 		player.set_can_act(true)
 		
 	emit_signal("player_turn_started")
-	print("--- Player's Turn ---")
+	print("--- Turno do Jogador ---")
 
-# --- Custom Logic ---
+# --- Lógica Personalizada ---
 
+# Conta quantos inimigos ainda estão vivos na cena.
 func _count_living_enemies() -> int:
 	var living_enemies = 0
 	for enemy in enemies_container.get_children():
@@ -123,12 +136,14 @@ func _count_living_enemies() -> int:
 			living_enemies += 1
 	return living_enemies
 
-# --- A* Pathfinding Logic ---
+# --- Lógica de Pathfinding A* ---
 
+# Cria o grid A* baseado nos tiles de chão e parede.
 func _create_astar_grid():
 	astar_grid.clear()
 	var used_rect = floor_tilemap.get_used_rect()
 
+	# Adiciona um ponto ao grid para cada tile de chão que não é uma parede.
 	for y in range(used_rect.position.y, used_rect.end.y):
 		for x in range(used_rect.position.x, used_rect.end.x):
 			var cell = Vector2i(x, y)
@@ -139,6 +154,7 @@ func _create_astar_grid():
 				var point_id = _get_point_id(cell)
 				astar_grid.add_point(point_id, Vector2(cell))
 
+	# Conecta os pontos adjacentes no grid.
 	for y in range(used_rect.position.y, used_rect.end.y):
 		for x in range(used_rect.position.x, used_rect.end.x):
 			var cell = Vector2i(x, y)
@@ -152,10 +168,12 @@ func _create_astar_grid():
 					if astar_grid.has_point(neighbor_point_id):
 						astar_grid.connect_points(current_point_id, neighbor_point_id, false)
 
+# Converte uma coordenada de célula (Vector2i) em um ID de ponto único (int).
 func _get_point_id(cell: Vector2i) -> int:
 	const OFFSET = 5000 
 	return (cell.x + OFFSET) + (cell.y + OFFSET) * (OFFSET * 2)
 
+# Calcula o caminho entre duas posições no mundo.
 func calculate_path(start_world_pos: Vector2, end_world_pos: Vector2) -> PackedVector2Array:
 	var start_cell = floor_tilemap.local_to_map(start_world_pos)
 	var end_cell = floor_tilemap.local_to_map(end_world_pos)
@@ -174,6 +192,7 @@ func calculate_path(start_world_pos: Vector2, end_world_pos: Vector2) -> PackedV
 		
 	return world_path
 
+# Retorna a posição global atual do jogador.
 func get_player_position() -> Vector2:
 	if is_instance_valid(player):
 		return player.global_position
