@@ -4,7 +4,7 @@
 // Incrementing CACHE_VERSION will kick off the install event and force
 // previously cached resources to be updated from the network.
 /** @type {string} */
-const CACHE_VERSION = '1752094052|1545104875';
+const CACHE_VERSION = '1752096715|4208295912';
 /** @type {string} */
 const CACHE_PREFIX = 'SirPeidalot-sw-cache-';
 const CACHE_NAME = CACHE_PREFIX + CACHE_VERSION;

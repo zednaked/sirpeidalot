@@ -57,12 +57,11 @@ func start_game():
 	print("--- Player's Turn ---")
 
 func _on_player_action_taken():
-	# This function is now only triggered by the PLAYER.
-	# We check the state to prevent it from running during the enemy turn sequence.
 	if current_state != GameState.PLAYER_TURN:
 		return
 
-	if enemies_container.get_children().is_empty():
+	# Check for win condition AFTER the player's action is resolved.
+	if _count_living_enemies() == 0:
 		print_debug("All enemies defeated! Switching to free roam mode.")
 		current_state = GameState.FREE_ROAM
 		if player.has_method("set_can_act"):
@@ -81,26 +80,27 @@ func _on_player_action_taken():
 	call_deferred("_process_enemy_turns")
 
 func _process_enemy_turns():
-	var enemies = enemies_container.get_children()
-	if enemies.is_empty():
-		_end_enemy_turn_sequence()
-		return
+	var enemies = enemies_container.get_children().duplicate()
 
 	for enemy in enemies:
-		if is_instance_valid(enemy):
-			if enemy.has_method("take_turn"):
-				enemy.take_turn()
-				# CORRECTED: Now awaits the same signal from enemies as from the player.
-				if enemy.has_signal("action_taken"):
-					await enemy.action_taken
-				else:
-					print_debug("Enemy %s is missing 'action_taken' signal. Turn will not advance." % enemy.name)
-			else:
-				print_debug("Enemy %s is missing the 'take_turn' method." % enemy.name)
-		
+		# Skip dead or invalid enemies
+		if not is_instance_valid(enemy) or enemy.is_dead:
+			continue
+
+		enemy.take_turn()
+		await enemy.action_taken
+	
 	_end_enemy_turn_sequence()
 
 func _end_enemy_turn_sequence():
+	# A check to see if the last enemy was killed during this turn sequence.
+	if _count_living_enemies() == 0:
+		current_state = GameState.FREE_ROAM
+		if player.has_method("set_can_act"):
+			player.set_can_act(true)
+		print_debug("Last enemy defeated! Switching to free roam mode.")
+		return
+
 	if current_state == GameState.FREE_ROAM:
 		return
 		
@@ -113,6 +113,15 @@ func _end_enemy_turn_sequence():
 		
 	emit_signal("player_turn_started")
 	print("--- Player's Turn ---")
+
+# --- Custom Logic ---
+
+func _count_living_enemies() -> int:
+	var living_enemies = 0
+	for enemy in enemies_container.get_children():
+		if is_instance_valid(enemy) and not enemy.is_dead:
+			living_enemies += 1
+	return living_enemies
 
 # --- A* Pathfinding Logic ---
 

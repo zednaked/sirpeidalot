@@ -80,7 +80,7 @@ func _try_move_or_attack(direction: Vector2):
 		# --- MOVEMENT LOGIC ---
 		target_position = global_position + direction * TILE_SIZE
 		is_moving = true
-		animated_sprite.play("walk")
+		animated_sprite.play("idle")
 		return
 
 	if consumed_turn:

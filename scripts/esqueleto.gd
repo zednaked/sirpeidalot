@@ -20,7 +20,7 @@ var turn_manager = null
 
 # --- State ---
 var is_moving: bool = false
-var is_dead: bool = false # Prevents a dying skeleton from acting
+var is_dead: bool = false
 var target_position: Vector2
 
 func _ready():
@@ -39,100 +39,65 @@ func _physics_process(delta):
 			emit_signal("action_taken")
 
 func take_turn():
-	# A dead skeleton cannot take a turn.
+	# A dead skeleton's turn is to do nothing and end immediately.
 	if is_dead:
-		emit_signal("action_taken") # End turn immediately
-		return
-
-	print_debug("--- Skeleton's Turn (%s) ---" % self.name)
-	if not is_instance_valid(player_node):
-		print_debug("Skeleton: Player not found. Ending turn.")
 		emit_signal("action_taken")
 		return
 
 	var player_pos = turn_manager.get_player_position()
 	var my_pos = global_position
-	
-	var distance_to_player = my_pos.distance_to(player_pos)
-
-	if distance_to_player < TILE_SIZE * 1.5:
-		print_debug("Skeleton: Player is adjacent. Attacking!")
+	if my_pos.distance_to(player_pos) < TILE_SIZE * 1.5:
 		_attack_player(player_pos - my_pos)
 	else:
-		print_debug("Skeleton: Player is far. Moving towards player.")
 		_move_towards_player(player_pos)
 
 # --- Combat Functions ---
 
 func take_damage(amount: int):
-	# Can't take damage if already dead.
 	if is_dead:
 		return
-
 	health -= amount
-	print_debug("Skeleton took %d damage, has %d health left." % [amount, health])
-	
+	print_debug("%s took %d damage, has %d health left." % [self.name, amount, health])
 	if health <= 0:
 		_die()
 
 func _attack_player(direction: Vector2):
 	_update_animation_direction(direction.normalized())
-	
 	var anim_name = "attack"
-
 	if animated_sprite.sprite_frames.has_animation(anim_name):
-		if animated_sprite.sprite_frames.get_animation_loop(anim_name):
-			print_debug("!!! AVISO: A animação 'attack' está configurada para LOOP.")
-		
 		animated_sprite.play(anim_name)
-		# Deal damage to the player
 		if player_node.has_method("take_damage"):
 			player_node.take_damage(damage)
 		await animated_sprite.animation_finished
 	else:
-		print_debug("ERROR: Animation '%s' not found!" % anim_name)
 		await get_tree().create_timer(0.5).timeout
-
 	animated_sprite.play("idle")
 	emit_signal("action_taken")
 
+# This function now only sets the state and starts the animation.
+# It does NOT handle queue_free().
 func _die():
+	if is_dead: return
 	is_dead = true
-	# Disable collision so the player can walk over the dying body
+	print_debug("%s is dying." % self.name)
 	if is_instance_valid(collision_shape):
 		collision_shape.disabled = true
 	
-	var anim_name = "death"
-	if animated_sprite.sprite_frames.has_animation(anim_name):
-		print_debug("Skeleton is dying. Playing death animation.")
-		animated_sprite.play(anim_name)
-		await animated_sprite.animation_finished
-	else:
-		print_debug("ERROR: 'death' animation not found. Skeleton will disappear immediately.")
-	
-	queue_free()
+	animated_sprite.play("death")
 
-# --- Movement Functions ---
+# --- Movement and Helper Functions ---
 
 func _move_towards_player(player_pos: Vector2):
 	if not turn_manager:
-		print_debug("Skeleton: TurnManager not defined. Ending turn.")
 		emit_signal("action_taken")
 		return
-
 	var path = turn_manager.calculate_path(global_position, player_pos)
-	
 	if path.size() > 1:
-		var next_step = path[1]
-		var direction = (next_step - global_position).normalized()
-		
-		print_debug("Skeleton: Path found. Moving to: ", next_step)
-		target_position = next_step
+		target_position = path[1]
 		is_moving = true
-		_update_animation_direction(direction)
+		_update_animation_direction((target_position - global_position).normalized())
 		animated_sprite.play("walk")
 	else:
-		print_debug("Skeleton: No path found. Ending turn.")
 		emit_signal("action_taken")
 
 func _update_animation_direction(direction: Vector2):
