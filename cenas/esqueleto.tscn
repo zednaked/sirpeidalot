@@ -368,7 +368,7 @@ animations = [{
 size = Vector2(20, 18.57143)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_4bm5w"]
-polygon = PackedVector2Array(-9.999997, 7.1428614, -7.142854, 7.1428614, -8.571425, 8.571433, -7.142854, 8.571433, -6.142868, 9.285713, -6.142868, 10.714279, -7.142854, 12.857147, -12.85714, 12.857147, -12.85714, 10.000004, -12.85714, 7.1428614, -11.428568, 5.71429)
+polygon = PackedVector2Array(-8.571427, 5.714287, -7.1428556, 1.428573, -12.8571415, 1.428573)
 
 [node name="esqueleto" type="CharacterBody2D"]
 scale = Vector2(0.7, 0.7)
@@ -382,16 +382,19 @@ animation = &"idle"
 autoplay = "idle"
 speed_scale = 1.6
 offset = Vector2(3, -6)
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-7.1428576, -1.4285715)
 scale = Vector2(0.99999994, 0.99999994)
 shape = SubResource("RectangleShape2D_1yycb")
+metadata/_edit_lock_ = true
 
 [node name="VisionRayCast" type="RayCast2D" parent="."]
 position = Vector2(-7.1428566, -0.71428454)
 target_position = Vector2(0, 16)
+metadata/_edit_lock_ = true
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
-position = Vector2(1.4285688, -5.7142906)
+position = Vector2(1.4285706, 1.4285698)
 occluder = SubResource("OccluderPolygon2D_4bm5w")
