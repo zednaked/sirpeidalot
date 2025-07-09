@@ -68,6 +68,7 @@ func _try_move_or_attack(direction: Vector2):
 		# --- ATTACK LOGIC ---
 		if collider.is_in_group("enemies") and collider.has_method("take_damage"):
 			print("Player attacks ", collider.name)
+			$efeitos.play("attack")
 			collider.take_damage(damage)
 			consumed_turn = true
 		
@@ -130,3 +131,8 @@ func set_can_act(value: bool):
 		print_debug("Player can now act.")
 	else:
 		print_debug("Player input disabled.")
+
+
+func _on_efeitos_animation_finished() -> void:
+	
+	pass # Replace with function body.

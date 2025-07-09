@@ -1,13 +1,41 @@
-[gd_scene load_steps=5 format=3 uid="uid://brjnkob1iywis"]
+[gd_scene load_steps=9 format=3 uid="uid://brjnkob1iywis"]
 
 [ext_resource type="Script" uid="uid://dhtrkfjo7ndr" path="res://scripts/player.gd" id="1_ec23w"]
 [ext_resource type="PackedScene" uid="uid://decl5ra508cu0" path="res://cenas/animacaoplayer.tscn" id="2_81edp"]
+[ext_resource type="Texture2D" uid="uid://cwq0s0ei84td4" path="res://addons/kenney_particle_pack/twirl_01.png" id="3_w5k1g"]
+[ext_resource type="Texture2D" uid="uid://cfd5wra04yjwo" path="res://addons/kenney_particle_pack/twirl_02.png" id="4_qt7mt"]
+[ext_resource type="Texture2D" uid="uid://u6mhob82tmci" path="res://addons/kenney_particle_pack/twirl_03.png" id="5_kt34h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jdavq"]
 size = Vector2(16.250004, 15.625004)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_81edp"]
 polygon = PackedVector2Array(-7, 6, -6, 6, -4.7142944, 6.428566, -3, 8, -3, 9, -7, 10, -8, 10, -10, 10, -10, 8, -10, 7, -8, 7)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ysavc"]
+animations = [{
+"frames": [{
+"duration": 0.41,
+"texture": ExtResource("3_w5k1g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_qt7mt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_kt34h")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": false,
+"name": &"attack",
+"speed": 3.0
+}, {
+"frames": [],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
@@ -30,3 +58,14 @@ collision_mask = 51
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 position = Vector2(6, -6)
 occluder = SubResource("OccluderPolygon2D_81edp")
+
+[node name="efeitos" type="AnimatedSprite2D" parent="."]
+modulate = Color(0.96492857, 0.32539752, 0.500027, 1)
+position = Vector2(-0.9999995, -0.99999994)
+scale = Vector2(0.1, 0.1)
+sprite_frames = SubResource("SpriteFrames_ysavc")
+animation = &"attack"
+autoplay = "default"
+frame = 3
+
+[connection signal="animation_finished" from="efeitos" to="." method="_on_efeitos_animation_finished"]

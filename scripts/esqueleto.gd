@@ -64,6 +64,10 @@ func take_turn():
 
 # --- Funções de Combate ---
 
+func set_anim (animac: String):
+	$animacao.play (animac)
+	pass
+	
 # Reduz a vida do esqueleto ao receber dano.
 func take_damage(amount: int):
 	if is_dead:
@@ -72,6 +76,9 @@ func take_damage(amount: int):
 	print_debug("%s recebeu %d de dano, vida restante: %d." % [self.name, amount, health])
 	if health <= 0:
 		_die()
+	else:
+		set_anim("hurt")
+		
 
 # Executa a lógica de ataque contra o jogador.
 func _attack_player(direction: Vector2):

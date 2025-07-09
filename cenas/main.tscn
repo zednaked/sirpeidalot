@@ -56,6 +56,10 @@ metadata/_edit_group_ = true
 [node name="InteractionRayCast" parent="Player" index="2"]
 collide_with_areas = true
 
+[node name="efeitos" parent="Player" index="4"]
+animation = &"attack"
+autoplay = ""
+
 [node name="escada" parent="." instance=ExtResource("4_jdavq")]
 target_scene = ExtResource("5_vhipe")
 
@@ -80,6 +84,9 @@ frame_progress = 0.3497669
 
 [node name="esqueleto" parent="Node" instance=ExtResource("5_bhvw8")]
 position = Vector2(153, -57)
+
+[node name="esqueleto4" parent="Node" instance=ExtResource("5_bhvw8")]
+position = Vector2(23.000004, -55)
 
 [node name="esqueleto2" parent="Node" instance=ExtResource("5_bhvw8")]
 position = Vector2(237, 7.999996)
