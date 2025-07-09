@@ -69,3 +69,23 @@ Para que os ataques e interações funcionem corretamente, os corpos físicos pr
 -   **Ataque**: Mova-se em direção a um inimigo adjacente para atacá-lo.
 -   **Passar o Turno**: Pressione a **Barra de Espaço** para pular seu turno sem realizar uma ação. Isso é útil para esperar que os inimigos se aproximem.
 -   **Modo Livre**: Após todos os inimigos serem derrotados, o sistema de turnos é desativado e você pode se mover livremente pelo mapa.
+
+## 4. Deploy Automático (GitHub Pages)
+
+O projeto está configurado para ser automaticamente construído e publicado na web usando GitHub Actions.
+
+### 4.1. Como Funciona
+
+1.  Toda vez que um novo commit é enviado (`git push`) para a branch `main` do repositório no GitHub, um processo automático é iniciado.
+2.  Este processo, definido em `.github/workflows/deploy.yml`, usa um servidor remoto para:
+    a. Baixar o código do jogo.
+    b. Exportar o jogo para o formato Web/HTML5, usando o preset de exportação `Web-Pages`.
+    c. Publicar os arquivos resultantes em uma página da web.
+
+### 4.2. Acessando o Jogo
+
+-   Após um `push` bem-sucedido, aguarde alguns minutos para o processo ser concluído. Você pode acompanhar o progresso na aba **"Actions"** do seu repositório no GitHub.
+-   Quando o processo terminar com sucesso, o jogo estará disponível no seguinte link:
+    -   **https://zednaked.github.io/sirpeidalot/**
+
+Isso significa que você não precisa exportar e fazer o upload do jogo manualmente. Apenas envie suas novas mudanças para o repositório e o jogo será atualizado online automaticamente.
