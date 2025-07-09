@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=4 uid="uid://c1vuc22tkpssy"]
+[gd_scene load_steps=9 format=4 uid="uid://c1vuc22tkpssy"]
 
 [ext_resource type="TileSet" uid="uid://74d8818b5tw4" path="res://cenas/tilemap.tres" id="1_1yycb"]
 [ext_resource type="Script" uid="uid://cfwe642akir1" path="res://scripts/dungeon_generator.gd" id="1_v1d1r"]
 [ext_resource type="PackedScene" uid="uid://cmdjbl5nkg0mx" path="res://cenas/esqueleto.tscn" id="5_bhvw8"]
 [ext_resource type="PackedScene" uid="uid://b5a3sedway7cr" path="res://cenas/chave.tscn" id="6_l8342"]
+[ext_resource type="PackedScene" uid="uid://rnyckv2mqcuq" path="res://cenas/luz.tscn" id="7_l8342"]
 [ext_resource type="SpriteFrames" uid="uid://6dyc4c0q2ltw" path="res://cenas/itensmist.tres" id="8_g6klm"]
+[ext_resource type="PackedScene" uid="uid://l6yyfgkqa3sv" path="res://cenas/luzfrente.tscn" id="8_v1d1r"]
 [ext_resource type="PackedScene" uid="uid://brjnkob1iywis" path="res://cenas/Jogador.tscn" id="9_1yycb"]
 
 [node name="main" type="Node2D" node_paths=PackedStringArray("player", "enemies_container", "floor_tilemap", "walls_tilemap")]
@@ -69,10 +71,197 @@ animation = &"bandeira"
 autoplay = "bandeira"
 frame_progress = 0.3497669
 
-[node name="chave" parent="." instance=ExtResource("6_l8342")]
-position = Vector2(208, 24)
-
 [node name="Node" type="Node" parent="."]
 
 [node name="esqueleto" parent="Node" instance=ExtResource("5_bhvw8")]
 position = Vector2(152, -54.999996)
+
+[node name="esqueleto2" parent="Node" instance=ExtResource("5_bhvw8")]
+position = Vector2(237, 7.999996)
+
+[node name="esqueleto3" parent="Node" instance=ExtResource("5_bhvw8")]
+position = Vector2(141, 7.9999995)
+
+[node name="chave" parent="." instance=ExtResource("6_l8342")]
+position = Vector2(209, 21)
+
+[node name="Luz" parent="." instance=ExtResource("7_l8342")]
+light_mask = 7
+visibility_layer = 7
+position = Vector2(-8, -56)
+
+[node name="animacao" parent="Luz" index="0"]
+autoplay = "luzparedev"
+
+[node name="PointLight2D" parent="Luz" index="2"]
+color = Color(0.93753624, 0.9311703, 0.62972325, 1)
+energy = 1.42
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 4.0
+texture_scale = 4.46
+height = 233.0
+
+[node name="Luz2" parent="." instance=ExtResource("7_l8342")]
+light_mask = 7
+visibility_layer = 7
+position = Vector2(120, -76)
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="animacao" parent="Luz2" index="0"]
+autoplay = "luzparedev"
+
+[node name="PointLight2D" parent="Luz2" index="2"]
+color = Color(0.93753624, 0.9311703, 0.62972325, 1)
+energy = 1.42
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 4.0
+texture_scale = 4.46
+height = 233.0
+
+[node name="Luz3" parent="." instance=ExtResource("7_l8342")]
+light_mask = 7
+visibility_layer = 7
+position = Vector2(120, -76)
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="animacao" parent="Luz3" index="0"]
+autoplay = "luzparedev"
+
+[node name="PointLight2D" parent="Luz3" index="2"]
+color = Color(0.93753624, 0.9311703, 0.62972325, 1)
+energy = 1.42
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 4.0
+texture_scale = 4.46
+height = 233.0
+
+[node name="Luz4" parent="." instance=ExtResource("7_l8342")]
+light_mask = 7
+visibility_layer = 7
+position = Vector2(231, -75)
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="animacao" parent="Luz4" index="0"]
+autoplay = "luzparedev"
+
+[node name="PointLight2D" parent="Luz4" index="2"]
+color = Color(0.93753624, 0.9311703, 0.62972325, 1)
+energy = 1.42
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 4.0
+texture_scale = 4.46
+height = 233.0
+
+[node name="Luz5" parent="." instance=ExtResource("7_l8342")]
+light_mask = 7
+visibility_layer = 7
+position = Vector2(-8, 31)
+metadata/_edit_group_ = true
+
+[node name="animacao" parent="Luz5" index="0"]
+autoplay = "luzparedev"
+
+[node name="PointLight2D" parent="Luz5" index="2"]
+color = Color(0.93753624, 0.9311703, 0.62972325, 1)
+energy = 1.42
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 4.0
+texture_scale = 4.46
+height = 233.0
+
+[node name="Luz6" parent="." instance=ExtResource("7_l8342")]
+light_mask = 7
+visibility_layer = 7
+position = Vector2(88, 40)
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="animacao" parent="Luz6" index="0"]
+autoplay = "luzparedev"
+
+[node name="PointLight2D" parent="Luz6" index="2"]
+color = Color(0.93753624, 0.9311703, 0.62972325, 1)
+energy = 1.42
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 4.0
+texture_scale = 4.46
+height = 233.0
+
+[node name="Luz7" parent="." instance=ExtResource("7_l8342")]
+light_mask = 7
+visibility_layer = 7
+position = Vector2(184, 39)
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="animacao" parent="Luz7" index="0"]
+autoplay = "luzparedev"
+
+[node name="PointLight2D" parent="Luz7" index="2"]
+color = Color(0.93753624, 0.9311703, 0.62972325, 1)
+energy = 1.42
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 4.0
+texture_scale = 4.46
+height = 233.0
+
+[node name="Luzparede" parent="." instance=ExtResource("8_v1d1r")]
+position = Vector2(24, -6)
+metadata/_edit_group_ = true
+
+[node name="animacao" parent="Luzparede" index="0"]
+autoplay = "luzparedeh"
+
+[node name="PointLight2D" parent="Luzparede" index="2"]
+energy = 2.11
+shadow_enabled = true
+shadow_filter = 1
+shadow_item_cull_mask = 3
+
+[node name="Luzparede2" parent="." instance=ExtResource("8_v1d1r")]
+position = Vector2(104, -7)
+metadata/_edit_group_ = true
+
+[node name="animacao" parent="Luzparede2" index="0"]
+autoplay = "luzparedeh"
+
+[node name="PointLight2D" parent="Luzparede2" index="2"]
+energy = 2.11
+shadow_enabled = true
+shadow_filter = 1
+shadow_item_cull_mask = 3
+
+[node name="Luzparede3" parent="." instance=ExtResource("8_v1d1r")]
+position = Vector2(219, -7)
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="animacao" parent="Luzparede3" index="0"]
+autoplay = "luzparedeh"
+
+[node name="PointLight2D" parent="Luzparede3" index="2"]
+energy = 2.11
+shadow_enabled = true
+shadow_filter = 1
+shadow_item_cull_mask = 3
+
+[editable path="Luz"]
+[editable path="Luz2"]
+[editable path="Luz3"]
+[editable path="Luz4"]
+[editable path="Luz5"]
+[editable path="Luz6"]
+[editable path="Luz7"]
+[editable path="Luzparede"]
+[editable path="Luzparede2"]
+[editable path="Luzparede3"]
