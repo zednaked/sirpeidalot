@@ -1,104 +1,70 @@
-# Dossiê Técnico: Sistema de Turnos
+# Dossiê Técnico: Sistema de Jogo
 
-Este documento detalha a arquitetura e o fluxo de dados do sistema de combate por turnos implementado no projeto.
+Este documento detalha a arquitetura e os fluxos de dados do projeto, incluindo o sistema de turnos, a interface do usuário (HUD) e o ciclo de fim de jogo.
 
 ## 1. Visão Geral da Arquitetura
 
-O sistema é centralizado em um nó "gerenciador" e se comunica com as entidades (jogador, inimigos) através de sinais e chamadas de método. A lógica é desacoplada: o gerenciador não precisa saber *o que* um inimigo faz, apenas *quando* ele deve agir e *quando* ele terminou.
+O sistema é centralizado em um nó "gerenciador" (`dungeon_generator.gd`) que orquestra o fluxo de jogo. As entidades (jogador, inimigos) são semi-independentes e comunicam seu estado através de sinais. Uma camada de UI (`HUD`) escuta esses sinais para exibir informações relevantes.
 
 ### Componentes Principais:
 
-1.  **`dungeon_generator.gd` (O Gerenciador de Turnos)**
-    *   **Responsabilidade**: Orquestrar o fluxo do jogo, determinar de quem é o turno, e fornecer serviços (como pathfinding A*) para outras entidades.
+1.  **`dungeon_generator.gd` (O Gerenciador de Jogo)**
+    *   **Responsabilidade**: Orquestrar o fluxo de turnos, fornecer pathfinding A*, e gerenciar o estado global do jogo (como "Game Over").
     *   **Nó**: Anexado ao nó `main` da cena.
 
 2.  **`player.gd` (O Jogador)**
-    *   **Responsabilidade**: Capturar a entrada do usuário e traduzi-la em ações de jogo (mover, atacar, passar o turno). Só pode agir quando o Gerenciador permite.
+    *   **Responsabilidade**: Gerenciar os atributos do jogador (vida, dano), capturar input, executar ações e emitir sinais sobre seu estado (`health_updated`, `player_died`, `action_taken`).
     *   **Nó**: A cena `Jogador.tscn`.
 
 3.  **`esqueleto.gd` (O Inimigo)**
-    *   **Responsabilidade**: Implementar a lógica de IA para decidir o que fazer em seu turno (atacar ou mover-se em direção ao jogador).
+    *   **Responsabilidade**: Implementar a IA de combate, gerenciar seus próprios atributos e emitir um sinal (`action_taken`) ao final de seu turno.
     *   **Nó**: A cena `esqueleto.tscn`.
 
-## 2. Fluxo de um Turno Completo
+4.  **`HUD.gd` (Interface do Usuário)**
+    *   **Responsabilidade**: Escutar os sinais do jogador (`health_updated`) e atualizar os elementos visuais da interface, como a barra de vida.
+    *   **Nó**: Anexado ao `CanvasLayer` chamado `HUD`.
 
-O ciclo de jogo opera da seguinte forma:
+## 2. Fluxos de Jogo
 
-1.  **Início do Jogo**:
-    *   `dungeon_generator.gd` entra no estado `PLAYER_TURN`.
-    *   Ele chama `player.set_can_act(true)` para habilitar a entrada do jogador.
+### 2.1. Fluxo de Combate por Turnos
 
-2.  **Ação do Jogador**:
-    *   O jogador pressiona uma tecla de movimento ou a barra de espaço.
-    *   `player.gd` executa a ação (calcula o movimento, ataca ou simplesmente passa o turno).
-    *   Ao final da ação, o `player.gd` emite o sinal `action_taken`.
+O fluxo de turnos permanece o mesmo:
+`Jogador age` -> `emite action_taken` -> `Gerenciador recebe` -> `Inimigos agem em sequência` -> `emitem action_taken` -> `Gerenciador devolve o turno ao jogador`.
 
-3.  **Início do Turno dos Inimigos**:
-    *   `dungeon_generator.gd` recebe o sinal `action_taken`.
-    *   Ele verifica se ainda existem inimigos. Se não, entra no modo `FREE_ROAM` e o ciclo de turnos termina.
-    *   Se há inimigos, ele chama `player.set_can_act(false)` para desabilitar a entrada do jogador.
-    *   O estado muda para `ENEMY_TURN`.
-    *   O gerenciador chama a função `_process_enemy_turns()`.
+### 2.2. Fluxo de Atualização da UI (Vida)
 
-4.  **Ações dos Inimigos**:
-    *   `_process_enemy_turns()` itera sobre cada inimigo no `enemies_container`.
-    *   Para cada inimigo, ele chama o método `take_turn()`.
-    *   O gerenciador então usa `await enemy.action_taken` para pausar a execução e esperar que o inimigo atual termine sua ação.
-    *   Dentro de `take_turn()`, o `esqueleto.gd` decide se ataca (se o jogador estiver adjacente) ou se move.
-    *   Para se mover, ele solicita um caminho ao `dungeon_generator.calculate_path()`.
-    *   Após a animação de ataque ou movimento ser concluída, o `esqueleto.gd` emite o sinal `action_taken`.
+1.  O jogador ou um inimigo executa uma ação de ataque.
+2.  O alvo do ataque chama sua função `take_damage(amount)`.
+3.  No `player.gd`, a função `take_damage` emite o sinal `health_updated` com a vida atual e a vida máxima.
+4.  O script `HUD.gd` recebe este sinal e atualiza o valor da `ProgressBar` (barra de vida).
 
-5.  **Fim do Turno dos Inimigos**:
-    *   O `await` no gerenciador é satisfeito, e o loop continua para o próximo inimigo.
-    *   Quando todos os inimigos agiram, a função `_process_enemy_turns()` chama `_end_enemy_turn_sequence()`.
-    *   O estado volta para `PLAYER_TURN`.
-    *   O gerenciador chama `player.set_can_act(true)`.
-    *   O ciclo recomeça no passo 2.
+### 2.3. Fluxo de Fim de Jogo (Game Over)
+
+1.  O jogador recebe dano e sua vida chega a 0 ou menos.
+2.  A função `take_damage` do jogador emite o sinal `player_died`.
+3.  O `dungeon_generator.gd` recebe o sinal `player_died`.
+4.  O gerenciador executa a lógica de fim de jogo:
+    *   Mostra a tela de "Game Over" (`GameOverScreen`).
+    *   Pausa a árvore de cena com `get_tree().paused = true`, congelando o jogo.
 
 ## 3. Sinais e Métodos Chave
 
 ### `dungeon_generator.gd`
-*   **Sinais Emitidos**: `player_turn_started`, `enemy_turn_started`.
-*   **Sinais Escutados**: `action_taken` (do jogador e dos inimigos).
-*   **Métodos Principais**:
-    *   `_on_player_action_taken()`: Ponto de entrada para o turno dos inimigos.
-    *   `_process_enemy_turns()`: Orquestra as ações dos inimigos sequencialmente.
-    *   `calculate_path()`: Fornece o serviço de pathfinding A*.
+*   **Sinais Escutados**: `action_taken` (de todos), `player_died` (do jogador).
+*   **Responsabilidades Adicionais**: Gerenciar a visibilidade da tela de "Game Over" e pausar o jogo.
 
 ### `player.gd`
-*   **Sinais Emitidos**: `action_taken`.
-*   **Métodos Principais**:
-    *   `_unhandled_input()`: Captura as intenções do jogador.
-    *   `set_can_act(bool)`: Habilita ou desabilita a capacidade do jogador de agir.
+*   **Sinais Emitidos**: `action_taken`, `health_updated(current_health, max_health)`, `player_died`.
+*   **Atributos Chave**: `@export var health_bar: ProgressBar` para a referência da UI.
+*   **Métodos Adicionais**: `take_damage()` agora contém a lógica de morte.
 
 ### `esqueleto.gd`
-*   **Sinais Emitidos**: `action_taken`.
-*   **Métodos Principais**:
-    *   `take_turn()`: Ponto de entrada para a lógica de IA do inimigo.
-    *   `set_turn_manager()`: Usado para injeção de dependência, permitindo que o esqueleto acesse o gerenciador.
+*   **Métodos Adicionais**: `_die()` agora toca a animação de morte antes de remover o nó.
+
+### `HUD.gd`
+*   **Sinais Escutados**: `health_updated`.
+*   **Responsabilidade**: Conectar a lógica do jogo com os elementos da interface.
 
 ## 4. Controle de Versão e Deploy (CI/CD)
 
-O projeto utiliza **Git** para controle de versão e **GitHub Actions** para automação do processo de build e deploy para o **GitHub Pages**.
-
-### 4.1. Estrutura do Workflow
-
-O pipeline de CI/CD está definido em `.github/workflows/deploy.yml`. Ele é acionado a cada `push` na branch `main`.
-
-O workflow consiste em dois trabalhos (`jobs`) que rodam em sequência:
-
-1.  **`build` (Construção)**:
-    *   **`actions/checkout@v4`**: Baixa o código-fonte do repositório para o ambiente da action.
-    *   **`abarichello/godot-ci@4.2.2-stable`**: Ação principal. Ela utiliza uma imagem Docker com o Godot para exportar o projeto.
-        *   **`preset: "Web-Pages"`**: Instrui o Godot a usar o preset de exportação específico para a web que foi configurado no arquivo `export_presets.cfg`.
-        *   **`path: "build/"`**: Define o diretório de saída para os arquivos do jogo construído.
-    *   **`actions/upload-pages-artifact@v3`**: Pega o conteúdo da pasta `build/` e o empacota como um "artefato", preparando-o para o próximo trabalho.
-
-2.  **`deploy` (Publicação)**:
-    *   **`needs: build`**: Este trabalho só começa se o trabalho `build` for concluído com sucesso.
-    *   **`actions/deploy-pages@v4`**: Uma ação oficial do GitHub que pega o artefato criado no passo anterior e o publica no ambiente do GitHub Pages, tornando o jogo acessível online.
-
-### 4.2. Arquivos de Configuração
-
-*   **`.gitignore`**: Contém uma entrada para `build/` para garantir que a pasta de build local nunca seja enviada para o repositório, pois ela é gerada automaticamente pela action.
-*   **`export_presets.cfg`**: Arquivo gerado pelo Godot que contém todas as configurações do preset de exportação "Web-Pages", incluindo o caminho de saída e outras opções de build. É essencial que este arquivo esteja no repositório.
+O projeto utiliza **Git** e **GitHub Actions** para automação do build e deploy para o **GitHub Pages**, conforme detalhado na versão anterior deste documento.
