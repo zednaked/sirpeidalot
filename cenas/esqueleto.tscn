@@ -324,7 +324,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_3ng3v")
 }],
-"loop": false,
+"loop": true,
 "name": &"idle",
 "speed": 5.0
 }, {
@@ -375,7 +375,7 @@ script = ExtResource("1_gq2x8")
 position = Vector2(-8.571429, 0)
 scale = Vector2(0.99999994, 0.99999994)
 sprite_frames = SubResource("SpriteFrames_bj72j")
-animation = &"walk"
+animation = &"idle"
 autoplay = "idle"
 speed_scale = 1.6
 offset = Vector2(3, -6)
