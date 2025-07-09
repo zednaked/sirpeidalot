@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://c1vuc22tkpssy"]
+[gd_scene load_steps=7 format=4 uid="uid://c1vuc22tkpssy"]
 
 [ext_resource type="TileSet" uid="uid://74d8818b5tw4" path="res://cenas/tilemap.tres" id="1_1yycb"]
 [ext_resource type="Script" uid="uid://cfwe642akir1" path="res://scripts/dungeon_generator.gd" id="1_v1d1r"]
@@ -6,19 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://b5a3sedway7cr" path="res://cenas/chave.tscn" id="6_l8342"]
 [ext_resource type="SpriteFrames" uid="uid://6dyc4c0q2ltw" path="res://cenas/itensmist.tres" id="8_g6klm"]
 [ext_resource type="PackedScene" uid="uid://brjnkob1iywis" path="res://cenas/Jogador.tscn" id="9_1yycb"]
-
-[sub_resource type="Gradient" id="Gradient_bhvw8"]
-offsets = PackedFloat32Array(0, 0.6666667, 1)
-colors = PackedColorArray(1, 1, 1, 1, 0.04666668, 0.04666668, 0.04666668, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_l8342"]
-gradient = SubResource("Gradient_bhvw8")
-fill = 1
-fill_from = Vector2(0.5140187, 0.49532712)
-fill_to = Vector2(0.915, 0.7)
-
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_bhvw8"]
-polygon = PackedVector2Array(-3, 0, -2, 4, 0, 6, 2, 6, 4, 6, 5, 9, -4, 9, -5, 6, -5, 4, -4, 2, -4, -1)
 
 [node name="main" type="Node2D" node_paths=PackedStringArray("player", "enemies_container", "floor_tilemap", "walls_tilemap")]
 modulate = Color(0.9764706, 1, 0.70980394, 1)
@@ -65,21 +52,6 @@ metadata/_edit_lock_ = true
 position = Vector2(8, -54)
 disable_mode = 2
 
-[node name="PointLight2D" type="PointLight2D" parent="Player"]
-position = Vector2(5, -7)
-scale = Vector2(0.95707005, 0.7796984)
-color = Color(0.7416571, 0.8512779, 0.8824329, 1)
-energy = 1.51
-shadow_enabled = true
-shadow_filter = 2
-texture = SubResource("GradientTexture2D_l8342")
-texture_scale = 3.0
-height = 228.0
-
-[node name="LightOccluder2D" type="LightOccluder2D" parent="Player"]
-position = Vector2(-1, -5)
-occluder = SubResource("OccluderPolygon2D_bhvw8")
-
 [node name="bandeiradeparede" type="AnimatedSprite2D" parent="."]
 position = Vector2(7.5, -88.5)
 scale = Vector2(0.8125, 0.8125)
@@ -103,4 +75,4 @@ position = Vector2(208, 24)
 [node name="Node" type="Node" parent="."]
 
 [node name="esqueleto" parent="Node" instance=ExtResource("5_bhvw8")]
-position = Vector2(152, -56)
+position = Vector2(152, -54.999996)

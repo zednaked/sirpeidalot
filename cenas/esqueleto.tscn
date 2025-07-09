@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://cmdjbl5nkg0mx"]
+[gd_scene load_steps=57 format=3 uid="uid://cmdjbl5nkg0mx"]
 
 [ext_resource type="Texture2D" uid="uid://baife1m822x8f" path="res://sprites/Enemy_Animations_Set/enemies-skeleton1_attack.png" id="1_b66pk"]
 [ext_resource type="Script" uid="uid://dqgyx8jhdbw4p" path="res://scripts/esqueleto.gd" id="1_gq2x8"]
@@ -367,6 +367,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1yycb"]
 size = Vector2(20, 18.57143)
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_4bm5w"]
+polygon = PackedVector2Array(-9.999997, 7.1428614, -7.142854, 7.1428614, -8.571425, 8.571433, -7.142854, 8.571433, -6.142868, 9.285713, -6.142868, 10.714279, -7.142854, 12.857147, -12.85714, 12.857147, -12.85714, 10.000004, -12.85714, 7.1428614, -11.428568, 5.71429)
+
 [node name="esqueleto" type="CharacterBody2D"]
 scale = Vector2(0.7, 0.7)
 script = ExtResource("1_gq2x8")
@@ -381,9 +384,14 @@ speed_scale = 1.6
 offset = Vector2(3, -6)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -0.7142868)
+position = Vector2(-7.1428576, -1.4285715)
 scale = Vector2(0.99999994, 0.99999994)
 shape = SubResource("RectangleShape2D_1yycb")
 
 [node name="VisionRayCast" type="RayCast2D" parent="."]
+position = Vector2(-7.1428566, -0.71428454)
 target_position = Vector2(0, 16)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+position = Vector2(1.4285688, -5.7142906)
+occluder = SubResource("OccluderPolygon2D_4bm5w")
