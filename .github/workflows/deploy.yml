@@ -25,9 +25,9 @@ jobs:
         uses: actions/checkout@v4
 
       # 2. Constrói o jogo Godot para a Web
-      # Usa uma ação da comunidade para facilitar o processo
+      # CORRIGIDO: Usando a sintaxe correta com '@' para a referência da action
       - name: Godot Export
-        uses: abarichello/godot-ci:4.2
+        uses: abarichello/godot-ci@4.2.2
         with:
           # O nome exato do preset de exportação que você criou
           preset: "Web-Pages"
@@ -35,7 +35,6 @@ jobs:
           path: "build/"
       
       # 3. Carrega o resultado do build como um artefato
-      # Este artefato será usado pelo trabalho de deploy
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

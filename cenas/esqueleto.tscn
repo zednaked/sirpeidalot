@@ -377,6 +377,7 @@ scale = Vector2(0.99999994, 0.99999994)
 sprite_frames = SubResource("SpriteFrames_bj72j")
 animation = &"walk"
 autoplay = "idle"
+speed_scale = 1.6
 offset = Vector2(3, -6)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
