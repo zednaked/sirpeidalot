@@ -28,4 +28,5 @@ animations = [{
 [node name="Player" type="AnimatedSprite2D"]
 scale = Vector2(0.8, 0.8)
 sprite_frames = SubResource("SpriteFrames_71k2v")
+animation = &"idle"
 offset = Vector2(0, -2.5)
