@@ -79,7 +79,7 @@ polygon = PackedVector2Array(-5.5756207, -8, -1.7985859, -8, -1.6187286, 8, -5.9
 polygon = PackedVector2Array(-8, -8, -2.5180206, -8, -1.4388695, -0.8992939, -8, -1.0791512)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_objq2"]
-polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, 1.7985878, 8, 1.7985878, -1.978445, -8, -2.3381624)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_tnoq5"]
 polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
