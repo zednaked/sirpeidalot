@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://df43caxqf3q3"]
+
+[ext_resource type="Texture2D" uid="uid://dvxb1rejes8w6" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/arrow/Just_arrow.png" id="1_ln8ok"]
+
+[node name="JustArrow" type="Sprite2D"]
+visible = false
+texture = ExtResource("1_ln8ok")

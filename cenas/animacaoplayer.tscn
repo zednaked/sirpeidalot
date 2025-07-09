@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://decl5ra508cu0"]
+
+[ext_resource type="Texture2D" uid="uid://du1hlg1p11i2b" path="res://sprites/2D Pixel Dungeon Asset Pack/Character_animation/priests_idle/priest1/v1/priest1_v1_1.png" id="1_15dsx"]
+[ext_resource type="Texture2D" uid="uid://ek0650xp5wvg" path="res://sprites/2D Pixel Dungeon Asset Pack/Character_animation/priests_idle/priest1/v1/priest1_v1_2.png" id="2_8v4ht"]
+[ext_resource type="Texture2D" uid="uid://cshun6vq50omo" path="res://sprites/2D Pixel Dungeon Asset Pack/Character_animation/priests_idle/priest1/v1/priest1_v1_3.png" id="3_4y2i1"]
+[ext_resource type="Texture2D" uid="uid://cyc83ffve1ubn" path="res://sprites/2D Pixel Dungeon Asset Pack/Character_animation/priests_idle/priest1/v1/priest1_v1_4.png" id="4_ogt8j"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_71k2v"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_15dsx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_8v4ht")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_4y2i1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ogt8j")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[node name="Player" type="AnimatedSprite2D"]
+scale = Vector2(0.8, 0.8)
+sprite_frames = SubResource("SpriteFrames_71k2v")
+offset = Vector2(0, -2.5)

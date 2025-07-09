@@ -1,0 +1,26 @@
+{
+	"version": 1.0,
+	"meta": {
+		"tag_colors": {
+
+		}
+	},
+	"issues": {
+		"ZeD": [
+			{
+				"text": "teste",
+				"tags": [
+					"teste"
+				],
+				"timestamp": 1751671798.838,
+				"priority": 5.0,
+				"estimate": 7.0
+			},
+			{
+				"text": "",
+				"tags": [],
+				"timestamp": 1751671823.445
+			}
+		]
+	}
+}

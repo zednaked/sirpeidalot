@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://b5a3sedway7cr"]
+
+[ext_resource type="SpriteFrames" uid="uid://6dyc4c0q2ltw" path="res://cenas/itensmist.tres" id="1_3luxu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jdavq"]
+size = Vector2(17, 14)
+
+[node name="chave" type="StaticBody2D"]
+
+[node name="animacao" type="AnimatedSprite2D" parent="."]
+sprite_frames = ExtResource("1_3luxu")
+animation = &"chave"
+autoplay = "chave"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 1)
+shape = SubResource("RectangleShape2D_jdavq")
