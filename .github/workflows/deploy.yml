@@ -27,7 +27,7 @@ jobs:
       # 2. Constrói o jogo Godot para a Web
       # Usa uma ação da comunidade para facilitar o processo
       - name: Godot Export
-        uses: abarichello/godot-ci:4.2
+        uses: abarichello/godot-ci:4.2.2
         with:
           # O nome exato do preset de exportação que você criou
           preset: "Web-Pages"
