@@ -25,15 +25,17 @@ jobs:
         uses: actions/checkout@v4
 
       # 2. Constrói o jogo Godot para a Web
-      # CORRIGIDO: Usando a tag de versão correta e completa
       - name: Godot Export
         uses: abarichello/godot-ci@4.2.2-stable
         with:
-          # O nome exato do preset de exportação que você criou
           preset: "Web-Pages"
-          # O caminho para onde o jogo será exportado
-          path: "build/"
+          path: "build/" # A action deve criar esta pasta
       
+      # --- PASSO DE DEBUG ---
+      # Lista todos os arquivos no workspace para vermos o que foi criado.
+      - name: List files in workspace
+        run: ls -R
+
       # 3. Carrega o resultado do build como um artefato
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
