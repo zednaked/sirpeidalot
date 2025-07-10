@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://cmdjbl5nkg0mx"]
+[gd_scene load_steps=58 format=3 uid="uid://cmdjbl5nkg0mx"]
 
 [ext_resource type="Texture2D" uid="uid://baife1m822x8f" path="res://sprites/Enemy_Animations_Set/enemies-skeleton1_attack.png" id="1_b66pk"]
 [ext_resource type="Script" uid="uid://dqgyx8jhdbw4p" path="res://scripts/esqueleto.gd" id="1_gq2x8"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bo3b64m8r5vey" path="res://sprites/Enemy_Animations_Set/enemies-skeleton1_take_damage.png" id="3_re4gi"]
 [ext_resource type="Texture2D" uid="uid://16e5ssvd2dux" path="res://sprites/Enemy_Animations_Set/enemies-skeleton1_idle.png" id="4_ey6uc"]
 [ext_resource type="Texture2D" uid="uid://cwq1qpxufri3" path="res://sprites/Enemy_Animations_Set/enemies-skeleton1_movement.png" id="5_i8qh3"]
+[ext_resource type="PackedScene" uid="uid://cjo70h14cluga" path="res://cenas/envenenado.tscn" id="7_re4gi"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bkqu4"]
 atlas = ExtResource("1_b66pk")
@@ -373,6 +374,7 @@ polygon = PackedVector2Array(5.7142854, 5.714287, 4.285714, 1.66893e-06, 1.42857
 [node name="esqueleto" type="CharacterBody2D"]
 scale = Vector2(0.7, 0.7)
 script = ExtResource("1_gq2x8")
+db = ExtResource("7_re4gi")
 
 [node name="animacao" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.99999994, 0.99999994)
@@ -398,3 +400,5 @@ metadata/_edit_lock_ = true
 position = Vector2(0, 1.4285698)
 occluder = SubResource("OccluderPolygon2D_4bm5w")
 metadata/_edit_lock_ = true
+
+[node name="efeitos" type="Node2D" parent="."]

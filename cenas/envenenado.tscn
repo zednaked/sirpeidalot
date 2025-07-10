@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cjo70h14cluga"]
+
+[ext_resource type="Texture2D" uid="uid://cc7tdh3t4u3oe" path="res://addons/kenney_particle_pack/circle_03.png" id="1_rcv5o"]
+[ext_resource type="Script" uid="uid://cmxmchujhmk54" path="res://scripts/efeito.gd" id="2_1pk3t"]
+
+[node name="envenenado" type="Sprite2D"]
+modulate = Color(0, 1, 0, 0.3647059)
+scale = Vector2(0.04453124, 0.04453124)
+texture = ExtResource("1_rcv5o")
+script = ExtResource("2_1pk3t")
+tempo = 3

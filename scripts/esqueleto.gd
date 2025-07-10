@@ -14,6 +14,7 @@ const TILE_SIZE = 16
 const MOVE_SPEED = 15.0
 
 # --- Atributos ---
+@export var db: PackedScene
 @export var health: int = 50 # Pontos de vida do esqueleto.
 @export var damage: int = 10 # Dano que o esqueleto causa ao jogador.
 @export var detection_range: int = 160 # Distância em pixels para detectar o jogador (10 tiles)
@@ -50,6 +51,10 @@ func _physics_process(delta):
 # Função principal chamada pelo TurnManager para que o esqueleto execute seu turno.
 func take_turn():
 	# Um esqueleto morto não faz nada e termina seu turno imediatamente.
+	for efeito in $efeitos.get_children():
+		efeito.diminuitempo()
+	
+	
 	if is_dead:
 		call_deferred("emit_signal", "action_taken")
 		return
@@ -106,6 +111,11 @@ func _attack_player(direction: Vector2):
 	else:
 		# Fallback caso a anima��ão de ataque não exista.
 		await get_tree().create_timer(0.5).timeout
+
+	#var filhodaputa = db.instantiate()
+	#player_node.get_node("debuffs").add_child(filhodaputa)	
+	#filhodaputa.position.x = 0
+	#filhodaputa.position.y = 0
 	animated_sprite.play("idle")
 	emit_signal("action_taken")
 

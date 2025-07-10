@@ -9,6 +9,7 @@ const TILE_SIZE = 16
 const MOVE_SPEED = 15.0
 
 # --- Attributes ---
+@export var debuff: PackedScene
 @export var health: int = 100
 @export var damage: int = 25
 var has_key: bool = true
@@ -30,6 +31,11 @@ func _unhandled_input(event):
 	if not can_act or is_moving:
 		return
 
+	for debuf in $debuffs.get_children():
+		debuf.diminuitempo()
+	for buf in $buffs.get_children():
+		buf.diminuitempo()			
+		
 	if event.is_action_pressed("ui_accept"):
 		_pass_turn()
 		return
@@ -68,8 +74,14 @@ func _try_move_or_attack(direction: Vector2):
 		# --- ATTACK LOGIC ---
 		if collider.is_in_group("enemies") and collider.has_method("take_damage"):
 			print("Player attacks ", collider.name)
+			
 			$efeitos.play("attack")
 			collider.take_damage(damage)
+			#var filhodaputa = debuff.instantiate()
+			
+			#collider.get_node("efeitos").add_child(filhodaputa)
+			#filhodaputa.position.x = 0
+			#filhodaputa.position.y = 0
 			consumed_turn = true
 		
 		# --- KEY PICKUP LOGIC ---
@@ -115,7 +127,7 @@ func _pickup_key(key_node):
 func take_damage(amount: int):
 	health -= amount
 	print_debug("Player took %d damage, has %d health left." % [amount, health])
-	# Player cannot die for now, so no further logic is needed.
+	
 
 # --- Helper Functions ---
 
