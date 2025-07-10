@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://uhlbu8vso7at"]
+
+[ext_resource type="Script" uid="uid://c1h70hpe6lfcd" path="res://scripts/chave.gd" id="1_jiw3h"]
+[ext_resource type="PackedScene" uid="uid://df43caxqf3q3" path="res://cenas/arco.tscn" id="3_pbx8x"]
+[ext_resource type="Texture2D" uid="uid://dichiiyly3dvq" path="res://sprites/2D Pixel Dungeon Asset Pack/character and tileset/Dungeon_Tileset.png" id="4_h7nco"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iwfo7"]
+size = Vector2(17, 20)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_p8tku"]
+polygon = PackedVector2Array(-2, -21, 2, -21, 2, 11, -2, 11)
+
+[node name="porta" type="StaticBody2D" groups=["portas"]]
+script = ExtResource("1_jiw3h")
+
+[node name="sprite" parent="." instance=ExtResource("3_pbx8x")]
+visible = true
+position = Vector2(0, 9.536743e-07)
+scale = Vector2(0.8, 1.25)
+texture = ExtResource("4_h7nco")
+region_enabled = true
+region_rect = Rect2(96, 64, 16, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["stairs"]]
+shape = SubResource("RectangleShape2D_iwfo7")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_p8tku")

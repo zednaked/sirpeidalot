@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://c2s5sud7m7blb"]
+
+[ext_resource type="Script" uid="uid://g4c36qyrt7jt" path="res://scripts/stairs.gd" id="1_tf11a"]
+[ext_resource type="PackedScene" uid="uid://c1vuc22tkpssy" path="res://cenas/main.tscn" id="2_883m3"]
+[ext_resource type="PackedScene" uid="uid://df43caxqf3q3" path="res://cenas/arco.tscn" id="3_3pung"]
+[ext_resource type="Texture2D" uid="uid://dichiiyly3dvq" path="res://sprites/2D Pixel Dungeon Asset Pack/character and tileset/Dungeon_Tileset.png" id="4_5tvnj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iwfo7"]
+size = Vector2(17, 14)
+
+[node name="escada" type="StaticBody2D" groups=["stairs"]]
+script = ExtResource("1_tf11a")
+target_scene = ExtResource("2_883m3")
+
+[node name="sprite" parent="." instance=ExtResource("3_3pung")]
+visible = true
+position = Vector2(233, -87)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("4_5tvnj")
+region_enabled = true
+region_rect = Rect2(144, 48, 16, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["stairs"]]
+position = Vector2(233, -74)
+shape = SubResource("RectangleShape2D_iwfo7")
