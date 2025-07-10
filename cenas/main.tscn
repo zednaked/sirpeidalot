@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://c1vuc22tkpssy"]
+[gd_scene load_steps=15 format=4 uid="uid://c1vuc22tkpssy"]
 
 [ext_resource type="TileSet" uid="uid://74d8818b5tw4" path="res://cenas/tilemap.tres" id="1_1yycb"]
 [ext_resource type="Script" uid="uid://cfwe642akir1" path="res://scripts/dungeon_generator.gd" id="1_v1d1r"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://cqpbstgufd4u8" path="res://cenas/vamp.tscn" id="8_klgsu"]
 [ext_resource type="PackedScene" uid="uid://l6yyfgkqa3sv" path="res://cenas/luzfrente.tscn" id="8_v1d1r"]
 [ext_resource type="PackedScene" uid="uid://brjnkob1iywis" path="res://cenas/Jogador.tscn" id="9_1yycb"]
+[ext_resource type="PackedScene" uid="uid://drwoe2xdu8w6m" path="res://cenas/cranio.tscn" id="9_klgsu"]
 [ext_resource type="Script" uid="uid://c1h70hpe6lfcd" path="res://scripts/chave.gd" id="9_vhipe"]
 [ext_resource type="PackedScene" uid="uid://uhlbu8vso7at" path="res://cenas/porta.tscn" id="12_iwfo7"]
 
@@ -105,6 +106,12 @@ position = Vector2(7.9999995, -9.999999)
 
 [node name="vamp2" parent="Node" instance=ExtResource("8_klgsu")]
 position = Vector2(159.99998, 22)
+
+[node name="cranio" parent="Node" instance=ExtResource("9_klgsu")]
+position = Vector2(230.99998, -56)
+
+[node name="cranio2" parent="Node" instance=ExtResource("9_klgsu")]
+position = Vector2(39.000015, 41.999992)
 
 [node name="chave" parent="." groups=["key"] instance=ExtResource("6_l8342")]
 position = Vector2(209, 21)
