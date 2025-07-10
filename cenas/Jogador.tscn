@@ -45,6 +45,7 @@ script = ExtResource("1_ec23w")
 
 [node name="animacao" parent="." instance=ExtResource("2_81edp")]
 autoplay = "idle"
+speed_scale = 1.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, -1.75)
@@ -60,12 +61,14 @@ position = Vector2(6, -6)
 occluder = SubResource("OccluderPolygon2D_81edp")
 
 [node name="efeitos" type="AnimatedSprite2D" parent="."]
-modulate = Color(0.96492857, 0.32539752, 0.500027, 1)
+modulate = Color(0.9950027, 0.80706954, 0.8368016, 1)
 position = Vector2(-0.9999995, -0.99999994)
-scale = Vector2(0.1, 0.1)
+scale = Vector2(0.05, 0.05)
 sprite_frames = SubResource("SpriteFrames_ysavc")
 animation = &"attack"
 autoplay = "default"
 frame = 3
+frame_progress = 1.0
+speed_scale = 1.6
 
 [connection signal="animation_finished" from="efeitos" to="." method="_on_efeitos_animation_finished"]

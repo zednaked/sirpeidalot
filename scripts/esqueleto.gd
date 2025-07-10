@@ -16,6 +16,7 @@ const MOVE_SPEED = 15.0
 # --- Atributos ---
 @export var health: int = 50 # Pontos de vida do esqueleto.
 @export var damage: int = 10 # Dano que o esqueleto causa ao jogador.
+@export var detection_range: int = 160 # Distância em pixels para detectar o jogador (10 tiles)
 
 # --- Referências ---
 @onready var animated_sprite: AnimatedSprite2D = $animacao
@@ -50,17 +51,29 @@ func _physics_process(delta):
 func take_turn():
 	# Um esqueleto morto não faz nada e termina seu turno imediatamente.
 	if is_dead:
-		emit_signal("action_taken")
+		call_deferred("emit_signal", "action_taken")
 		return
 
+	print_debug("--- Turno de %s ---" % self.name)
 	var player_pos = turn_manager.get_player_position()
 	var my_pos = global_position
-	
-	# Decide se ataca ou se move com base na distância até o jogador.
-	if my_pos.distance_to(player_pos) < TILE_SIZE * 1.5:
+	var distance_to_player = my_pos.distance_to(player_pos)
+	print_debug("Distância para o jogador: %s, Raio de Detecção: %s" % [distance_to_player, detection_range])
+
+	# Se o jogador estiver fora de alcance, não faz nada e passa o turno.
+	if distance_to_player > detection_range:
+		print_debug("Ação: Não fazer nada (jogador fora de alcance).")
+		call_deferred("emit_signal", "action_taken")
+		return
+
+	# Se o jogador estiver dentro do alcance, decide se ataca ou se move.
+	if distance_to_player < TILE_SIZE * 1.5:
+		print_debug("Ação: Atacar o jogador.")
 		_attack_player(player_pos - my_pos)
 	else:
+		print_debug("Ação: Mover em direção ao jogador.")
 		_move_towards_player(player_pos)
+
 
 # --- Funções de Combate ---
 
@@ -78,6 +91,7 @@ func take_damage(amount: int):
 		_die()
 	else:
 		set_anim("hurt")
+		
 		
 
 # Executa a lógica de ataque contra o jogador.
@@ -110,11 +124,14 @@ func _die():
 
 # Move o esqueleto um passo em direção ao jogador usando o caminho A*.
 func _move_towards_player(player_pos: Vector2):
+	
 	if not turn_manager:
 		emit_signal("action_taken")
 		return
+	
 		
 	var path = turn_manager.calculate_path(global_position, player_pos)
+	print_debug("Path for ", self.name, ": ", path)
 	if path.size() > 1:
 		# Define o próximo passo do caminho como o alvo.
 		target_position = path[1]
@@ -123,7 +140,7 @@ func _move_towards_player(player_pos: Vector2):
 		animated_sprite.play("walk")
 	else:
 		# Se não houver caminho, simplesmente termina o turno.
-		emit_signal("action_taken")
+		call_deferred("emit_signal", "action_taken")
 
 # Vira o sprite do esqueleto para a esquerda ou direita com base na direção.
 func _update_animation_direction(direction: Vector2):
