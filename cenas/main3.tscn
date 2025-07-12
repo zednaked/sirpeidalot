@@ -1,9 +1,8 @@
-[gd_scene load_steps=12 format=4 uid="uid://dm815wvjal6ow"]
+[gd_scene load_steps=11 format=4 uid="uid://dm815wvjal6ow"]
 
 [ext_resource type="Script" uid="uid://cfwe642akir1" path="res://scripts/dungeon_generator.gd" id="1_pswac"]
 [ext_resource type="TileSet" uid="uid://74d8818b5tw4" path="res://cenas/tilemap.tres" id="2_hcb66"]
 [ext_resource type="PackedScene" uid="uid://brjnkob1iywis" path="res://cenas/Jogador.tscn" id="3_dmxnx"]
-[ext_resource type="PackedScene" uid="uid://c2s5sud7m7blb" path="res://cenas/escada.tscn" id="4_h2dxi"]
 [ext_resource type="SpriteFrames" uid="uid://6dyc4c0q2ltw" path="res://cenas/itensmist.tres" id="5_6fyeb"]
 [ext_resource type="PackedScene" uid="uid://cmdjbl5nkg0mx" path="res://cenas/esqueleto.tscn" id="6_32f3q"]
 [ext_resource type="PackedScene" uid="uid://b5a3sedway7cr" path="res://cenas/chave.tscn" id="7_82vmo"]
@@ -54,10 +53,6 @@ metadata/_edit_group_ = true
 
 [node name="InteractionRayCast" parent="Player" index="2"]
 collide_with_areas = true
-
-[node name="escada" parent="." instance=ExtResource("4_h2dxi")]
-position = Vector2(-33, 79)
-metadata/_edit_group_ = true
 
 [node name="bandeiradeparede" type="AnimatedSprite2D" parent="."]
 position = Vector2(7.5, -88.5)

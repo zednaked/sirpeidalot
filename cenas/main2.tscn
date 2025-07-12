@@ -1,10 +1,8 @@
-[gd_scene load_steps=13 format=4 uid="uid://r1jhgwwpmq62"]
+[gd_scene load_steps=11 format=4 uid="uid://r1jhgwwpmq62"]
 
 [ext_resource type="Script" uid="uid://cfwe642akir1" path="res://scripts/dungeon_generator.gd" id="1_huq03"]
 [ext_resource type="TileSet" uid="uid://74d8818b5tw4" path="res://cenas/tilemap.tres" id="2_lyg8s"]
 [ext_resource type="PackedScene" uid="uid://brjnkob1iywis" path="res://cenas/Jogador.tscn" id="3_rtofs"]
-[ext_resource type="PackedScene" uid="uid://c2s5sud7m7blb" path="res://cenas/escada.tscn" id="4_v05et"]
-[ext_resource type="PackedScene" uid="uid://dm815wvjal6ow" path="res://cenas/main3.tscn" id="5_lyg8s"]
 [ext_resource type="SpriteFrames" uid="uid://6dyc4c0q2ltw" path="res://cenas/itensmist.tres" id="5_xvj8v"]
 [ext_resource type="PackedScene" uid="uid://cmdjbl5nkg0mx" path="res://cenas/esqueleto.tscn" id="6_50vdn"]
 [ext_resource type="PackedScene" uid="uid://b5a3sedway7cr" path="res://cenas/chave.tscn" id="7_4wfiu"]
@@ -55,10 +53,6 @@ metadata/_edit_group_ = true
 
 [node name="InteractionRayCast" parent="Player" index="2"]
 collide_with_areas = true
-
-[node name="escada" parent="." instance=ExtResource("4_v05et")]
-position = Vector2(-193, 0)
-target_scene = ExtResource("5_lyg8s")
 
 [node name="bandeiradeparede" type="AnimatedSprite2D" parent="."]
 position = Vector2(7.5, -88.5)

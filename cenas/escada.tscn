@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://c2s5sud7m7blb"]
+[gd_scene load_steps=5 format=3 uid="uid://ngr6tk2bssnh"]
 
 [ext_resource type="Script" uid="uid://g4c36qyrt7jt" path="res://scripts/stairs.gd" id="1_tf11a"]
-[ext_resource type="PackedScene" uid="uid://c1vuc22tkpssy" path="res://cenas/main.tscn" id="2_883m3"]
 [ext_resource type="PackedScene" uid="uid://df43caxqf3q3" path="res://cenas/arco.tscn" id="3_3pung"]
 [ext_resource type="Texture2D" uid="uid://dichiiyly3dvq" path="res://sprites/2D Pixel Dungeon Asset Pack/character and tileset/Dungeon_Tileset.png" id="4_5tvnj"]
 
@@ -10,7 +9,6 @@ size = Vector2(17, 14)
 
 [node name="escada" type="StaticBody2D" groups=["stairs"]]
 script = ExtResource("1_tf11a")
-target_scene = ExtResource("2_883m3")
 
 [node name="sprite" parent="." instance=ExtResource("3_3pung")]
 visible = true
