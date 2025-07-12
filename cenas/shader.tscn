@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://coaep7rpmnpl5"]
+
+[ext_resource type="Shader" uid="uid://7ver7822au4k" path="res://cenas/fog2.gdshader" id="1_ytali"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_klgsu"]
+shader = ExtResource("1_ytali")
+shader_parameter/color = Color(3.9630623, 3.9059405, 4.857975, 1)
+shader_parameter/OCTAVES = 4
+shader_parameter/enable_pixelation = true
+shader_parameter/pixelation_amount = 139
+shader_parameter/fog_direction = Vector2(1.77, 1)
+shader_parameter/scroll_noise_tex = true
+shader_parameter/noise_scroll_direction = Vector2(1, 1.015)
+
+[node name="shader" type="Node2D"]
+light_mask = 3
+visibility_layer = 3
+z_index = 2
+z_as_relative = false
+material = SubResource("ShaderMaterial_klgsu")
+use_parent_material = true
