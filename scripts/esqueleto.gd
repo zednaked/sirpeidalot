@@ -11,7 +11,7 @@ signal action_taken
 
 # --- Constantes ---
 const TILE_SIZE = 16
-const MOVE_SPEED = 15.0
+const MOVE_SPEED = 25.0
 
 # --- Atributos ---
 @export var db: PackedScene

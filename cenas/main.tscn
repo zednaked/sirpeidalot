@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://c1vuc22tkpssy"]
+[gd_scene load_steps=15 format=4 uid="uid://c1vuc22tkpssy"]
 
 [ext_resource type="TileSet" uid="uid://74d8818b5tw4" path="res://cenas/tilemap.tres" id="1_1yycb"]
 [ext_resource type="Script" uid="uid://cfwe642akir1" path="res://scripts/dungeon_generator.gd" id="1_v1d1r"]
@@ -13,23 +13,16 @@
 [ext_resource type="Script" uid="uid://c1h70hpe6lfcd" path="res://scripts/chave.gd" id="9_vhipe"]
 [ext_resource type="PackedScene" uid="uid://uhlbu8vso7at" path="res://cenas/porta.tscn" id="12_iwfo7"]
 [ext_resource type="Shader" uid="uid://7ver7822au4k" path="res://cenas/fog2.gdshader" id="13_g6klm"]
-[ext_resource type="Shader" uid="uid://6kxq38ahn671" path="res://cenas/main.gdshader" id="14_klgsu"]
-[ext_resource type="Texture2D" uid="uid://d2pdf6k8cwtfj" path="res://crt.png" id="15_ocpn0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g6klm"]
 shader = ExtResource("13_g6klm")
 shader_parameter/color = Color(1.0549184, 1.9993623, 0, 0.654902)
-shader_parameter/OCTAVES = 92
+shader_parameter/OCTAVES = 3
 shader_parameter/enable_pixelation = true
 shader_parameter/pixelation_amount = 54
 shader_parameter/fog_direction = Vector2(1, 1)
 shader_parameter/scroll_noise_tex = true
 shader_parameter/noise_scroll_direction = Vector2(0.4, 0.1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ocpn0"]
-shader = ExtResource("14_klgsu")
-shader_parameter/pixel_texture = ExtResource("15_ocpn0")
-shader_parameter/screen_size = Vector2(130, 130)
 
 [node name="main" type="Node2D" node_paths=PackedStringArray("player", "enemies_container", "floor_tilemap", "walls_tilemap")]
 modulate = Color(0.9764706, 1, 0.70980394, 1)
@@ -79,42 +72,34 @@ position = Vector2(9, -54)
 disable_mode = 2
 metadata/_edit_group_ = true
 
+[node name="animacao" parent="Player" index="0"]
+speed_scale = 3.0
+
 [node name="InteractionRayCast" parent="Player" index="2"]
 collide_with_areas = true
 
 [node name="efeitos" parent="Player" index="4"]
 autoplay = ""
-
-[node name="bandeiradeparede" type="AnimatedSprite2D" parent="."]
-position = Vector2(7.5, -88.5)
-scale = Vector2(0.8125, 0.8125)
-sprite_frames = ExtResource("8_g6klm")
-animation = &"bandeira"
-autoplay = "bandeira"
-frame_progress = 0.5915967
-speed_scale = 0.5
-
-[node name="bandeiradeparede2" type="AnimatedSprite2D" parent="."]
-position = Vector2(21.499985, -88.49998)
-scale = Vector2(0.8125, 0.8125)
-sprite_frames = ExtResource("8_g6klm")
-animation = &"bandeira"
-autoplay = "bandeira"
-frame_progress = 0.3497669
+frame_progress = 0.0
+speed_scale = 3.0
 
 [node name="Node" type="Node" parent="."]
 
 [node name="esqueleto" parent="Node" instance=ExtResource("5_bhvw8")]
 position = Vector2(153, -57)
+db = null
 
 [node name="esqueleto4" parent="Node" instance=ExtResource("5_bhvw8")]
-position = Vector2(23.000004, -55)
+position = Vector2(136, 39.999992)
+db = null
 
 [node name="esqueleto2" parent="Node" instance=ExtResource("5_bhvw8")]
 position = Vector2(237, 7.999996)
+db = null
 
 [node name="esqueleto3" parent="Node" instance=ExtResource("5_bhvw8")]
 position = Vector2(141, 7.9999995)
+db = null
 
 [node name="vamp" parent="Node" instance=ExtResource("8_klgsu")]
 position = Vector2(7.9999995, -9.999999)
@@ -132,203 +117,6 @@ position = Vector2(39.000015, 41.999992)
 position = Vector2(209, 21)
 script = ExtResource("9_vhipe")
 
-[node name="Luz" parent="." instance=ExtResource("7_l8342")]
-light_mask = 7
-visibility_layer = 7
-position = Vector2(-8, -56)
-metadata/_edit_lock_ = true
-metadata/_edit_group_ = true
-
-[node name="animacao" parent="Luz" index="0"]
-autoplay = "luzparedev"
-
-[node name="PointLight2D" parent="Luz" index="2"]
-color = Color(0.93753624, 0.9311703, 0.62972325, 1)
-energy = 1.42
-shadow_enabled = true
-shadow_filter = 1
-shadow_filter_smooth = 4.0
-texture_scale = 4.46
-height = 233.0
-
-[node name="Luz2" parent="." instance=ExtResource("7_l8342")]
-light_mask = 7
-visibility_layer = 7
-position = Vector2(120, -76)
-metadata/_edit_group_ = true
-metadata/_edit_lock_ = true
-
-[node name="animacao" parent="Luz2" index="0"]
-autoplay = "luzparedev"
-
-[node name="PointLight2D" parent="Luz2" index="2"]
-color = Color(0.93753624, 0.9311703, 0.62972325, 1)
-energy = 1.42
-shadow_enabled = true
-shadow_filter = 1
-shadow_filter_smooth = 4.0
-texture_scale = 4.46
-height = 233.0
-
-[node name="Luz3" parent="." instance=ExtResource("7_l8342")]
-light_mask = 7
-visibility_layer = 7
-position = Vector2(120, -76)
-metadata/_edit_group_ = true
-metadata/_edit_lock_ = true
-
-[node name="animacao" parent="Luz3" index="0"]
-autoplay = "luzparedev"
-
-[node name="PointLight2D" parent="Luz3" index="2"]
-color = Color(0.93753624, 0.9311703, 0.62972325, 1)
-energy = 1.42
-shadow_enabled = true
-shadow_filter = 1
-shadow_filter_smooth = 4.0
-texture_scale = 4.46
-height = 233.0
-
-[node name="Luz4" parent="." instance=ExtResource("7_l8342")]
-light_mask = 7
-visibility_layer = 7
-position = Vector2(231, -75)
-metadata/_edit_group_ = true
-metadata/_edit_lock_ = true
-
-[node name="animacao" parent="Luz4" index="0"]
-autoplay = "luzparedev"
-
-[node name="PointLight2D" parent="Luz4" index="2"]
-color = Color(0.93753624, 0.9311703, 0.62972325, 1)
-energy = 1.42
-shadow_enabled = true
-shadow_filter = 1
-shadow_filter_smooth = 4.0
-texture_scale = 4.46
-height = 233.0
-
-[node name="Luz5" parent="." instance=ExtResource("7_l8342")]
-light_mask = 7
-visibility_layer = 7
-position = Vector2(-8, 31)
-metadata/_edit_group_ = true
-metadata/_edit_lock_ = true
-
-[node name="animacao" parent="Luz5" index="0"]
-autoplay = "luzparedev"
-
-[node name="PointLight2D" parent="Luz5" index="2"]
-color = Color(0.93753624, 0.9311703, 0.62972325, 1)
-energy = 1.42
-shadow_enabled = true
-shadow_filter = 1
-shadow_filter_smooth = 4.0
-texture_scale = 4.46
-height = 233.0
-
-[node name="Luz6" parent="." instance=ExtResource("7_l8342")]
-light_mask = 7
-visibility_layer = 7
-position = Vector2(88, 40)
-metadata/_edit_group_ = true
-metadata/_edit_lock_ = true
-
-[node name="animacao" parent="Luz6" index="0"]
-autoplay = "luzparedev"
-
-[node name="PointLight2D" parent="Luz6" index="2"]
-color = Color(0.93753624, 0.9311703, 0.62972325, 1)
-energy = 1.42
-shadow_enabled = true
-shadow_filter = 1
-shadow_filter_smooth = 4.0
-texture_scale = 4.46
-height = 233.0
-
-[node name="Luz7" parent="." instance=ExtResource("7_l8342")]
-light_mask = 7
-visibility_layer = 7
-position = Vector2(184, 39)
-metadata/_edit_group_ = true
-metadata/_edit_lock_ = true
-
-[node name="animacao" parent="Luz7" index="0"]
-autoplay = "luzparedev"
-
-[node name="PointLight2D" parent="Luz7" index="2"]
-color = Color(0.93753624, 0.9311703, 0.62972325, 1)
-energy = 1.42
-shadow_enabled = true
-shadow_filter = 1
-shadow_filter_smooth = 4.0
-texture_scale = 4.46
-height = 233.0
-
-[node name="Luzparede" parent="." instance=ExtResource("8_v1d1r")]
-position = Vector2(24, -6)
-metadata/_edit_group_ = true
-metadata/_edit_lock_ = true
-
-[node name="animacao" parent="Luzparede" index="0"]
-autoplay = "luzparedeh"
-
-[node name="PointLight2D" parent="Luzparede" index="2"]
-energy = 2.11
-shadow_filter = 1
-shadow_item_cull_mask = 3
-
-[node name="Luzparede2" parent="." instance=ExtResource("8_v1d1r")]
-position = Vector2(104, -7)
-metadata/_edit_group_ = true
-metadata/_edit_lock_ = true
-
-[node name="animacao" parent="Luzparede2" index="0"]
-autoplay = "luzparedeh"
-
-[node name="PointLight2D" parent="Luzparede2" index="2"]
-energy = 2.11
-shadow_filter = 1
-shadow_item_cull_mask = 3
-
-[node name="Luzparede3" parent="." instance=ExtResource("8_v1d1r")]
-position = Vector2(219, -7)
-metadata/_edit_group_ = true
-metadata/_edit_lock_ = true
-
-[node name="animacao" parent="Luzparede3" index="0"]
-autoplay = "luzparedeh"
-
-[node name="PointLight2D" parent="Luzparede3" index="2"]
-energy = 2.11
-shadow_filter = 1
-shadow_item_cull_mask = 3
-
-[node name="porta" parent="." instance=ExtResource("12_iwfo7")]
-position = Vector2(82, -57)
-metadata/_edit_group_ = true
-
-[node name="sprite" parent="porta" index="0"]
-position = Vector2(-0.3, 1.1920929e-07)
-scale = Vector2(0.83750004, 1.25)
-
-[node name="porta3" parent="." instance=ExtResource("12_iwfo7")]
-position = Vector2(64, 23)
-metadata/_edit_group_ = true
-
-[node name="sprite" parent="porta3" index="0"]
-position = Vector2(-0.3, 1.1920929e-07)
-scale = Vector2(0.83750004, 1.25)
-
-[node name="porta2" parent="." instance=ExtResource("12_iwfo7")]
-position = Vector2(217, -57)
-metadata/_edit_group_ = true
-
-[node name="sprite" parent="porta2" index="0"]
-visible = false
-position = Vector2(-0.3, 1.1920929e-07)
-scale = Vector2(0.83750004, 1.25)
-
 [node name="ColorRect" type="ColorRect" parent="."]
 self_modulate = Color(1, 1, 1, 0.39215687)
 top_level = true
@@ -338,31 +126,236 @@ offset_left = -14.0
 offset_top = -94.0
 offset_right = 243.0
 offset_bottom = 49.0
+metadata/_edit_lock_ = true
 
-[node name="ColorRect2" type="ColorRect" parent="."]
-modulate = Color(1, 1, 1, 0.17254902)
-self_modulate = Color(1, 1, 1, 0.09019608)
-z_index = 3
-texture_filter = 1
-material = SubResource("ShaderMaterial_ocpn0")
-offset_left = -27.0
-offset_top = -98.0
-offset_right = 252.0
-offset_bottom = 73.0
-color = Color(0.9372549, 0.9372549, 0.9372549, 0.33333334)
+[node name="cenario" type="Node2D" parent="."]
+
+[node name="bandeiradeparede" type="AnimatedSprite2D" parent="cenario"]
+position = Vector2(7.5, -88.5)
+scale = Vector2(0.8125, 0.8125)
+sprite_frames = ExtResource("8_g6klm")
+animation = &"bandeira"
+autoplay = "bandeira"
+frame_progress = 0.5915967
+speed_scale = 0.5
+
+[node name="bandeiradeparede2" type="AnimatedSprite2D" parent="cenario"]
+position = Vector2(21.499985, -88.49998)
+scale = Vector2(0.8125, 0.8125)
+sprite_frames = ExtResource("8_g6klm")
+animation = &"bandeira"
+autoplay = "bandeira"
+frame_progress = 0.3497669
+
+[node name="Luz" parent="cenario" instance=ExtResource("7_l8342")]
+light_mask = 7
+visibility_layer = 7
+position = Vector2(-8, -56)
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="animacao" parent="cenario/Luz" index="0"]
+autoplay = "luzparedev"
+
+[node name="PointLight2D" parent="cenario/Luz" index="2"]
+color = Color(0.93753624, 0.9311703, 0.62972325, 1)
+energy = 1.42
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 4.0
+texture_scale = 4.46
+height = 233.0
+
+[node name="Luz2" parent="cenario" instance=ExtResource("7_l8342")]
+light_mask = 7
+visibility_layer = 7
+position = Vector2(120, -76)
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="animacao" parent="cenario/Luz2" index="0"]
+autoplay = "luzparedev"
+
+[node name="PointLight2D" parent="cenario/Luz2" index="2"]
+color = Color(0.93753624, 0.9311703, 0.62972325, 1)
+energy = 1.42
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 4.0
+texture_scale = 4.46
+height = 233.0
+
+[node name="Luz3" parent="cenario" instance=ExtResource("7_l8342")]
+light_mask = 7
+visibility_layer = 7
+position = Vector2(120, -76)
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="animacao" parent="cenario/Luz3" index="0"]
+autoplay = "luzparedev"
+
+[node name="PointLight2D" parent="cenario/Luz3" index="2"]
+color = Color(0.93753624, 0.9311703, 0.62972325, 1)
+energy = 1.42
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 4.0
+texture_scale = 4.46
+height = 233.0
+
+[node name="Luz4" parent="cenario" instance=ExtResource("7_l8342")]
+light_mask = 7
+visibility_layer = 7
+position = Vector2(231, -75)
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="animacao" parent="cenario/Luz4" index="0"]
+autoplay = "luzparedev"
+
+[node name="PointLight2D" parent="cenario/Luz4" index="2"]
+color = Color(0.93753624, 0.9311703, 0.62972325, 1)
+energy = 1.42
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 4.0
+texture_scale = 4.46
+height = 233.0
+
+[node name="Luz5" parent="cenario" instance=ExtResource("7_l8342")]
+light_mask = 7
+visibility_layer = 7
+position = Vector2(-8, 31)
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="animacao" parent="cenario/Luz5" index="0"]
+autoplay = "luzparedev"
+
+[node name="PointLight2D" parent="cenario/Luz5" index="2"]
+color = Color(0.93753624, 0.9311703, 0.62972325, 1)
+energy = 1.42
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 4.0
+texture_scale = 4.46
+height = 233.0
+
+[node name="Luz6" parent="cenario" instance=ExtResource("7_l8342")]
+light_mask = 7
+visibility_layer = 7
+position = Vector2(88, 40)
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="animacao" parent="cenario/Luz6" index="0"]
+autoplay = "luzparedev"
+
+[node name="PointLight2D" parent="cenario/Luz6" index="2"]
+color = Color(0.93753624, 0.9311703, 0.62972325, 1)
+energy = 1.42
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 4.0
+texture_scale = 4.46
+height = 233.0
+
+[node name="Luz7" parent="cenario" instance=ExtResource("7_l8342")]
+light_mask = 7
+visibility_layer = 7
+position = Vector2(184, 39)
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="animacao" parent="cenario/Luz7" index="0"]
+autoplay = "luzparedev"
+
+[node name="PointLight2D" parent="cenario/Luz7" index="2"]
+color = Color(0.93753624, 0.9311703, 0.62972325, 1)
+energy = 1.42
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 4.0
+texture_scale = 4.46
+height = 233.0
+
+[node name="Luzparede" parent="cenario" instance=ExtResource("8_v1d1r")]
+position = Vector2(24, -6)
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="animacao" parent="cenario/Luzparede" index="0"]
+autoplay = "luzparedeh"
+
+[node name="PointLight2D" parent="cenario/Luzparede" index="2"]
+energy = 2.11
+shadow_filter = 1
+shadow_item_cull_mask = 3
+
+[node name="Luzparede2" parent="cenario" instance=ExtResource("8_v1d1r")]
+position = Vector2(104, -7)
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="animacao" parent="cenario/Luzparede2" index="0"]
+autoplay = "luzparedeh"
+
+[node name="PointLight2D" parent="cenario/Luzparede2" index="2"]
+energy = 2.11
+shadow_filter = 1
+shadow_item_cull_mask = 3
+
+[node name="Luzparede3" parent="cenario" instance=ExtResource("8_v1d1r")]
+position = Vector2(219, -7)
+metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
+
+[node name="animacao" parent="cenario/Luzparede3" index="0"]
+autoplay = "luzparedeh"
+
+[node name="PointLight2D" parent="cenario/Luzparede3" index="2"]
+energy = 2.11
+shadow_filter = 1
+shadow_item_cull_mask = 3
+
+[node name="porta" parent="cenario" instance=ExtResource("12_iwfo7")]
+position = Vector2(82, -57)
+metadata/_edit_group_ = true
+
+[node name="sprite" parent="cenario/porta" index="0"]
+position = Vector2(-0.3, 1.1920929e-07)
+scale = Vector2(0.83750004, 1.25)
+
+[node name="porta3" parent="cenario" instance=ExtResource("12_iwfo7")]
+position = Vector2(64, 23)
+metadata/_edit_group_ = true
+
+[node name="sprite" parent="cenario/porta3" index="0"]
+position = Vector2(-0.3, 1.1920929e-07)
+scale = Vector2(0.83750004, 1.25)
+
+[node name="porta2" parent="cenario" instance=ExtResource("12_iwfo7")]
+position = Vector2(217, -57)
+metadata/_edit_group_ = true
+
+[node name="sprite" parent="cenario/porta2" index="0"]
+visible = false
+position = Vector2(-0.3, 1.1920929e-07)
+scale = Vector2(0.83750004, 1.25)
 
 [editable path="Player"]
 [editable path="chave"]
-[editable path="Luz"]
-[editable path="Luz2"]
-[editable path="Luz3"]
-[editable path="Luz4"]
-[editable path="Luz5"]
-[editable path="Luz6"]
-[editable path="Luz7"]
-[editable path="Luzparede"]
-[editable path="Luzparede2"]
-[editable path="Luzparede3"]
-[editable path="porta"]
-[editable path="porta3"]
-[editable path="porta2"]
+[editable path="cenario/Luz"]
+[editable path="cenario/Luz2"]
+[editable path="cenario/Luz3"]
+[editable path="cenario/Luz4"]
+[editable path="cenario/Luz5"]
+[editable path="cenario/Luz6"]
+[editable path="cenario/Luz7"]
+[editable path="cenario/Luzparede"]
+[editable path="cenario/Luzparede2"]
+[editable path="cenario/Luzparede3"]
+[editable path="cenario/porta"]
+[editable path="cenario/porta3"]
+[editable path="cenario/porta2"]
