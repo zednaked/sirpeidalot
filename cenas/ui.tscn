@@ -1,0 +1,343 @@
+[gd_scene load_steps=11 format=3 uid="uid://ygv0qscvgpfk"]
+
+[ext_resource type="Script" uid="uid://b2ihgpnsx2tti" path="res://cenas/ui.gd" id="1_kmdi0"]
+[ext_resource type="Texture2D" uid="uid://bdglltdtt3eyu" path="res://sprites/16x16.png" id="2_ufjay"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_klgsu"]
+light_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ocpn0"]
+light_mode = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g6klm"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0.9350336, 0.7330125, 1)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+corner_detail = 20
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_gl1un"]
+light_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_dfnyg"]
+light_mode = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_klgsu"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.011764706, 0, 0.007843138, 0.8352941)
+border_color = Color(0.98623735, 0.4824041, 0.6147203, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 20
+shadow_offset = Vector2(0, 2)
+
+[sub_resource type="SystemFont" id="SystemFont_gl1un"]
+modulate_color_glyphs = true
+subpixel_positioning = 0
+multichannel_signed_distance_field = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ocpn0"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.99055, 0.8272634, 0.8598636, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[node name="UI" type="Control"]
+modulate = Color(1.1333088, 1.1333088, 1.1333088, 1)
+self_modulate = Color(18.892157, 18.892157, 8.398238, 1)
+top_level = true
+light_mask = 0
+z_index = 3
+z_as_relative = false
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_klgsu")
+layout_mode = 3
+anchors_preset = 0
+offset_left = -25.789333
+offset_top = -93.35152
+offset_right = 248.52463
+offset_bottom = -79.35152
+script = ExtResource("1_kmdi0")
+
+[node name="topo" type="HBoxContainer" parent="."]
+material = SubResource("CanvasItemMaterial_ocpn0")
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 0.11798096
+offset_bottom = 1.0
+metadata/_edit_lock_ = true
+
+[node name="slot3" type="Panel" parent="topo"]
+material = SubResource("CanvasItemMaterial_ocpn0")
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_g6klm")
+
+[node name="Sprite2D2" type="Sprite2D" parent="topo/slot3"]
+z_index = 7
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_ocpn0")
+position = Vector2(8, 7)
+scale = Vector2(0.6875, 0.61875004)
+texture = ExtResource("2_ufjay")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 16)
+
+[node name="slot2" type="Panel" parent="topo"]
+visible = false
+material = SubResource("CanvasItemMaterial_ocpn0")
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_g6klm")
+
+[node name="Sprite2D2" type="Sprite2D" parent="topo/slot2"]
+z_index = 3
+texture_filter = 1
+position = Vector2(8, 7)
+scale = Vector2(0.6875, 0.61875004)
+texture = ExtResource("2_ufjay")
+region_enabled = true
+region_rect = Rect2(80, 656, 16, 16)
+
+[node name="MarginContainer" type="MarginContainer" parent="topo"]
+material = SubResource("CanvasItemMaterial_ocpn0")
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="slot4" type="Panel" parent="topo"]
+visible = false
+material = SubResource("CanvasItemMaterial_ocpn0")
+custom_minimum_size = Vector2(93.905, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_g6klm")
+
+[node name="Label" type="Label" parent="topo/slot4"]
+material = SubResource("CanvasItemMaterial_gl1un")
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.99300003
+anchor_bottom = 0.767
+offset_left = 6.0539856
+offset_top = 1.2745209
+offset_right = 6.0176697
+offset_bottom = 12.769521
+theme_override_font_sizes/font_size = 8
+text = "catacumbas - level - 1"
+
+[node name="MarginContainer2" type="MarginContainer" parent="topo"]
+material = SubResource("CanvasItemMaterial_ocpn0")
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="setup" type="Panel" parent="topo"]
+visible = false
+material = SubResource("CanvasItemMaterial_ocpn0")
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_g6klm")
+
+[node name="Sprite2D" type="Sprite2D" parent="topo/setup"]
+z_index = 7
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_dfnyg")
+position = Vector2(8.000001, 7.0000033)
+scale = Vector2(0.6875, 0.61875004)
+texture = ExtResource("2_ufjay")
+region_enabled = true
+region_rect = Rect2(16, 0, 16, 16)
+
+[node name="inventario" type="Panel" parent="."]
+visible = false
+light_mask = 0
+z_index = 3
+z_as_relative = false
+material = SubResource("CanvasItemMaterial_ocpn0")
+custom_minimum_size = Vector2(22.735, 19.775)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -38.769745
+offset_top = 22.931465
+offset_right = 58.84349
+offset_bottom = 116.94744
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_klgsu")
+
+[node name="Label" type="Label" parent="inventario"]
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_ocpn0")
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.49400002
+anchor_right = 0.49400002
+anchor_bottom = 0.33200002
+offset_left = -67.85814
+offset_top = 1.4167252
+offset_right = 69.005615
+offset_bottom = -16.67413
+theme_override_colors/font_color = Color(0.9537712, 0.9392503, 0.9608411, 1)
+theme_override_fonts/font = SubResource("SystemFont_gl1un")
+theme_override_font_sizes/font_size = 9
+text = "Inventario"
+horizontal_alignment = 1
+
+[node name="Panel" type="Panel" parent="inventario"]
+light_mask = 0
+custom_minimum_size = Vector2(15.55, 15.015)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.517
+anchor_right = 0.517
+offset_left = -33.215866
+offset_top = 21.715607
+offset_right = 33.127796
+offset_bottom = 58.716133
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ocpn0")
+
+[node name="mochila" type="GridContainer" parent="inventario"]
+layout_mode = 0
+offset_left = 20.436497
+offset_top = 23.897316
+offset_right = 81.43649
+offset_bottom = 57.52472
+theme_override_constants/h_separation = -1
+theme_override_constants/v_separation = -1
+columns = 4
+
+[node name="slot4" type="Panel" parent="inventario/mochila"]
+material = SubResource("CanvasItemMaterial_ocpn0")
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_g6klm")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D2" type="Sprite2D" parent="inventario/mochila/slot4"]
+light_mask = 0
+z_index = 3
+z_as_relative = false
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_ocpn0")
+position = Vector2(8, 7)
+scale = Vector2(0.6875, 0.61875004)
+texture = ExtResource("2_ufjay")
+region_enabled = true
+region_rect = Rect2(64, 528, 16, 16)
+
+[node name="slot5" type="Panel" parent="inventario/mochila"]
+material = SubResource("CanvasItemMaterial_ocpn0")
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_g6klm")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D2" type="Sprite2D" parent="inventario/mochila/slot5"]
+light_mask = 0
+z_index = 3
+z_as_relative = false
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_ocpn0")
+position = Vector2(8, 7)
+scale = Vector2(0.6875, 0.61875004)
+texture = ExtResource("2_ufjay")
+region_enabled = true
+region_rect = Rect2(64, 128, 16, 16)
+
+[node name="equipado" type="HBoxContainer" parent="inventario"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -26.821098
+offset_top = 69.133
+offset_right = 29.178902
+offset_bottom = 84.598434
+alignment = 1
+metadata/_edit_group_ = true
+
+[node name="slot5" type="Panel" parent="inventario/equipado"]
+material = SubResource("CanvasItemMaterial_ocpn0")
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_g6klm")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D2" type="Sprite2D" parent="inventario/equipado/slot5"]
+light_mask = 0
+z_index = 3
+z_as_relative = false
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_ocpn0")
+position = Vector2(8, 7)
+scale = Vector2(0.6875, 0.61875004)
+texture = ExtResource("2_ufjay")
+region_enabled = true
+region_rect = Rect2(48, 0, 16, 16)
+
+[node name="slot6" type="Panel" parent="inventario/equipado"]
+material = SubResource("CanvasItemMaterial_ocpn0")
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_g6klm")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D2" type="Sprite2D" parent="inventario/equipado/slot6"]
+light_mask = 0
+z_index = 3
+z_as_relative = false
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_ocpn0")
+position = Vector2(8, 7)
+scale = Vector2(0.6875, 0.61875004)
+texture = ExtResource("2_ufjay")
+region_enabled = true
+region_rect = Rect2(32, 1856, 16, 16)
+
+[node name="slot3" type="Panel" parent="inventario/equipado"]
+material = SubResource("CanvasItemMaterial_ocpn0")
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_g6klm")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D2" type="Sprite2D" parent="inventario/equipado/slot3"]
+light_mask = 0
+z_index = 3
+z_as_relative = false
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_ocpn0")
+position = Vector2(8, 7)
+scale = Vector2(0.6875, 0.61875004)
+texture = ExtResource("2_ufjay")
+region_enabled = true
+region_rect = Rect2(96, 2048, 16, 16)
+
+[connection signal="gui_input" from="topo/slot3" to="." method="_on_slot_3_gui_input"]

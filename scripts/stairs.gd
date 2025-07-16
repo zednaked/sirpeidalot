@@ -3,6 +3,8 @@ extends StaticBody2D
 ## This scene will be loaded when the player interacts with the stairs.
 @export var target_scene: PackedScene
 
+
+
 ## Called by the player when they interact with the stairs.
 func interact():
 	if target_scene:
