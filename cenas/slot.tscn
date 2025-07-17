@@ -1,28 +1,14 @@
-[gd_scene load_steps=21 format=4 uid="uid://6fwtnmfft5rv"]
+[gd_scene load_steps=22 format=4 uid="uid://6fwtnmfft5rv"]
 
 [ext_resource type="Script" uid="uid://c2urgxximke2d" path="res://cenas/slot.gd" id="1_58rbq"]
 [ext_resource type="Texture2D" uid="uid://bdglltdtt3eyu" path="res://sprites/16x16.png" id="1_hibsx"]
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_58rbq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e2pjn"]
+
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ocpn0"]
 light_mode = 1
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g6klm"]
-content_margin_left = 0.0
-content_margin_top = 0.0
-content_margin_right = 0.0
-content_margin_bottom = 0.0
-bg_color = Color(0, 0, 0, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0, 0.9350336, 0.7330125, 1)
-corner_radius_top_left = 1
-corner_radius_top_right = 1
-corner_radius_bottom_right = 1
-corner_radius_bottom_left = 1
-corner_detail = 20
-anti_aliasing = false
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e2pjn"]
 content_margin_left = 0.0
@@ -2239,7 +2225,7 @@ cache/0/25/0/glyphs/3/texture_idx = -1
 physics_interpolation_mode = 1
 auto_translate_mode = 1
 y_sort_enabled = true
-material = SubResource("CanvasItemMaterial_ocpn0")
+material = SubResource("CanvasItemMaterial_58rbq")
 custom_minimum_size = Vector2(16, 16)
 anchors_preset = -1
 anchor_left = 0.006
@@ -2251,7 +2237,7 @@ offset_top = -7.2000003
 offset_right = 8.32
 offset_bottom = 7.3685536
 mouse_filter = 1
-theme_override_styles/panel = SubResource("StyleBoxFlat_g6klm")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_e2pjn")
 script = ExtResource("1_58rbq")
 
 [node name="icone" type="Sprite2D" parent="."]

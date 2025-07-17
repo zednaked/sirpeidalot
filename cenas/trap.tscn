@@ -1,0 +1,596 @@
+[gd_scene load_steps=113 format=3 uid="uid://do77payyy4q7l"]
+
+[ext_resource type="Script" uid="uid://dc7ijepqqe56a" path="res://cenas/trap.gd" id="1_emlei"]
+[ext_resource type="Texture2D" uid="uid://cde3wlbqgay87" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/flag/flag_1.png" id="2_emlei"]
+[ext_resource type="Texture2D" uid="uid://cun3015t1hx51" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/flag/flag_2.png" id="3_70dtr"]
+[ext_resource type="Texture2D" uid="uid://jjlu5m5cbge8" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/flag/flag_3.png" id="4_878sr"]
+[ext_resource type="Texture2D" uid="uid://cpkbe827e5es5" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/flag/flag_4.png" id="5_krgud"]
+[ext_resource type="Texture2D" uid="uid://ckrv43hnyi6ls" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/mini_box_1/mini_box_1_1.png" id="6_fiwbk"]
+[ext_resource type="Texture2D" uid="uid://dnfuruynjig6e" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/mini_box_1/mini_box_1_2.png" id="7_wt4u8"]
+[ext_resource type="Texture2D" uid="uid://chbnor23by6tc" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/mini_box_1/mini_box_1_3.png" id="8_2ihgf"]
+[ext_resource type="Texture2D" uid="uid://dkevoh7ehddpd" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/mini_box_1/mini_box_1_4.png" id="9_51cxl"]
+[ext_resource type="Texture2D" uid="uid://yqt71etsl0es" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/keys/keys_1_1.png" id="10_oi5e8"]
+[ext_resource type="Texture2D" uid="uid://x1wsa84v64p" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/keys/keys_1_2.png" id="11_o3i6m"]
+[ext_resource type="Texture2D" uid="uid://bryhnvl767o04" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/keys/keys_1_3.png" id="12_nyiqd"]
+[ext_resource type="Texture2D" uid="uid://bsuwaf1gii2lk" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/keys/keys_1_4.png" id="13_6kttp"]
+[ext_resource type="Texture2D" uid="uid://mfrqjk2vpl2y" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/keys/keys_2_1.png" id="14_lra77"]
+[ext_resource type="Texture2D" uid="uid://dwhj6112lu1fv" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/keys/keys_2_2.png" id="15_36iss"]
+[ext_resource type="Texture2D" uid="uid://bj0iwgq5vb06h" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/keys/keys_2_3.png" id="16_qk02u"]
+[ext_resource type="Texture2D" uid="uid://d3osnqck2nqwo" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/keys/keys_2_4.png" id="17_algm2"]
+[ext_resource type="Texture2D" uid="uid://cjy0xpi4qwu6h" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/mini_chest/mini_chest_open_1.png" id="18_tnhdd"]
+[ext_resource type="Texture2D" uid="uid://c0vo26ld05lh" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/mini_chest/mini_chest_open_2.png" id="19_5upc5"]
+[ext_resource type="Texture2D" uid="uid://brhxw3x04n6xr" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/mini_chest/mini_chest_open_3.png" id="20_405iv"]
+[ext_resource type="Texture2D" uid="uid://u8eeswtic45s" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/mini_chest/mini_chest_open_4.png" id="21_jv38x"]
+[ext_resource type="Texture2D" uid="uid://d23x80w6ro347" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/mini_box_2/mini_box_2_1.png" id="22_k2q07"]
+[ext_resource type="Texture2D" uid="uid://dg8asfdhe1iau" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/mini_box_2/mini_box_2_2.png" id="23_opqy3"]
+[ext_resource type="Texture2D" uid="uid://dknr7hp1s3wxn" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/mini_box_2/mini_box_2_3.png" id="24_i0hao"]
+[ext_resource type="Texture2D" uid="uid://dyxo1onhjyxyp" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/mini_box_2/mini_box_2_4.png" id="25_llxtv"]
+[ext_resource type="Texture2D" uid="uid://dv20bvurjtspr" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/mini_chest/mini_chest_1.png" id="26_v6to6"]
+[ext_resource type="Texture2D" uid="uid://cphf6tiwupb00" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/mini_chest/mini_chest_2.png" id="27_n4bv0"]
+[ext_resource type="Texture2D" uid="uid://iereuc5kj844" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/mini_chest/mini_chest_3.png" id="28_61f7x"]
+[ext_resource type="Texture2D" uid="uid://cl2hvwjngsxao" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/mini_chest/mini_chest_4.png" id="29_0sxo7"]
+[ext_resource type="Texture2D" uid="uid://7exs21rlv1s" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/chest/chest_1.png" id="30_dly4l"]
+[ext_resource type="Texture2D" uid="uid://borittqw7tnv8" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/chest/chest_2.png" id="31_vj1ad"]
+[ext_resource type="Texture2D" uid="uid://cu3bmw753moff" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/chest/chest_3.png" id="32_iynfm"]
+[ext_resource type="Texture2D" uid="uid://dsm3o4mavjsc7" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/chest/chest_4.png" id="33_2128t"]
+[ext_resource type="Texture2D" uid="uid://pt0ghfjfrbs7" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/chest/chest_open_1.png" id="34_5x1v5"]
+[ext_resource type="Texture2D" uid="uid://d2qgedcsr18yt" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/chest/chest_open_2.png" id="35_a1xbw"]
+[ext_resource type="Texture2D" uid="uid://cfp7n483ld623" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/chest/chest_open_3.png" id="36_batts"]
+[ext_resource type="Texture2D" uid="uid://cap3l8mvadk7k" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/chest/chest_open_4.png" id="37_yftrq"]
+[ext_resource type="Texture2D" uid="uid://c76qxf00vnwe1" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/box_2/box_2_1.png" id="38_y3k35"]
+[ext_resource type="Texture2D" uid="uid://dkibjk7cnno0p" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/box_2/box_2_2.png" id="39_bepi8"]
+[ext_resource type="Texture2D" uid="uid://c402uoggcqykp" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/box_2/box_2_3.png" id="40_lrkml"]
+[ext_resource type="Texture2D" uid="uid://cx4dsh8janqt" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/box_2/box_2_4.png" id="41_221sf"]
+[ext_resource type="Texture2D" uid="uid://ctwjtggdue0c4" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/box_1/box_1_1.png" id="42_v4a8h"]
+[ext_resource type="Texture2D" uid="uid://fb21nf3p6yo7" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/box_1/box_1_2.png" id="43_tegqx"]
+[ext_resource type="Texture2D" uid="uid://ddb2pmmirq25p" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/box_1/box_1_3.png" id="44_36v15"]
+[ext_resource type="Texture2D" uid="uid://cnhnhahiab0oo" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/box_1/box_1_4.png" id="45_ncf60"]
+[ext_resource type="Texture2D" uid="uid://c5vcmwhsrbb3w" path="res://sprites/2D Pixel Dungeon Asset Pack/interface/arrow_1.png" id="46_axxqq"]
+[ext_resource type="Texture2D" uid="uid://bn0334voipnns" path="res://sprites/2D Pixel Dungeon Asset Pack/interface/arrow_2.png" id="47_fjoxd"]
+[ext_resource type="Texture2D" uid="uid://ch6hmunixdqyj" path="res://sprites/2D Pixel Dungeon Asset Pack/interface/arrow_3.png" id="48_sbhl5"]
+[ext_resource type="Texture2D" uid="uid://ctk85agfih0ig" path="res://sprites/2D Pixel Dungeon Asset Pack/interface/arrow_4.png" id="49_ptxne"]
+[ext_resource type="Texture2D" uid="uid://cemtgcu5xaq1l" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/flamethrower/flamethrower_2_1.png" id="50_dx84k"]
+[ext_resource type="Texture2D" uid="uid://lcps4pakt4dc" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/flamethrower/flamethrower_2_2.png" id="51_mtg8l"]
+[ext_resource type="Texture2D" uid="uid://dujsgmf4t58t4" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/flamethrower/flamethrower_2_3.png" id="52_u6ije"]
+[ext_resource type="Texture2D" uid="uid://cwfuy5t7adjjk" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/flamethrower/flamethrower_2_4.png" id="53_ud6tq"]
+[ext_resource type="Texture2D" uid="uid://xsyc0bhur72o" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/flamethrower/flamethrower_1_1.png" id="54_v3k8f"]
+[ext_resource type="Texture2D" uid="uid://nc4c14kgoppk" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/flamethrower/flamethrower_1_2.png" id="55_o2adm"]
+[ext_resource type="Texture2D" uid="uid://bolxi2bqpsy2m" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/flamethrower/flamethrower_1_3.png" id="56_ip3q8"]
+[ext_resource type="Texture2D" uid="uid://bxmpt15liafg6" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/flamethrower/flamethrower_1_4.png" id="57_4oabo"]
+[ext_resource type="Texture2D" uid="uid://eyovxuoik2dp" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/torch/candlestick_1_1.png" id="58_8h7cu"]
+[ext_resource type="Texture2D" uid="uid://dny7t3ixgtyaa" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/torch/candlestick_1_2.png" id="59_i7h0o"]
+[ext_resource type="Texture2D" uid="uid://cwlcedrar2xqf" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/torch/candlestick_1_3.png" id="60_wu3qf"]
+[ext_resource type="Texture2D" uid="uid://db1esffmddpf5" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/torch/candlestick_1_4.png" id="61_y88c3"]
+[ext_resource type="Texture2D" uid="uid://dj7s2wq8utvov" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/torch/candlestick_2_1.png" id="62_3fl0k"]
+[ext_resource type="Texture2D" uid="uid://duobqw8tc1wd2" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/torch/candlestick_2_2.png" id="63_6vhol"]
+[ext_resource type="Texture2D" uid="uid://d06y4lowlgirx" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/torch/candlestick_2_3.png" id="64_5v4hg"]
+[ext_resource type="Texture2D" uid="uid://dkbptblj5xwww" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/torch/candlestick_2_4.png" id="65_g0s81"]
+[ext_resource type="Texture2D" uid="uid://cnyehsn54oc7u" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/torch/torch_1.png" id="66_m1f0y"]
+[ext_resource type="Texture2D" uid="uid://c5ktr68bxolu0" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/torch/torch_2.png" id="67_laxvv"]
+[ext_resource type="Texture2D" uid="uid://bwwhwxctkipq5" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/torch/torch_3.png" id="68_xgk47"]
+[ext_resource type="Texture2D" uid="uid://1tdbcop0xhya" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/torch/torch_4.png" id="69_7osna"]
+[ext_resource type="Texture2D" uid="uid://ci72gtjwwdwni" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/torch/side_torch_1.png" id="70_4ghvs"]
+[ext_resource type="Texture2D" uid="uid://bt60ofghocu6i" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/torch/side_torch_2.png" id="71_sljua"]
+[ext_resource type="Texture2D" uid="uid://cnulanu536tva" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/torch/side_torch_3.png" id="72_l1x4c"]
+[ext_resource type="Texture2D" uid="uid://dmmwyq2x4k3bp" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/torch/side_torch_4.png" id="73_x7fum"]
+[ext_resource type="Texture2D" uid="uid://bgelt0eaacs7p" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/coin/coin_1.png" id="74_p6bwe"]
+[ext_resource type="Texture2D" uid="uid://cvxas05n16poq" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/coin/coin_2.png" id="75_gevad"]
+[ext_resource type="Texture2D" uid="uid://b3mlvrsk54qte" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/coin/coin_3.png" id="76_txmpx"]
+[ext_resource type="Texture2D" uid="uid://ckdajj6rctdyb" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/coin/coin_4.png" id="77_bq6sv"]
+[ext_resource type="Texture2D" uid="uid://cwdah0mo4p5q2" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/flasks/flasks_2_1.png" id="78_l2cl0"]
+[ext_resource type="Texture2D" uid="uid://dyh3hqnh3llpd" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/flasks/flasks_2_2.png" id="79_jxvfb"]
+[ext_resource type="Texture2D" uid="uid://l8tf245fro7w" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/flasks/flasks_2_3.png" id="80_q0ktq"]
+[ext_resource type="Texture2D" uid="uid://bx4tu60t008n4" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/flasks/flasks_2_4.png" id="81_yli3x"]
+[ext_resource type="Texture2D" uid="uid://4ceyp32d5sdc" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/flasks/flasks_3_1.png" id="82_l3hen"]
+[ext_resource type="Texture2D" uid="uid://x0ykwrxuxqw1" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/flasks/flasks_3_2.png" id="83_0svn6"]
+[ext_resource type="Texture2D" uid="uid://dt7fbumoecsn0" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/flasks/flasks_3_3.png" id="84_ee0j6"]
+[ext_resource type="Texture2D" uid="uid://2vr6td2iq2sx" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/flasks/flasks_3_4.png" id="85_r7wmw"]
+[ext_resource type="Texture2D" uid="uid://cs3hatj5po1k8" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/flasks/flasks_4_1.png" id="86_k6d5u"]
+[ext_resource type="Texture2D" uid="uid://bo1emdyebcssu" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/flasks/flasks_4_2.png" id="87_4oilf"]
+[ext_resource type="Texture2D" uid="uid://4pfyeb7xwoue" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/flasks/flasks_4_3.png" id="88_tfiee"]
+[ext_resource type="Texture2D" uid="uid://bfpocp28ip0na" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/flasks/flasks_4_4.png" id="89_uoru5"]
+[ext_resource type="Texture2D" uid="uid://df03ibx33ne0v" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/flasks/flasks_1_1.png" id="90_iwa6c"]
+[ext_resource type="Texture2D" uid="uid://b00nywgfmrkrl" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/flasks/flasks_1_2.png" id="91_licbs"]
+[ext_resource type="Texture2D" uid="uid://bxt5rsdo3uodp" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/flasks/flasks_1_3.png" id="92_kw17i"]
+[ext_resource type="Texture2D" uid="uid://chwamiekrhjjh" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/flasks/flasks_1_4.png" id="93_ti5cj"]
+[ext_resource type="Texture2D" uid="uid://bewgl6mhkxbsw" path="res://sprites/2D Pixel Dungeon Asset Pack/interface/square_left_1.png" id="94_qv026"]
+[ext_resource type="Texture2D" uid="uid://qjqfp2cyaoap" path="res://sprites/2D Pixel Dungeon Asset Pack/interface/square_left_2.png" id="95_jyydx"]
+[ext_resource type="Texture2D" uid="uid://cn6wm6svb6xpe" path="res://sprites/2D Pixel Dungeon Asset Pack/interface/square_left_3.png" id="96_lne4e"]
+[ext_resource type="Texture2D" uid="uid://dlskd8kac5b3p" path="res://sprites/2D Pixel Dungeon Asset Pack/interface/square_left_4.png" id="97_160j1"]
+[ext_resource type="Texture2D" uid="uid://diwco7sdbgg7a" path="res://sprites/2D Pixel Dungeon Asset Pack/interface/square_left_2_1.png" id="98_lig70"]
+[ext_resource type="Texture2D" uid="uid://lfwdtuc17wuy" path="res://sprites/2D Pixel Dungeon Asset Pack/interface/square_left_2_2.png" id="99_es33j"]
+[ext_resource type="Texture2D" uid="uid://ucg20fjg6qwb" path="res://sprites/2D Pixel Dungeon Asset Pack/interface/square_left_2_3.png" id="100_pvq06"]
+[ext_resource type="Texture2D" uid="uid://bvg3dvmo4m15i" path="res://sprites/2D Pixel Dungeon Asset Pack/interface/square_left_2_4.png" id="101_hmy87"]
+[ext_resource type="Texture2D" uid="uid://cc4pchjrjwn0d" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/peaks/peaks_3.png" id="102_jhsr3"]
+[ext_resource type="Texture2D" uid="uid://d3ffvqlufvhgf" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/peaks/peaks_4.png" id="103_r8yha"]
+[ext_resource type="Texture2D" uid="uid://bf822sag3hnaw" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/peaks/peaks_2.png" id="104_dxw3n"]
+[ext_resource type="Texture2D" uid="uid://dsa4cp18myjvn" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/peaks/peaks_1.png" id="105_l0mny"]
+[ext_resource type="Texture2D" uid="uid://k2fkdr7s8dsh" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/arrow/arrow_1.png" id="106_0swpk"]
+[ext_resource type="Texture2D" uid="uid://remkbite3qtm" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/arrow/arrow_2.png" id="107_4ekmm"]
+[ext_resource type="Texture2D" uid="uid://fcc4253ilf7v" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/arrow/arrow_3.png" id="108_epjcw"]
+[ext_resource type="Texture2D" uid="uid://d2x6cuwol7s5s" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/arrow/arrow_4.png" id="109_m5rro"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_p8tku"]
+polygon = PackedVector2Array(-2, -21, 2, -21, 2, 11, -2, 11)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iwfo7"]
+size = Vector2(17, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wf35e"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_emlei")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_70dtr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_878sr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_krgud")
+}],
+"loop": true,
+"name": &"bandeira",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_fiwbk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_wt4u8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_2ihgf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_51cxl")
+}],
+"loop": true,
+"name": &"caixafechada",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_oi5e8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_o3i6m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_nyiqd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_6kttp")
+}],
+"loop": true,
+"name": &"chave",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_lra77")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_36iss")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_qk02u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_algm2")
+}],
+"loop": true,
+"name": &"chavecinza",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("18_tnhdd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_5upc5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_405iv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_jv38x")
+}],
+"loop": true,
+"name": &"chestabrindo",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("22_k2q07")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_opqy3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_i0hao")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_llxtv")
+}],
+"loop": true,
+"name": &"chestfechado",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("26_v6to6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_n4bv0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_61f7x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_0sxo7")
+}],
+"loop": true,
+"name": &"chestfechado_1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("30_dly4l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_vj1ad")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_iynfm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_2128t")
+}],
+"loop": true,
+"name": &"chestgrande",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("34_5x1v5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35_a1xbw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_batts")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37_yftrq")
+}],
+"loop": true,
+"name": &"chestgrandeabrindo",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("38_y3k35")
+}, {
+"duration": 1.0,
+"texture": ExtResource("39_bepi8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("40_lrkml")
+}, {
+"duration": 1.0,
+"texture": ExtResource("41_221sf")
+}],
+"loop": true,
+"name": &"chestmadeirafechado",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("42_v4a8h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("43_tegqx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("44_36v15")
+}, {
+"duration": 1.0,
+"texture": ExtResource("45_ncf60")
+}],
+"loop": true,
+"name": &"chestnormal",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("46_axxqq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("47_fjoxd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("48_sbhl5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("49_ptxne")
+}],
+"loop": true,
+"name": &"flechabaixo",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("50_dx84k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("51_mtg8l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("52_u6ije")
+}, {
+"duration": 1.0,
+"texture": ExtResource("53_ud6tq")
+}],
+"loop": true,
+"name": &"lancachamash",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("54_v3k8f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("55_o2adm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("56_ip3q8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("57_4oabo")
+}],
+"loop": true,
+"name": &"lancachamasv",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("58_8h7cu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("59_i7h0o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("60_wu3qf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("61_y88c3")
+}],
+"loop": true,
+"name": &"luzchao",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("62_3fl0k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("63_6vhol")
+}, {
+"duration": 1.0,
+"texture": ExtResource("64_5v4hg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("65_g0s81")
+}],
+"loop": true,
+"name": &"luzchao2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("66_m1f0y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("67_laxvv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("68_xgk47")
+}, {
+"duration": 1.0,
+"texture": ExtResource("69_7osna")
+}],
+"loop": true,
+"name": &"luzparedeh",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("70_4ghvs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("71_sljua")
+}, {
+"duration": 1.0,
+"texture": ExtResource("72_l1x4c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("73_x7fum")
+}],
+"loop": true,
+"name": &"luzparedev",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("74_p6bwe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("75_gevad")
+}, {
+"duration": 1.0,
+"texture": ExtResource("76_txmpx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("77_bq6sv")
+}],
+"loop": true,
+"name": &"moeda",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("78_l2cl0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("79_jxvfb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("80_q0ktq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("81_yli3x")
+}],
+"loop": true,
+"name": &"pocaoazul",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("82_l3hen")
+}, {
+"duration": 1.0,
+"texture": ExtResource("83_0svn6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("84_ee0j6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("85_r7wmw")
+}],
+"loop": true,
+"name": &"pocaoazulgrande",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("86_k6d5u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("87_4oilf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("88_tfiee")
+}, {
+"duration": 1.0,
+"texture": ExtResource("89_uoru5")
+}],
+"loop": true,
+"name": &"pocaovermelha",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("90_iwa6c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("91_licbs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("92_kw17i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("93_ti5cj")
+}],
+"loop": true,
+"name": &"pocaovermelha2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("94_qv026")
+}, {
+"duration": 1.0,
+"texture": ExtResource("95_jyydx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("96_lne4e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("97_160j1")
+}],
+"loop": true,
+"name": &"selecionado1",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("95_jyydx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("98_lig70")
+}, {
+"duration": 1.0,
+"texture": ExtResource("99_es33j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("100_pvq06")
+}, {
+"duration": 1.0,
+"texture": ExtResource("101_hmy87")
+}],
+"loop": true,
+"name": &"selecionado2",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("102_jhsr3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("103_r8yha")
+}, {
+"duration": 1.0,
+"texture": ExtResource("104_dxw3n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("105_l0mny")
+}],
+"loop": false,
+"name": &"trapchao",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("106_0swpk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("107_4ekmm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("108_epjcw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("109_m5rro")
+}],
+"loop": true,
+"name": &"trapflechaparede",
+"speed": 5.0
+}]
+
+[node name="trap" type="StaticBody2D" groups=["traps"]]
+script = ExtResource("1_emlei")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+visible = false
+occluder = SubResource("OccluderPolygon2D_p8tku")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["stairs"]]
+shape = SubResource("RectangleShape2D_iwfo7")
+
+[node name="animacao" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_wf35e")
+animation = &"trapchao"

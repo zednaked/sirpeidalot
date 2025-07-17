@@ -97,13 +97,26 @@ func _try_move_or_attack(direction: Vector2):
 			else:
 				print("The stairs are locked. You need a key.")
 			consumed_turn = true # Interacting with stairs takes a turn
-
+	
+		elif collider.is_in_group ("drop"):
+			target_position = global_position + direction * TILE_SIZE
+			is_moving = true
+			#sollider.get_parent()
+			collider.get_parent().reparent(get_parent().get_node("UI/inventario/mochila"))
+			consumed_turn = true
+			
 		elif collider is StaticBody2D and collider.is_in_group ("portas"):
 			print_debug ("porta")
 			#var collision_point = interaction_ray.get_collision_point()
 			#var map_coords = collider.local_to_map(collider.to_local(collision_point))
 			#collider.set_cell(map_coords, -1)
 			collider.collect()
+			consumed_turn = true
+		elif collider is StaticBody2D and collider.is_in_group ("traps"):
+			collider.collect()
+			target_position = global_position + direction * TILE_SIZE
+			is_moving = true
+			animated_sprite.play("idle")			
 			consumed_turn = true
 			
 	else:

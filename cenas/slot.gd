@@ -6,6 +6,7 @@ extends Panel
 @export var equipamentos: Goblais.equipamentos
 @export var comidas: Goblais.comidas
 @export var bebidas: Goblais.bebidas
+@export var insumos: Goblais.insumos
 @export var qtd: int = 1
 @export var dano: int = 0
 @export var vida: int = 0
@@ -36,7 +37,14 @@ func _ready() -> void:
 
 		Goblais.ConteudoSlot.DINHEIRO:
 				$icone.region_rect = Rect2 (64.0,128.0,16,16)
-				tooltiplabel = "Ouro"			
+				tooltiplabel = "Ouro"
+				
+		Goblais.ConteudoSlot.INSUMO:
+			match insumos:
+				Goblais.insumos.OSSOS:
+					$icone.region_rect = Rect2 (32.0,224.0,16,16)
+					tooltiplabel= "Ossos"
+				
 	
 
 func _on_mouse_entered() -> void:
@@ -66,7 +74,9 @@ func _process(delta: float) -> void:
 	
 
 func qtoequipado() -> int :
-	return %equipado.get_child_count()
+	
+	var equipado = get_parent().get_parent().get_node("equipado")
+	return equipado.get_child_count()
 	
 func come(comida):
 	comida.queue_free()
@@ -77,7 +87,8 @@ func bebe(bebida):
 	pass
 func equipa ():
 	if qtoequipado() < 3:
-		reparent (%equipado)
+		var equipado = get_parent().get_parent().get_node("equipado")
+		reparent (equipado)
 	
 	
 
@@ -94,7 +105,9 @@ func _on_gui_input(event: InputEvent) -> void:
 				equipa()	
 			
 		else:
-			reparent(%mochila)
+			
+			var mochilao = get_parent().get_parent().get_node("mochila")
+			reparent (mochilao)
 			
 		Goblais.selecionado1.selecionado = false
 		Goblais.selecionado1 = 0 

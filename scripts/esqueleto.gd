@@ -15,6 +15,7 @@ const MOVE_SPEED = 25.0
 
 # --- Atributos ---
 @export var db: PackedScene
+@export var drop: PackedScene
 @export var health: int = 50 # Pontos de vida do esqueleto.
 @export var damage: int = 10 # Dano que o esqueleto causa ao jogador.
 @export var detection_range: int = 160 # Distância em pixels para detectar o jogador (10 tiles)
@@ -127,6 +128,18 @@ func _die():
 	print_debug("%s está morrendo." % self.name)
 	if is_instance_valid(collision_shape):
 		collision_shape.disabled = true
+		if drop :
+			var droptemp = drop.instantiate()
+			droptemp.position.x = position.x -7
+			droptemp.position.y = position.y - 7
+			get_parent().get_parent().add_child(droptemp)
+			
+		
+			#var filhodaputa = debuff.instantiate()
+			
+			#collider.get_node("efeitos").add_child(filhodaputa)
+			#filhodaputa.position.x = 0
+			#filhodaputa.position.y = 0
 	
 	animated_sprite.play("death")
 

@@ -3,7 +3,13 @@ enum ConteudoSlot {
 	COMIDA,
 	DINHEIRO,
 	BEBIDA,
-	EQUIPAMENTO
+	EQUIPAMENTO,
+	INSUMO
+}
+
+enum insumos  {
+	OSSOS,
+	GRAOS	
 }
 enum equipamentos {
 	ESPADA,
