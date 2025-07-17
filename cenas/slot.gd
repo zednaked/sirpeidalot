@@ -3,6 +3,9 @@
 extends Panel
 
 @export var tipo: Goblais.ConteudoSlot
+@export var equipamentos: Goblais.equipamentos
+@export var comidas: Goblais.comidas
+@export var bebidas: Goblais.bebidas
 @export var qtd: int = 1
 @export var dano: int = 0
 @export var vida: int = 0
@@ -12,24 +15,29 @@ var tooltiplabel = ""
 var selecionado = false
 
 func _ready() -> void:
-	if tipo == Goblais.ConteudoSlot.ESPADA:
-		$icone.region_rect = Rect2 (48.0,0.0,16,16)
-		tooltiplabel = "Espada"
+	match tipo:
+		Goblais.ConteudoSlot.EQUIPAMENTO:
+			match equipamentos:
+				Goblais.equipamentos.ESPADA:
+					$icone.region_rect = Rect2 (48.0,0.0,16,16)
+					tooltiplabel = "Espada"
+					
+				Goblais.equipamentos.BOTAS:
+					$icone.region_rect = Rect2 (96.0,2048.0,16,16)
+					tooltiplabel = "Botas"
+					
+				Goblais.equipamentos.ARMADURA:
+					$icone.region_rect = Rect2 (32.0,1856.0,16,16)
+					tooltiplabel = "Armadura"
 		
-	elif tipo == Goblais.ConteudoSlot.COMIDA:
-		$icone.region_rect = Rect2 (64.0,528.0,16,16)
-		tooltiplabel = "Comida"
-		
-	elif tipo == Goblais.ConteudoSlot.DINHEIRO:
-		$icone.region_rect = Rect2 (64.0,128.0,16,16)
-		tooltiplabel = "Ouro"
-	elif tipo == Goblais.ConteudoSlot.BOTAS:
-		$icone.region_rect = Rect2 (96.0,2048.0,16,16)
-		tooltiplabel = "Botas"
-	elif tipo == Goblais.ConteudoSlot.ARMADURA:
-		$icone.region_rect = Rect2 (32.0,1856.0,16,16)
-		tooltiplabel = "Armadura"
-		
+		Goblais.ConteudoSlot.COMIDA:
+			$icone.region_rect = Rect2 (64.0,528.0,16,16)
+			tooltiplabel = "Comida"
+
+		Goblais.ConteudoSlot.DINHEIRO:
+				$icone.region_rect = Rect2 (64.0,128.0,16,16)
+				tooltiplabel = "Ouro"			
+	
 
 func _on_mouse_entered() -> void:
 	$tooltip.visible = true
@@ -60,29 +68,44 @@ func _process(delta: float) -> void:
 func qtoequipado() -> int :
 	return %equipado.get_child_count()
 	
+func come(comida):
+	comida.queue_free()
+	pass
 	
-	#return 0
+func bebe(bebida):
+	bebida.queue_free()
+	pass
+func equipa ():
+	if qtoequipado() < 3:
+		reparent (%equipado)
+	
+	
 
 func _on_gui_input(event: InputEvent) -> void:
 	var e = event 
 	if e is InputEventMouseButton and e.button_index == MOUSE_BUTTON_LEFT and e.double_click:
+		if !is_instance_valid(Goblais.selecionado1):
+			return
 		var onde = Goblais.selecionado1.get_parent().name
 		if onde == "mochila":
-			if qtoequipado() < 3:
-				reparent (%equipado)
+			if Goblais.selecionado1.tipo == Goblais.ConteudoSlot.COMIDA:
+				come (Goblais.selecionado1)
+			elif Goblais.selecionado1.tipo == Goblais.ConteudoSlot.EQUIPAMENTO:
+				equipa()	
+			
 		else:
 			reparent(%mochila)
+			
 		Goblais.selecionado1.selecionado = false
 		Goblais.selecionado1 = 0 
 		
-		return
+		return 
 	
 	if event.is_action_pressed("clique_esquerdo"):
 		
 		selecionado = !selecionado
 		
-		if Goblais.selecionado1:
-			print_debug("troca")
+		if Goblais.selecionado1:			
 			selecionado = false
 			var temp = Goblais.selecionado1.get_parent()
 			
@@ -90,8 +113,3 @@ func _on_gui_input(event: InputEvent) -> void:
 			reparent(temp)
 			Goblais.selecionado1.selecionado = false
 			Goblais.selecionado1 = 0 
-			
-			return 
-
-		
-	pass # Replace with function body.

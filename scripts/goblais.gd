@@ -1,15 +1,25 @@
 extends Node
 enum ConteudoSlot {
 	COMIDA,
-	ESPADA,
 	DINHEIRO,
+	BEBIDA,
+	EQUIPAMENTO
+}
+enum equipamentos {
+	ESPADA,
 	BOTAS,
 	ARMADURA
 }
 
-enum Comidas {
+enum comidas {
 	TORTA
 }
+
+enum bebidas {
+	POCAO
+	
+}
+
 
 var gold = 0
 var armadura = 0

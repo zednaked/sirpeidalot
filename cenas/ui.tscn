@@ -255,10 +255,19 @@ columns = 4
 [node name="slot5" parent="inventario/mochila" instance=ExtResource("3_ufjay")]
 layout_mode = 2
 tipo = 3
+qtd = null
+dano = null
+vida = null
+armadura = null
 
 [node name="slot6" parent="inventario/mochila" instance=ExtResource("3_ufjay")]
 layout_mode = 2
 tipo = 2
+equipamentos = null
+qtd = null
+dano = null
+vida = null
+armadura = null
 
 [node name="equipado" type="HBoxContainer" parent="inventario"]
 unique_name_in_owner = true
@@ -278,10 +287,20 @@ metadata/_edit_group_ = true
 [node name="slot8" parent="inventario/equipado" instance=ExtResource("3_ufjay")]
 layout_mode = 2
 tipo = 1
+equipamentos = null
+qtd = null
+dano = null
+vida = null
+armadura = null
 
 [node name="slot6" parent="inventario/equipado" instance=ExtResource("3_ufjay")]
 layout_mode = 2
 tipo = 4
+equipamentos = null
+qtd = null
+dano = null
+vida = null
+armadura = null
 
 [node name="Label" type="Label" parent="inventario"]
 texture_filter = 1

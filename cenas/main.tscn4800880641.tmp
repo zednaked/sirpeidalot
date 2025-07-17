@@ -39,35 +39,40 @@ walls_tilemap = NodePath("paredes")
 [node name="UI" parent="." instance=ExtResource("2_klgsu")]
 
 [node name="slot5" parent="UI/inventario/mochila" index="0"]
-tipo = 0
-qtd = 1
-dano = 0
-vida = 0
-armadura = 0
+tipo = null
+equipamentos = null
+COMIDA = null
+qtd = null
+dano = null
+vida = null
+armadura = null
 
 [node name="slot6" parent="UI/inventario/mochila" index="1"]
-tipo = 1
-equipamentos = 0
-qtd = 1
-dano = 0
-vida = 0
-armadura = 0
+tipo = 6
+equipamentos = null
+COMIDA = null
+qtd = null
+dano = null
+vida = null
+armadura = null
 
 [node name="slot8" parent="UI/inventario/equipado" index="0"]
-tipo = 3
+tipo = 6
 equipamentos = 1
-qtd = 1
-dano = 0
-vida = 0
-armadura = 0
+COMIDA = null
+qtd = null
+dano = null
+vida = null
+armadura = null
 
 [node name="slot6" parent="UI/inventario/equipado" index="1"]
-tipo = 3
+tipo = 6
 equipamentos = 2
-qtd = 1
-dano = 0
-vida = 0
-armadura = 0
+COMIDA = null
+qtd = null
+dano = null
+vida = null
+armadura = null
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(112, -17)
