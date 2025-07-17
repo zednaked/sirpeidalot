@@ -163,6 +163,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="setup" type="Panel" parent="topo"]
+visible = false
 material = SubResource("CanvasItemMaterial_ocpn0")
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
@@ -179,6 +180,7 @@ region_enabled = true
 region_rect = Rect2(16, 0, 16, 16)
 
 [node name="inventario" type="Panel" parent="."]
+visible = false
 light_mask = 0
 z_index = 3
 z_as_relative = false
