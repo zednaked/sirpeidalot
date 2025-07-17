@@ -9,4 +9,3 @@ func _on_slot_3_gui_input(event: InputEvent) -> void:
 		
 		$topo/slot2.visible = pause
 		$topo/setup.visible = pause
-	
