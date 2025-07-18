@@ -2222,7 +2222,7 @@ cache/0/25/0/glyphs/3/size = Vector2(0, 0)
 cache/0/25/0/glyphs/3/uv_rect = Rect2(0, 0, 0, 0)
 cache/0/25/0/glyphs/3/texture_idx = -1
 
-[node name="drop" type="Panel"]
+[node name="drop" type="Panel" groups=["drop", "propagaveis"]]
 physics_interpolation_mode = 1
 auto_translate_mode = 1
 material = SubResource("CanvasItemMaterial_ocpn0")

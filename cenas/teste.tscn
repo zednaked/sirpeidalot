@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://vgude01dubcg"]
+
+[ext_resource type="Script" uid="uid://bm4dm4qxyuoft" path="res://scripts/propagator.gd" id="1_lbg61"]
+[ext_resource type="PackedScene" uid="uid://drwoe2xdu8w6m" path="res://cenas/cranio.tscn" id="2_un3lp"]
+[ext_resource type="PackedScene" uid="uid://brjnkob1iywis" path="res://cenas/Jogador.tscn" id="3_un3lp"]
+
+[node name="Teste" type="Node2D"]
+script = ExtResource("1_lbg61")
+
+[node name="cranio" parent="." groups=["propagaveis"] instance=ExtResource("2_un3lp")]
+position = Vector2(60.999992, 73.99999)
+
+[node name="cranio2" parent="." groups=["propagaveis"] instance=ExtResource("2_un3lp")]
+position = Vector2(8, 77.00001)
+
+[node name="cranio3" parent="." groups=["propagaveis"] instance=ExtResource("2_un3lp")]
+position = Vector2(103.99999, 54.000008)
+
+[node name="cranio4" parent="." groups=["propagaveis"] instance=ExtResource("2_un3lp")]
+position = Vector2(82, 31)
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+
+[node name="Player" parent="." instance=ExtResource("3_un3lp")]
+position = Vector2(13, 15)

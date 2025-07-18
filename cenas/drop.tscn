@@ -2241,7 +2241,7 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_f3lym")
 script = ExtResource("1_f3lym")
 tipo = 4
 
-[node name="drop" type="Area2D" parent="." groups=["drop"]]
+[node name="drop" type="Area2D" parent="." groups=["drop", "propagaveis"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="drop"]
 position = Vector2(7.4859467, 6.794592)

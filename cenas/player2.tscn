@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbsmn8n2bac6l"]
+
+[ext_resource type="Script" uid="uid://ff7u3uoetjn7" path="res://cenas/player_2.gd" id="1_6voh3"]
+[ext_resource type="PackedScene" uid="uid://decl5ra508cu0" path="res://cenas/animacaoplayer.tscn" id="1_rsf2i"]
+
+[node name="Player2" type="CharacterBody2D" groups=["propagaveis"]]
+script = ExtResource("1_6voh3")
+metadata/_edit_group_ = true
+
+[node name="animacao" parent="." instance=ExtResource("1_rsf2i")]
+self_modulate = Color(0.90588236, 0.34509805, 1, 1)
+position = Vector2(-1.9999999, 0.99999994)
+autoplay = "idle"
+speed_scale = 3.0

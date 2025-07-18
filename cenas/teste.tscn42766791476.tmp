@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://vgude01dubcg"]
+
+[ext_resource type="Script" uid="uid://bm4dm4qxyuoft" path="res://scripts/propagator.gd" id="1_lbg61"]
+[ext_resource type="PackedScene" uid="uid://drwoe2xdu8w6m" path="res://cenas/cranio.tscn" id="2_un3lp"]
+
+[node name="Teste" type="Node2D"]
+script = ExtResource("1_lbg61")
+server_url = null
+propagatable_group = null
+
+[node name="cranio" parent="." groups=["propagaveis"] instance=ExtResource("2_un3lp")]
+position = Vector2(19.000004, 21.000002)
+
+[node name="cranio2" parent="." groups=["propagaveis"] instance=ExtResource("2_un3lp")]
+position = Vector2(19.000004, 21.000002)
+
+[node name="cranio3" parent="." groups=["propagaveis"] instance=ExtResource("2_un3lp")]
+position = Vector2(19.000004, 21.000002)
+
+[node name="cranio4" parent="." groups=["propagaveis"] instance=ExtResource("2_un3lp")]
+position = Vector2(19.000004, 21.000002)

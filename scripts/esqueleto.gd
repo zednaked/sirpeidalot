@@ -122,6 +122,13 @@ func _attack_player(direction: Vector2):
 
 # Altera o estado do esqueleto para 'morto'.
 # Desativa sua colisão e executa a animação de morte.
+func _die_async ():
+	is_dead = true
+	if is_instance_valid(collision_shape):
+		collision_shape.disabled = true
+		
+	animated_sprite.play("death",3,true)
+	animated_sprite.frame = 3
 func _die():
 	if is_dead: return
 	is_dead = true

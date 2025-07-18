@@ -1,9 +1,10 @@
-[gd_scene load_steps=19 format=4 uid="uid://c1vuc22tkpssy"]
+[gd_scene load_steps=21 format=4 uid="uid://c1vuc22tkpssy"]
 
 [ext_resource type="TileSet" uid="uid://74d8818b5tw4" path="res://cenas/tilemap.tres" id="1_1yycb"]
 [ext_resource type="Script" uid="uid://cfwe642akir1" path="res://scripts/dungeon_generator.gd" id="1_v1d1r"]
 [ext_resource type="PackedScene" uid="uid://ygv0qscvgpfk" path="res://cenas/ui.tscn" id="2_klgsu"]
 [ext_resource type="PackedScene" uid="uid://6fwtnmfft5rv" path="res://cenas/slot.tscn" id="3_gl1un"]
+[ext_resource type="PackedScene" uid="uid://cbsmn8n2bac6l" path="res://cenas/player2.tscn" id="5_6uvjy"]
 [ext_resource type="PackedScene" uid="uid://cmdjbl5nkg0mx" path="res://cenas/esqueleto.tscn" id="5_bhvw8"]
 [ext_resource type="PackedScene" uid="uid://b5a3sedway7cr" path="res://cenas/chave.tscn" id="6_l8342"]
 [ext_resource type="PackedScene" uid="uid://cmcnk6r1wi7as" path="res://cenas/drop.tscn" id="7_dfnyg"]
@@ -17,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://uhlbu8vso7at" path="res://cenas/porta.tscn" id="12_iwfo7"]
 [ext_resource type="Shader" uid="uid://7ver7822au4k" path="res://cenas/fog2.gdshader" id="13_g6klm"]
 [ext_resource type="PackedScene" uid="uid://do77payyy4q7l" path="res://cenas/trap.tscn" id="15_ocpn0"]
+[ext_resource type="Script" uid="uid://bm4dm4qxyuoft" path="res://scripts/propagator.gd" id="18_22nsn"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g6klm"]
 shader = ExtResource("13_g6klm")
@@ -34,7 +36,7 @@ self_modulate = Color(18.892157, 18.892157, 18.892157, 1)
 light_mask = 0
 texture_filter = 1
 script = ExtResource("1_v1d1r")
-player = NodePath("Player")
+player = NodePath("player")
 enemies_container = NodePath("Node")
 floor_tilemap = NodePath("chao")
 walls_tilemap = NodePath("paredes")
@@ -97,50 +99,54 @@ tile_map_data = PackedByteArray("AAD//wAAAAAEAAYAAAALAAAAAAAEAAYAAAAHAPv/AAAEAAY
 tile_set = ExtResource("1_1yycb")
 metadata/_edit_lock_ = true
 
-[node name="Player" parent="." instance=ExtResource("9_1yycb")]
+[node name="Player2" parent="." instance=ExtResource("5_6uvjy")]
+position = Vector2(-6, -39)
+
+[node name="player" parent="." groups=["propagaveis"] instance=ExtResource("9_1yycb")]
 z_index = 1
 position = Vector2(9, -54)
 disable_mode = 2
 metadata/_edit_group_ = true
+metadata/_edit_lock_ = true
 
-[node name="animacao" parent="Player" index="0"]
+[node name="animacao" parent="player" index="0"]
 speed_scale = 3.0
 
-[node name="InteractionRayCast" parent="Player" index="2"]
+[node name="InteractionRayCast" parent="player" index="2"]
 collide_with_areas = true
 
-[node name="efeitos" parent="Player" index="4"]
+[node name="efeitos" parent="player" index="4"]
 autoplay = ""
 frame_progress = 0.0
 speed_scale = 3.0
 
 [node name="Node" type="Node" parent="."]
 
-[node name="esqueleto" parent="Node" instance=ExtResource("5_bhvw8")]
+[node name="esqueleto" parent="Node" groups=["propagaveis"] instance=ExtResource("5_bhvw8")]
 position = Vector2(39.56745, -54.450954)
 db = null
 drop = ExtResource("7_dfnyg")
 
-[node name="esqueleto4" parent="Node" instance=ExtResource("5_bhvw8")]
+[node name="esqueleto4" parent="Node" groups=["propagaveis"] instance=ExtResource("5_bhvw8")]
 position = Vector2(136, 39.999992)
 db = null
 
-[node name="esqueleto2" parent="Node" instance=ExtResource("5_bhvw8")]
+[node name="esqueleto2" parent="Node" groups=["propagaveis"] instance=ExtResource("5_bhvw8")]
 position = Vector2(237, 7.999996)
 db = null
 
-[node name="esqueleto3" parent="Node" instance=ExtResource("5_bhvw8")]
+[node name="esqueleto3" parent="Node" groups=["propagaveis"] instance=ExtResource("5_bhvw8")]
 position = Vector2(141, 7.9999995)
 db = null
 
-[node name="vamp" parent="Node" instance=ExtResource("8_klgsu")]
+[node name="vamp" parent="Node" groups=["propagaveis"] instance=ExtResource("8_klgsu")]
 position = Vector2(7.9999995, -9.999999)
 drop = ExtResource("9_dfnyg")
 
-[node name="vamp2" parent="Node" instance=ExtResource("8_klgsu")]
+[node name="vamp2" parent="Node" groups=["propagaveis"] instance=ExtResource("8_klgsu")]
 position = Vector2(159.99998, 22)
 
-[node name="chave" parent="." groups=["key"] instance=ExtResource("6_l8342")]
+[node name="chave" parent="." groups=["key", "propagaveis"] instance=ExtResource("6_l8342")]
 position = Vector2(209, 21)
 script = ExtResource("9_vhipe")
 
@@ -348,7 +354,7 @@ energy = 2.11
 shadow_filter = 1
 shadow_item_cull_mask = 3
 
-[node name="porta" parent="cenario" instance=ExtResource("12_iwfo7")]
+[node name="porta" parent="cenario" groups=["propagaveis"] instance=ExtResource("12_iwfo7")]
 position = Vector2(82, -57)
 metadata/_edit_group_ = true
 
@@ -356,7 +362,7 @@ metadata/_edit_group_ = true
 position = Vector2(-0.3, 1.1920929e-07)
 scale = Vector2(0.83750004, 1.25)
 
-[node name="porta3" parent="cenario" instance=ExtResource("12_iwfo7")]
+[node name="porta3" parent="cenario" groups=["propagaveis"] instance=ExtResource("12_iwfo7")]
 position = Vector2(64, 23)
 metadata/_edit_group_ = true
 
@@ -364,7 +370,7 @@ metadata/_edit_group_ = true
 position = Vector2(-0.3, 1.1920929e-07)
 scale = Vector2(0.83750004, 1.25)
 
-[node name="porta2" parent="cenario" instance=ExtResource("12_iwfo7")]
+[node name="porta2" parent="cenario" groups=["propagaveis"] instance=ExtResource("12_iwfo7")]
 position = Vector2(217, -57)
 metadata/_edit_group_ = true
 
@@ -376,8 +382,13 @@ scale = Vector2(0.83750004, 1.25)
 [node name="trap" parent="cenario" instance=ExtResource("15_ocpn0")]
 position = Vector2(39.82528, -71.278824)
 
+[node name="propagador" type="Node" parent="."]
+script = ExtResource("18_22nsn")
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+
 [editable path="UI"]
-[editable path="Player"]
+[editable path="player"]
 [editable path="chave"]
 [editable path="cenario/Luz"]
 [editable path="cenario/Luz2"]

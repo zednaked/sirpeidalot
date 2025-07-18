@@ -36,6 +36,10 @@ folder_colors={
 "res://scripts/": "purple"
 }
 
+[global_group]
+
+propagaveis=""
+
 [input]
 
 interact/deadzone=0.5
