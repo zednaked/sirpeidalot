@@ -1,10 +1,9 @@
-[gd_scene load_steps=21 format=4 uid="uid://c1vuc22tkpssy"]
+[gd_scene load_steps=19 format=4 uid="uid://c1vuc22tkpssy"]
 
 [ext_resource type="TileSet" uid="uid://74d8818b5tw4" path="res://cenas/tilemap.tres" id="1_1yycb"]
 [ext_resource type="Script" uid="uid://cfwe642akir1" path="res://scripts/dungeon_generator.gd" id="1_v1d1r"]
 [ext_resource type="PackedScene" uid="uid://ygv0qscvgpfk" path="res://cenas/ui.tscn" id="2_klgsu"]
 [ext_resource type="PackedScene" uid="uid://6fwtnmfft5rv" path="res://cenas/slot.tscn" id="3_gl1un"]
-[ext_resource type="PackedScene" uid="uid://cbsmn8n2bac6l" path="res://cenas/player2.tscn" id="5_6uvjy"]
 [ext_resource type="PackedScene" uid="uid://cmdjbl5nkg0mx" path="res://cenas/esqueleto.tscn" id="5_bhvw8"]
 [ext_resource type="PackedScene" uid="uid://b5a3sedway7cr" path="res://cenas/chave.tscn" id="6_l8342"]
 [ext_resource type="PackedScene" uid="uid://cmcnk6r1wi7as" path="res://cenas/drop.tscn" id="7_dfnyg"]
@@ -12,7 +11,6 @@
 [ext_resource type="SpriteFrames" uid="uid://6dyc4c0q2ltw" path="res://cenas/itensmist.tres" id="8_g6klm"]
 [ext_resource type="PackedScene" uid="uid://cqpbstgufd4u8" path="res://cenas/vamp.tscn" id="8_klgsu"]
 [ext_resource type="PackedScene" uid="uid://l6yyfgkqa3sv" path="res://cenas/luzfrente.tscn" id="8_v1d1r"]
-[ext_resource type="PackedScene" uid="uid://brjnkob1iywis" path="res://cenas/Jogador.tscn" id="9_1yycb"]
 [ext_resource type="PackedScene" uid="uid://cxjpgfe5dkxv0" path="res://cenas/drop2.tscn" id="9_dfnyg"]
 [ext_resource type="Script" uid="uid://c1h70hpe6lfcd" path="res://scripts/chave.gd" id="9_vhipe"]
 [ext_resource type="PackedScene" uid="uid://uhlbu8vso7at" path="res://cenas/porta.tscn" id="12_iwfo7"]
@@ -36,7 +34,7 @@ self_modulate = Color(18.892157, 18.892157, 18.892157, 1)
 light_mask = 0
 texture_filter = 1
 script = ExtResource("1_v1d1r")
-player = NodePath("player")
+player = NodePath("")
 enemies_container = NodePath("Node")
 floor_tilemap = NodePath("chao")
 walls_tilemap = NodePath("paredes")
@@ -63,6 +61,18 @@ equipamentos = 1
 [node name="slot6" parent="UI/inventario/equipado" index="1"]
 tipo = 3
 equipamentos = 2
+
+[node name="LineEdit" type="LineEdit" parent="UI"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 0
+offset_left = 149.78934
+offset_top = -1.6484833
+offset_right = 218.35234
+offset_bottom = 17.351517
+theme_override_font_sizes/font_size = 7
+text = "Nome"
+placeholder_text = "Nome"
+alignment = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(112, -17)
@@ -98,27 +108,6 @@ metadata/_edit_lock_ = true
 tile_map_data = PackedByteArray("AAD//wAAAAAEAAYAAAALAAAAAAAEAAYAAAAHAPv/AAAEAAYAAAABAAIAAAAHAAcAAAACAP3/AAAHAAcAAAAGAAAAAAAIAAYAAAAOAAIAAAAIAAYAAAD//wEAAAAIAAYAAAD///3/AAAIAAYAAAACAAAAAAAFAAYAAAAOAP3/AAAFAAYAAAAIAP3/AAAJAAUAAAAKAPv/AAAJAAUAAAAAAPv/AAAJAAUAAAAHAAEAAAAJAAUAAAANAAIAAAAJAAUAAAABAAEAAAAJAAUAAAAHAP//AAAFAAcAAAAOAAEAAAAFAAYAAAA=")
 tile_set = ExtResource("1_1yycb")
 metadata/_edit_lock_ = true
-
-[node name="Player2" parent="." instance=ExtResource("5_6uvjy")]
-position = Vector2(-6, -39)
-
-[node name="player" parent="." groups=["propagaveis"] instance=ExtResource("9_1yycb")]
-z_index = 1
-position = Vector2(9, -54)
-disable_mode = 2
-metadata/_edit_group_ = true
-metadata/_edit_lock_ = true
-
-[node name="animacao" parent="player" index="0"]
-speed_scale = 3.0
-
-[node name="InteractionRayCast" parent="player" index="2"]
-collide_with_areas = true
-
-[node name="efeitos" parent="player" index="4"]
-autoplay = ""
-frame_progress = 0.0
-speed_scale = 3.0
 
 [node name="Node" type="Node" parent="."]
 
@@ -387,8 +376,9 @@ script = ExtResource("18_22nsn")
 
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
 
+[connection signal="text_changed" from="UI/LineEdit" to="." method="_on_line_edit_text_changed"]
+
 [editable path="UI"]
-[editable path="player"]
 [editable path="chave"]
 [editable path="cenario/Luz"]
 [editable path="cenario/Luz2"]

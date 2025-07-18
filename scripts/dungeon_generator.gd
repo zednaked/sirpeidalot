@@ -37,12 +37,17 @@ func _ready():
 	add_to_group("turn_manager")
 
 func start_game():
+	
+	player.action_taken.connect(_on_player_action_taken)
+	
+	
 	print("O jogo começou!")
 	_create_astar_grid()
 	
 	for enemy in enemies_container.get_children():
 		if enemy.has_method("set_turn_manager"):
 			enemy.set_turn_manager(self)
+			enemy.player_node = player
 
 	current_state = GameState.PLAYER_TURN
 	if player.has_method("set_can_act"):
@@ -179,3 +184,29 @@ func update_walkable_area(world_pos: Vector2):
 				astar_grid.connect_points(point_id, neighbor_point_id, false)
 				astar_grid.connect_points(neighbor_point_id, point_id, false)
 				print_debug("A* Grid: Conectado a %s" % neighbor_cell)
+
+
+func _on_line_edit_text_changed(new_text: String) -> void:
+	Goblais.nome = new_text	
+	
+
+
+
+# extends Node
+ #   3 func _ready():
+ #   4     # Encontra o nó propagator e conecta ao sinal dele
+ #   5     var propagator = get_node("/root/Teste") # Ajuste o caminho
+ #     se necessário
+ #   6     if propagator:
+ #   7         propagator.event_received.connect(_on_propagator_event)
+ #   8
+ #   9 func _on_propagator_event(event_data: Dictionary):
+ #  10     print("GameManager recebeu um evento: ", event_data)
+ #  11
+ #  12     if event_data.get("type") == "attack":
+ #  13         var source = event_data.get("source")
+ #  14         var target = event_data.get("target")
+ #  15         var damage = event_data.get("damage")
+ #  16         print(f"Lógica de ataque: {source} ataca {target}
+  #    causando {damage} de dano!")
+  # 17         # Aqui você colocaria a lógica real do seu jogo

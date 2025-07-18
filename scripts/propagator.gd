@@ -65,18 +65,31 @@ func send_scene_state():
 			continue
 			
 		var id
+		var nomejogador
 		
 		if "is_dead" in node:
 			id = node.is_dead
-
+		
+		var path = node.scene_file_path
+		
+		if "nome" in node: #significa que é jogador de mp
+			print_debug("um mp")
+			nomejogador = node.nome
+			
+		if node.name == "player" : #sabemos que é um jogador
+			print_debug("um jogador")
+			nomejogador = Goblais.nome
+		
+		
 		var node_data = {
 			"name": node.name,
-			"scene_path": node.scene_file_path,
+			"scene_path": path,
 			"parent_path": node.get_parent().get_path(),
 			"pos_x": node.position.x, "pos_y": node.position.y,
 			"rotation": node.rotation,
 			"scale_x": node.scale.x, "scale_y": node.scale.y,
-			"is_dead": id
+			"is_dead": id,
+			"nomejogador": nomejogador
 		}
 		data["nodes"].append(node_data)
 
@@ -101,6 +114,7 @@ func _reconstruct_scene(nodes_data_from_server: Array):
 	print("Iniciando reconstrução inteligente da cena...")
 	
 	# 1. Mapear nós existentes na cena pelo nome
+	var p1
 	var existing_nodes = {}
 	for node in get_tree().get_nodes_in_group(propagatable_group):
 		existing_nodes[node.name] = node
@@ -143,14 +157,32 @@ func _reconstruct_scene(nodes_data_from_server: Array):
 				print_debug("Nó " + node_name  + " atualizado.")
 		else:
 			# NÓ NÃO EXISTE: Cria um novo
-			print("Criando novo nó: '{node_name}'")
+			print_debug("Criando novo nó: "+ node_name)
 			var scene = load(data["scene_path"])
+			var nome = data ["name"]
+			
+			if data["nomejogador"] != Goblais.nome: #significa que ão é o jogador e deve usar a cena de player
+				
+				scene = load ("res://cenas/player2.tscn")
+				p1 = 0
+			if data["nomejogador"] == Goblais.nome:
+				p1 = 1
+				scene = load("res://cenas/Jogador.tscn")
+					
+				
+			
 			if scene:
 				var instance = scene.instantiate()
-				instance.name = data["name"]
+				
+				instance.name = nome
 				instance.position = Vector2(data["pos_x"], data["pos_y"])
 				instance.rotation = data["rotation"]
 				# Adicione outras propriedades aqui
+				if p1 == 1:
+					get_parent().player =  instance
+					print_debug("jogador encontrado")
+					get_parent().start_game()
+					
 				
 				var parent = get_node(data["parent_path"])
 				if parent:
@@ -169,6 +201,9 @@ func _reconstruct_scene(nodes_data_from_server: Array):
 			existing_nodes[node_name].queue_free()
 
 	print("Reconstrução inteligente concluída.")
+	
+	
+
 
 # ==================================================
 #  SISTEMA DE EVENTOS / MENSAGENS
@@ -190,6 +225,6 @@ func _on_events_request_completed(result, response_code, headers, body):
 	var events = JSON.parse_string(body.get_string_from_utf8())
 	if events and events is Array:
 		for event_data in events:
-			print("Evento recebido: " + event_data)
+			#print_debug ("Evento recebido: " + event_data)
 			# Emite o sinal para que outros scripts possam reagir
 			emit_signal("event_received", event_data)

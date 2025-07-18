@@ -11,6 +11,7 @@ const MOVE_SPEED = 25.0
 # --- Attributes ---
 @export var debuff: PackedScene
 @export var health: int = 100
+
 @export var damage: int = 25
 var has_key: bool = true
 

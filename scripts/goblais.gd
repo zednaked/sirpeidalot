@@ -31,5 +31,6 @@ var gold = 0
 var armadura = 0
 var dano = 0
 var vida = 100
+var nome = "player1"
 
 var selecionado1
