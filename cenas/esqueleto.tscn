@@ -371,7 +371,7 @@ size = Vector2(20, 18.57143)
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_4bm5w"]
 polygon = PackedVector2Array(5.7142854, 5.714287, 4.285714, 1.66893e-06, 1.4285713, 5.714287)
 
-[node name="esqueleto" type="CharacterBody2D"]
+[node name="esqueleto" type="CharacterBody2D" groups=["inimigo", "propagaveis"]]
 scale = Vector2(0.7, 0.7)
 script = ExtResource("1_gq2x8")
 db = ExtResource("7_re4gi")

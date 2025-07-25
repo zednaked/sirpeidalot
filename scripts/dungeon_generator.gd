@@ -6,9 +6,35 @@ extends Node2D
 
 # --- Referências de Nós (Configuradas no Editor) ---
 @export var player: CharacterBody2D
+@export var player2: CharacterBody2D
+
 @export var enemies_container: Node
 @export var floor_tilemap: TileMapLayer  # Camada com os tiles de chão (andáveis)
 @export var walls_tilemap: TileMapLayer  # Camada com paredes e obstáculos
+
+var packedp1 : PackedScene = preload("res://cenas/Jogador.tscn")
+var packedp2 : PackedScene = preload("res://cenas/player2.tscn")
+
+var inimigo1 : PackedScene = preload("res://cenas/esqueleto.tscn")
+var inimigo2 : PackedScene = preload("res://cenas/cranio.tscn")
+var inimigo3 : PackedScene = preload("res://cenas/vamp.tscn")
+
+var iscriador: bool = false
+
+#todo: isso aqui é feito para manter a vez, depois tem que mudar essa merda
+var isp2 : bool = false #0 para player 1 1 para player 2, se houver player 2 no jogo aguarda
+var numero_jogadores: int = 1
+
+func isvez () -> bool :
+	#garantir que se tiver só um jogador o isp2 numca muda
+	
+	if numero_jogadores < 2:
+		isp2 = false
+		
+	if current_state == GameState.PLAYER_TURN and isp2 == false:
+		return true
+	return false
+
 
 # --- Pathfinding ---
 var astar_grid = AStar2D.new()
@@ -21,43 +47,99 @@ var current_state: GameState = GameState.PAUSED
 signal player_turn_started
 signal enemy_turn_started
 
+
+func inimigo_morreu (nome, node):
+	print_debug("inimigo " + str(nome) + "morreu, node : " +str( node))
+
+	
+	
+func is_p1_turn() -> bool:
+	return !isp2;
+
+func get_player ():
+	player = get_tree().get_first_node_in_group("player")
+	
+
+func get_player2():
+	player2 =  get_tree().get_first_node_in_group("player2")
+	
+	
 func _ready():
-	# Validações
-	if not player: print_debug("Player não configurado no TurnManager."); return
-	if not enemies_container: print_debug("Container de inimigos não configurado."); return
-	if not floor_tilemap: print_debug("TileMapLayer de chão não configurado."); return
-	if not walls_tilemap: print_debug("TileMapLayer de paredes não configurado."); return
-
-	if player.has_signal("action_taken"):
-		player.action_taken.connect(_on_player_action_taken)
+	$propagador.dungeonmanager = self
+	Eventos.connect("async_evento_recebido", async_evento_recebido)
+	Eventos.connect("carregar",_on_carregar)	
+	Eventos.connect("inimigo_morreu", inimigo_morreu)
+	
+	if Goblais.modo == "join":
+		var event = {
+			"type": "join",
+			"source": Goblais.nome
+		}
+		$propagador.send_event(event)
 	else:
-		print_debug("Nó do jogador não possui o sinal 'action_taken'.")
+		iscriador = true	
+		start_game()
+		$propagador.send_scene_state()
+		
+		
+	
 
-	call_deferred("start_game")
-	add_to_group("turn_manager")
 
-func start_game():
+
+func join_p2 ():
+	#
+	#var spp2 = get_tree().get_nodes_in_group("spawn_player2")[0]
+	#player2 = packedp2.instantiate()
+	#player2.position = spp2.position
+	print ("p2 entrou")
+	
+	#add_child(player2)
+	numero_jogadores = 2
+	isp2 = true
+	
+	#super porco
+	
+	#a linha em seguida pode criar um player 2 e sobreescrever me
+	#$propagador.send_scene_state() 
+	var event = {
+		"type": "bemvindo",
+		"source": Goblais.nome
+	}
+	$propagador.send_event(event)
+	
+
+	
+
+	#player.action_taken.connect(_on_player_action_taken)	
+	#nesse caso tem que ver como vai passar para o outro a vez
+	
+
+# para startar um jogo novo ! 
+	
+
+
+
+func _on_carregar () :
+	get_player()
+	get_player2()
 	
 	player.action_taken.connect(_on_player_action_taken)
-	
-	
-	print("O jogo começou!")
 	_create_astar_grid()
 	
 	for enemy in enemies_container.get_children():
 		if enemy.has_method("set_turn_manager"):
 			enemy.set_turn_manager(self)
 			enemy.player_node = player
-
+	
 	current_state = GameState.PLAYER_TURN
-	if player.has_method("set_can_act"):
-		player.set_can_act(true)
-	emit_signal("player_turn_started")
-	print("--- Turno do Jogador ---")
+	emit_signal("player_turn_started")	
+	
+
 
 func _on_player_action_taken():
+	
 	if current_state != GameState.PLAYER_TURN: return
-
+	
 	if _count_living_enemies() == 0:
 		current_state = GameState.FREE_ROAM
 		if player.has_method("set_can_act"): player.set_can_act(true)
@@ -82,7 +164,27 @@ func _process_enemy_turns():
 	
 	_end_enemy_turn_sequence()
 
+
+func atualiza_mapa_geral():
+	$propagador.send_scene_state()
+	var event = {
+		"type": "atualizarmapa",
+		"source": Goblais.nome
+	}
+	$propagador.send_event(event)	
+
+func async_fim_turno():
+	var event = {
+			"type": "fimturnop",
+			"source": Goblais.nome
+		}
+	$propagador.send_event(event)
+		
+		
 func _end_enemy_turn_sequence():
+
+	
+	
 	if _count_living_enemies() == 0:
 		current_state = GameState.FREE_ROAM
 		if player.has_method("set_can_act"): player.set_can_act(true)
@@ -92,9 +194,27 @@ func _end_enemy_turn_sequence():
 	if current_state == GameState.FREE_ROAM: return
 		
 	current_state = GameState.PLAYER_TURN
-	if player.has_method("set_can_act"): player.set_can_act(true)
-	emit_signal("player_turn_started")
-	print("--- Turno do Jogador ---")
+	
+		
+		#ele inverte de uma forma porca
+	if numero_jogadores > 1:
+		isp2 = !isp2
+		
+		
+	if !isp2 :
+		if player.has_method("set_can_act"): player.set_can_act(true)
+		emit_signal("player_turn_started")
+		print("--- Turno do Jogador ---")
+	else :
+		#if player.has_method("set_can_act"): player.set_can_act(true)
+		#todo: emitir sinal para o p2 via api
+		#emit_signal("player_turn_started")
+		print("--- Turno do Jogador 2 ---")
+		
+		async_fim_turno()
+		atualiza_mapa_geral()
+		
+		#todo: enviar que acabou o turno
 
 func _count_living_enemies() -> int:
 	var living_enemies = 0
@@ -186,27 +306,107 @@ func update_walkable_area(world_pos: Vector2):
 				print_debug("A* Grid: Conectado a %s" % neighbor_cell)
 
 
-func _on_line_edit_text_changed(new_text: String) -> void:
-	Goblais.nome = new_text	
+func async_evento_recebido (event_data: Dictionary):
 	
+	if event_data.get("type") =="fimturnop":
+		print ("fimturnop recebido")
+		_on_player_action_taken()
+		
+	if event_data.get ("type") =="join":
+		if event_data.get ("source") == Goblais.nome:
+			#não é startgame
+			#tart_game()
+			print ("bemvindo")
+			isp2 = true
+			numero_jogadores = 2
+			$propagador.fetch_scene_state()
+
+		else:
+			join_p2()
+			
+	#acho que tem um bug aqui
+	if event_data.get ("type") == "atualizarmapa":
+		if event_data.get ("source") != Goblais.nome:
+			$propagador.fetch_scene_state()
+		
+	if event_data.get ("type") =="bemvindo":
+		print ("bemvindo")
+		$propagador.fetch_scene_state()
+		get_player()
+		
 
 
 
-# extends Node
- #   3 func _ready():
- #   4     # Encontra o nó propagator e conecta ao sinal dele
- #   5     var propagator = get_node("/root/Teste") # Ajuste o caminho
- #     se necessário
- #   6     if propagator:
- #   7         propagator.event_received.connect(_on_propagator_event)
- #   8
- #   9 func _on_propagator_event(event_data: Dictionary):
- #  10     print("GameManager recebeu um evento: ", event_data)
- #  11
- #  12     if event_data.get("type") == "attack":
- #  13         var source = event_data.get("source")
- #  14         var target = event_data.get("target")
- #  15         var damage = event_data.get("damage")
- #  16         print(f"Lógica de ataque: {source} ataca {target}
-  #    causando {damage} de dano!")
-  # 17         # Aqui você colocaria a lógica real do seu jogo
+
+
+
+	
+#para qunando conectar num jogo ja iniciado
+func async_start():
+	var spp2 = get_tree().get_nodes_in_group("spawn_player2")[0]
+	
+	player = packedp1.instantiate()
+	player.position = spp2.position
+	
+	add_child(player)
+	
+	player.action_taken.connect(_on_player_action_taken)
+	numero_jogadores = 2
+	_on_player_action_taken()
+	atualiza_mapa_geral()
+	
+	
+	pass
+func start_game():
+	var p1  = get_tree().get_first_node_in_group("player")
+	get_player2()
+	
+		
+	
+	
+	var ninimigos = 3
+	
+	var spp1 = get_tree().get_nodes_in_group("spawn_player1")[0]
+	
+	var spinimigos = get_tree().get_nodes_in_group("spawn_inimigos")
+	
+	player = packedp1.instantiate()
+	player.position = spp1.position
+	
+	add_child(player)
+	
+	player.action_taken.connect(_on_player_action_taken)
+	
+	#spawna inimigos para a fase 
+	
+	var inimigospk: Array
+	inimigospk.append(inimigo1)
+	inimigospk.append(inimigo1)
+	inimigospk.append(inimigo2)
+	inimigospk.append(inimigo3)
+	
+	
+	for n in ninimigos :
+		var inimigo = inimigospk.pick_random().instantiate()
+		inimigo.position = get_tree().get_nodes_in_group("spawn_inimigos").pick_random().position
+		$inimigos.add_child(inimigo)	
+	
+	print("O jogo começou!")
+	_create_astar_grid()
+	
+	for enemy in enemies_container.get_children():
+		if enemy.has_method("set_turn_manager"):
+			enemy.set_turn_manager(self)
+			enemy.player_node = player
+
+	current_state = GameState.PLAYER_TURN
+	if player.has_method("set_can_act"):
+		player.set_can_act(true)
+	emit_signal("player_turn_started")
+	print("--- Turno do Jogador ---")
+
+
+func _on_setup_gui_input(event: InputEvent) -> void:
+	if event.is_action_pressed("clique_esquerdo"):
+		get_tree().change_scene_to_file("res://cenas/main.tscn")
+	

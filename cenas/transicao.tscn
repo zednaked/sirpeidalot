@@ -1,0 +1,98 @@
+[gd_scene load_steps=7 format=3 uid="uid://dedonqt1xtco6"]
+
+[ext_resource type="Shader" uid="uid://ddxgjcn15adry" path="res://transition.gdshader" id="1_hneu3"]
+
+[sub_resource type="Animation" id="Animation_lt56m"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("transicao/rect:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_608tj"]
+resource_name = "fadefrom"
+length = 3.0
+step = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("transicao/rect:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 3.654999999998836]
+}
+
+[sub_resource type="Animation" id="Animation_46n1e"]
+resource_name = "fadeto"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("transicao/rect:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [3.654999999998836, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1kqcn"]
+_data = {
+&"RESET": SubResource("Animation_lt56m"),
+&"fadefrom": SubResource("Animation_608tj"),
+&"fadeto": SubResource("Animation_46n1e")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xqjva"]
+shader = ExtResource("1_hneu3")
+shader_parameter/use_sprite_alpha = true
+shader_parameter/use_transition_texture = false
+shader_parameter/transition_type = 0
+shader_parameter/position = Vector2(0, 0)
+shader_parameter/invert = false
+shader_parameter/grid_size = Vector2(6, 6)
+shader_parameter/rotation_angle = 0.0
+shader_parameter/stagger = Vector2(0, 0)
+shader_parameter/stagger_frequency = Vector2i(2, 2)
+shader_parameter/flip_frequency = Vector2i(1, 1)
+shader_parameter/basic_feather = 0.0
+shader_parameter/use_mask_size = false
+shader_parameter/mask_size = Vector2(100, 100)
+shader_parameter/edges = 3
+shader_parameter/shape_feather = 0.1
+shader_parameter/sectors = 1
+shader_parameter/clock_feather = 0.0
+shader_parameter/progress = 0.0
+shader_parameter/progress_bias = Vector2(2, 1)
+
+[node name="transicao" type="AnimationPlayer"]
+libraries = {
+&"": SubResource("AnimationLibrary_1kqcn")
+}
+
+[node name="rect" type="ColorRect" parent="."]
+self_modulate = Color(0.0943044, 0.09430441, 0.0943044, 1)
+light_mask = 0
+z_index = 3
+z_as_relative = false
+material = SubResource("ShaderMaterial_xqjva")
+offset_left = -23.0
+offset_top = -98.0
+offset_right = 247.0
+offset_bottom = 55.0
+focus_mode = 2
+mouse_filter = 1
+mouse_behavior_recursive = 2

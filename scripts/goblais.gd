@@ -33,4 +33,7 @@ var dano = 0
 var vida = 100
 var nome = "player1"
 
+var modo = "join"
+
+
 var selecionado1

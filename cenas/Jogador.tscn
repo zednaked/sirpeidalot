@@ -38,8 +38,9 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Player" type="CharacterBody2D" groups=["player"]]
+[node name="Player" type="CharacterBody2D" groups=["player", "propagaveis"]]
 collision_layer = 2
+collision_mask = 3
 platform_floor_layers = 4294967040
 platform_wall_layers = 1
 script = ExtResource("1_ec23w")
@@ -57,6 +58,7 @@ shape = SubResource("RectangleShape2D_jdavq")
 [node name="InteractionRayCast" type="RayCast2D" parent="."]
 target_position = Vector2(16, 0)
 collision_mask = 51
+collide_with_areas = true
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 position = Vector2(6, -6)

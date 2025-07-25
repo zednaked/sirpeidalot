@@ -7,7 +7,7 @@ signal action_taken
 # --- Constants ---
 const TILE_SIZE = 16
 const MOVE_SPEED = 25.0
-
+var player
 # --- Attributes ---
 @export var debuff: PackedScene
 @export var health: int = 100
@@ -24,9 +24,18 @@ var can_act: bool = false
 var is_moving: bool = false
 var target_position: Vector2
 
+func on_vez_jogador():
+	can_act = true
+	pass
+
 func _ready():
 	target_position = global_position
 	add_to_group("player")
+	get_parent().player = self
+	get_parent().connect("player_turn_started", on_vez_jogador)
+	
+	
+	
 
 func _unhandled_input(event):
 	if not can_act or is_moving:
@@ -72,6 +81,7 @@ func _try_move_or_attack(direction: Vector2):
 	if interaction_ray.is_colliding():
 		var collider = interaction_ray.get_collider()
 		
+		
 		# --- ATTACK LOGIC ---
 		if collider.is_in_group("enemies") and collider.has_method("take_damage"):
 			print("Player attacks ", collider.name)
@@ -104,6 +114,7 @@ func _try_move_or_attack(direction: Vector2):
 			is_moving = true
 			#sollider.get_parent()
 			collider.get_parent().reparent(get_parent().get_node("UI/inventario/mochila"))
+			collider.get_parent().dono = Goblais.nome
 			consumed_turn = true
 			
 		elif collider is StaticBody2D and collider.is_in_group ("portas"):

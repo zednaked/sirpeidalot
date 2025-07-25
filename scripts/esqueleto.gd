@@ -30,6 +30,8 @@ var turn_manager = null       # Referência ao TurnManager.
 var is_moving: bool = false # Verdadeiro se o esqueleto está se movendo.
 var is_dead: bool = false   # Verdadeiro se o esqueleto morreu.
 var target_position: Vector2 # Posição alvo para o movimento.
+var isinimigo = true
+
 
 func _ready():
 	# Obtém a referência ao jogador e define a posição inicial.
@@ -52,6 +54,7 @@ func _physics_process(delta):
 # Função principal chamada pelo TurnManager para que o esqueleto execute seu turno.
 func take_turn():
 	# Um esqueleto morto não faz nada e termina seu turno imediatamente.
+	turn_manager = get_parent().get_parent()
 	for efeito in $efeitos.get_children():
 		efeito.diminuitempo()
 	
@@ -71,7 +74,8 @@ func take_turn():
 		print_debug("Ação: Não fazer nada (jogador fora de alcance).")
 		call_deferred("emit_signal", "action_taken")
 		return
-
+	#tem que mandar async de tudo
+	
 	# Se o jogador estiver dentro do alcance, decide se ataca ou se move.
 	if distance_to_player < TILE_SIZE * 1.5:
 		print_debug("Ação: Atacar o jogador.")
@@ -79,7 +83,8 @@ func take_turn():
 	else:
 		print_debug("Ação: Mover em direção ao jogador.")
 		_move_towards_player(player_pos)
-
+		
+	turn_manager.atualiza_mapa_geral() #sempre que um 
 
 # --- Funções de Combate ---
 
@@ -124,14 +129,18 @@ func _attack_player(direction: Vector2):
 # Desativa sua colisão e executa a animação de morte.
 func _die_async ():
 	is_dead = true
+	queue_free()
 	if is_instance_valid(collision_shape):
 		collision_shape.disabled = true
 		
-	animated_sprite.play("death",3,true)
-	animated_sprite.frame = 3
+	if is_instance_valid(animated_sprite):
+		animated_sprite.play("death",3,true)
+		animated_sprite.frame = 3
+	
 func _die():
 	if is_dead: return
 	is_dead = true
+	drop = load("res://cenas/drop2.tscn")
 	print_debug("%s está morrendo." % self.name)
 	if is_instance_valid(collision_shape):
 		collision_shape.disabled = true
@@ -149,6 +158,8 @@ func _die():
 			#filhodaputa.position.y = 0
 	
 	animated_sprite.play("death")
+	turn_manager.atualiza_mapa_geral()
+	#todo:
 
 # --- Funções de Movimento e Auxiliares ---
 

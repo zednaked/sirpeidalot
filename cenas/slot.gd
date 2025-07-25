@@ -12,10 +12,16 @@ extends Panel
 @export var vida: int = 0
 @export var armadura: int = 0
 var tooltiplabel = ""
-
+var dono = ""
 var selecionado = false
+var isequipado = false
 
 func _ready() -> void:
+	
+	if get_parent().name == "mochila" or get_parent().name == "equipado":
+		dono = get_tree().get_first_node_in_group("player")
+	
+	
 	match tipo:
 		Goblais.ConteudoSlot.EQUIPAMENTO:
 			match equipamentos:
@@ -88,6 +94,7 @@ func bebe(bebida):
 func equipa ():
 	if qtoequipado() < 3:
 		var equipado = get_parent().get_parent().get_node("equipado")
+		isequipado = true
 		reparent (equipado)
 	
 	
@@ -107,6 +114,7 @@ func _on_gui_input(event: InputEvent) -> void:
 		else:
 			
 			var mochilao = get_parent().get_parent().get_node("mochila")
+			isequipado = false
 			reparent (mochilao)
 			
 		Goblais.selecionado1.selecionado = false

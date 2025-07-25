@@ -11,13 +11,14 @@ config_version=5
 [application]
 
 config/name="SirPeidalot"
-run/main_scene="uid://c1vuc22tkpssy"
+run/main_scene="uid://dsrnsuhn6mmrq"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 Goblais="*res://scripts/goblais.gd"
+Eventos="*res://scripts/eventos.gd"
 
 [display]
 
@@ -39,6 +40,13 @@ folder_colors={
 [global_group]
 
 propagaveis=""
+spawn_player1=""
+spawn_inimigos=""
+spawn_player2=""
+player=""
+inimigo=""
+player2=""
+drop=""
 
 [input]
 

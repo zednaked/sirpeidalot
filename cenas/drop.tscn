@@ -2222,7 +2222,7 @@ cache/0/25/0/glyphs/3/size = Vector2(0, 0)
 cache/0/25/0/glyphs/3/uv_rect = Rect2(0, 0, 0, 0)
 cache/0/25/0/glyphs/3/texture_idx = -1
 
-[node name="drop" type="Panel"]
+[node name="drop" type="Panel" groups=["drop", "propagaveis"]]
 physics_interpolation_mode = 1
 auto_translate_mode = 1
 material = SubResource("CanvasItemMaterial_ocpn0")
@@ -2241,7 +2241,10 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_f3lym")
 script = ExtResource("1_f3lym")
 tipo = 4
 
-[node name="drop" type="Area2D" parent="." groups=["drop", "propagaveis"]]
+[node name="drop" type="Area2D" parent="." groups=["drop"]]
+position = Vector2(0, -2)
+collision_layer = 3
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="drop"]
 position = Vector2(7.4859467, 6.794592)

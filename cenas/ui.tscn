@@ -1,8 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://ygv0qscvgpfk"]
+[gd_scene load_steps=11 format=3 uid="uid://ygv0qscvgpfk"]
 
 [ext_resource type="Script" uid="uid://b2ihgpnsx2tti" path="res://cenas/ui.gd" id="1_kmdi0"]
 [ext_resource type="Texture2D" uid="uid://bdglltdtt3eyu" path="res://sprites/16x16.png" id="2_ufjay"]
-[ext_resource type="PackedScene" uid="uid://6fwtnmfft5rv" path="res://cenas/slot.tscn" id="3_ufjay"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_klgsu"]
 light_mode = 1
@@ -250,14 +249,6 @@ theme_override_constants/h_separation = -1
 theme_override_constants/v_separation = -1
 columns = 4
 
-[node name="slot5" parent="inventario/mochila" instance=ExtResource("3_ufjay")]
-layout_mode = 2
-tipo = 3
-
-[node name="slot6" parent="inventario/mochila" instance=ExtResource("3_ufjay")]
-layout_mode = 2
-tipo = 2
-
 [node name="equipado" type="HBoxContainer" parent="inventario"]
 layout_mode = 1
 anchors_preset = -1
@@ -271,14 +262,6 @@ focus_mode = 2
 mouse_behavior_recursive = 2
 alignment = 1
 metadata/_edit_group_ = true
-
-[node name="slot8" parent="inventario/equipado" instance=ExtResource("3_ufjay")]
-layout_mode = 2
-tipo = 1
-
-[node name="slot6" parent="inventario/equipado" instance=ExtResource("3_ufjay")]
-layout_mode = 2
-tipo = 4
 
 [node name="Label" type="Label" parent="inventario"]
 texture_filter = 1
@@ -300,4 +283,3 @@ horizontal_alignment = 1
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="gui_input" from="topo/slot3" to="." method="_on_slot_3_gui_input"]
-[connection signal="gui_input" from="topo/setup" to="." method="_on_setup_gui_input"]

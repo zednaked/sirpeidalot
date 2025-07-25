@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://ff7u3uoetjn7" path="res://cenas/player_2.gd" id="1_6voh3"]
 [ext_resource type="PackedScene" uid="uid://decl5ra508cu0" path="res://cenas/animacaoplayer.tscn" id="1_rsf2i"]
 
-[node name="Player2" type="CharacterBody2D" groups=["propagaveis"]]
+[node name="Player2" type="CharacterBody2D" groups=["player2", "propagaveis"]]
 script = ExtResource("1_6voh3")
 metadata/_edit_group_ = true
 

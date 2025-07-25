@@ -7,16 +7,16 @@
 [node name="Teste" type="Node2D"]
 script = ExtResource("1_lbg61")
 
-[node name="cranio" parent="." groups=["propagaveis"] instance=ExtResource("2_un3lp")]
+[node name="cranio" parent="." instance=ExtResource("2_un3lp")]
 position = Vector2(60.999992, 73.99999)
 
-[node name="cranio2" parent="." groups=["propagaveis"] instance=ExtResource("2_un3lp")]
+[node name="cranio2" parent="." instance=ExtResource("2_un3lp")]
 position = Vector2(8, 77.00001)
 
-[node name="cranio3" parent="." groups=["propagaveis"] instance=ExtResource("2_un3lp")]
+[node name="cranio3" parent="." instance=ExtResource("2_un3lp")]
 position = Vector2(103.99999, 54.000008)
 
-[node name="cranio4" parent="." groups=["propagaveis"] instance=ExtResource("2_un3lp")]
+[node name="cranio4" parent="." instance=ExtResource("2_un3lp")]
 position = Vector2(82, 31)
 
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
