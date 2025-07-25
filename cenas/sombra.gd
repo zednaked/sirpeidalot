@@ -20,4 +20,4 @@ func _process(_delta):
 
 	var mat := material as ShaderMaterial
 	if mat:
-		mat.set_shader_parameter("mask_position", uv_pos)  # método certo no Godot 4 :contentReference[oaicite:5]{index=5}
+		mat.set_shader_parameter("mask_position", uv_pos)  # método
