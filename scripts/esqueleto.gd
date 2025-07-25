@@ -84,7 +84,8 @@ func take_turn():
 		print_debug("Ação: Mover em direção ao jogador.")
 		_move_towards_player(player_pos)
 		
-	turn_manager.atualiza_mapa_geral() #sempre que um 
+	if get_parent().get_parent().get_node("propagador"):
+		turn_manager.atualiza_mapa_geral() #sempre que um 
 
 # --- Funções de Combate ---
 
@@ -158,7 +159,8 @@ func _die():
 			#filhodaputa.position.y = 0
 	
 	animated_sprite.play("death")
-	turn_manager.atualiza_mapa_geral()
+	if get_parent().get_parent().get_node("propagador"):
+		turn_manager.atualiza_mapa_geral()
 	#todo:
 
 # --- Funções de Movimento e Auxiliares ---

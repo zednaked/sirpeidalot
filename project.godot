@@ -24,6 +24,7 @@ Eventos="*res://scripts/eventos.gd"
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+window/size/resizable=false
 window/stretch/mode="canvas_items"
 
 [editor_plugins]
@@ -62,4 +63,16 @@ clique_esquerdo={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+driver/threads/thread_model=2
 textures/vram_compression/import_etc2_astc=true
+lights_and_shadows/directional_shadow/soft_shadow_filter_quality=0
+lights_and_shadows/positional_shadow/soft_shadow_filter_quality=0
+anti_aliasing/screen_space_roughness_limiter/enabled=false
+textures/decals/filter=0
+textures/light_projectors/filter=0
+2d/snap/snap_2d_transforms_to_pixel=true
+2d/snap/snap_2d_vertices_to_pixel=true
+
+[threading]
+
+worker_pool/max_threads=3

@@ -69,3 +69,8 @@ func _on_criar_pressed() -> void:
 func _on_nome_text_changed(new_text: String) -> void:
 	Goblais.nome = $Panel/nome.text
 	pass # Replace with function body.
+
+
+func _on_conectar_2_pressed() -> void:
+	get_tree().change_scene_to_file("res://cenas/mapa4.tscn")	
+	pass # Replace with function body.

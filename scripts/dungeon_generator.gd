@@ -65,6 +65,12 @@ func get_player2():
 	
 	
 func _ready():
+	if !get_node("propagador"):
+		iscriador = true	
+		start_game()
+		return
+		
+		
 	$propagador.dungeonmanager = self
 	Eventos.connect("async_evento_recebido", async_evento_recebido)
 	Eventos.connect("carregar",_on_carregar)	
