@@ -1131,15 +1131,16 @@ floor_tilemap = NodePath("chao")
 walls_tilemap = NodePath("paredes")
 
 [node name="ColorRect2" parent="." instance=ExtResource("2_vy4ia")]
-visible = false
+z_index = 10
 
 [node name="UI" parent="." instance=ExtResource("3_ulxqr")]
+z_index = 13
 offset_top = -98.35152
 offset_bottom = -84.35152
 
 [node name="inventario" parent="UI" index="1"]
 visible = false
-z_index = 2
+z_index = 10
 material = SubResource("CanvasItemMaterial_g6klm")
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_uyo7u")

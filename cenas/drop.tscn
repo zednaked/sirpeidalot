@@ -2225,6 +2225,8 @@ cache/0/25/0/glyphs/3/texture_idx = -1
 [node name="drop" type="Panel" groups=["drop", "propagaveis"]]
 physics_interpolation_mode = 1
 auto_translate_mode = 1
+z_as_relative = false
+y_sort_enabled = true
 material = SubResource("CanvasItemMaterial_ocpn0")
 custom_minimum_size = Vector2(16, 16)
 anchors_preset = -1
