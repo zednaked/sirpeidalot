@@ -1,4 +1,4 @@
-[gd_scene load_steps=128 format=4 uid="uid://dsrnsuhn6mmrq"]
+[gd_scene load_steps=129 format=4 uid="uid://dsrnsuhn6mmrq"]
 
 [ext_resource type="Script" uid="uid://deawhevcgsq6k" path="res://cenas/abert.gd" id="1_0vgyr"]
 [ext_resource type="PackedScene" uid="uid://dedonqt1xtco6" path="res://cenas/transicao.tscn" id="2_608tj"]
@@ -116,6 +116,7 @@
 [ext_resource type="Texture2D" uid="uid://remkbite3qtm" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/arrow/arrow_2.png" id="112_abneh"]
 [ext_resource type="Texture2D" uid="uid://fcc4253ilf7v" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/arrow/arrow_3.png" id="113_yhxqh"]
 [ext_resource type="Texture2D" uid="uid://d2x6cuwol7s5s" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/arrow/arrow_4.png" id="114_r8hqi"]
+[ext_resource type="AudioStream" uid="uid://dasrtm628hlr3" path="res://bleep.sfxr" id="117_608tj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g6klm"]
 shader = ExtResource("6_3jgyd")
@@ -1509,14 +1510,24 @@ metadata/_edit_lock_ = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_0vgyr")
 
+[node name="bleep" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("117_608tj")
+volume_db = 4.37
+pitch_scale = 1.71
+
 [connection signal="item_activated" from="Panel/salas" to="." method="_on_salas_item_activated"]
 [connection signal="text_changed" from="Panel/nome" to="." method="_on_nome_text_changed"]
 [connection signal="pressed" from="Panel/entrar" to="." method="_on_entrar_pressed"]
 [connection signal="pressed" from="Panel/criar" to="." method="_on_criar_pressed"]
 [connection signal="pressed" from="Panel/voltar" to="." method="_on_voltar_pressed"]
 [connection signal="timeout" from="Panel/Timer" to="." method="_on_timer_timeout"]
+[connection signal="focus_entered" from="Panel2/HFlowContainer/conectar2" to="." method="_on_conectar_2_focus_entered"]
+[connection signal="mouse_entered" from="Panel2/HFlowContainer/conectar2" to="." method="_on_conectar_2_mouse_entered"]
 [connection signal="pressed" from="Panel2/HFlowContainer/conectar2" to="." method="_on_conectar_2_pressed"]
+[connection signal="toggled" from="Panel2/HFlowContainer/conectar2" to="." method="_on_conectar_2_toggled"]
+[connection signal="mouse_entered" from="Panel2/HFlowContainer/conectar" to="." method="_on_conectar_mouse_entered"]
 [connection signal="pressed" from="Panel2/HFlowContainer/conectar" to="." method="_on_conectar_pressed"]
+[connection signal="mouse_entered" from="Panel2/HFlowContainer/setup" to="." method="_on_setup_mouse_entered"]
 [connection signal="pressed" from="msg/ok" to="." method="_on_conectar_pressed"]
 [connection signal="timeout" from="propagador/Timer" to="propagador" method="_on_timer_timeout"]
 

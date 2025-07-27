@@ -1112,7 +1112,6 @@ floor_tilemap = NodePath("chao")
 walls_tilemap = NodePath("paredes")
 
 [node name="ColorRect2" parent="." instance=ExtResource("2_4ecrx")]
-visible = false
 
 [node name="UI" parent="." instance=ExtResource("2_fnqot")]
 

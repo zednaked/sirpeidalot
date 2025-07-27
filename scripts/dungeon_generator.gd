@@ -143,7 +143,7 @@ func _on_carregar () :
 
 
 func _on_player_action_taken():
-	
+	$anda.play()
 	if current_state != GameState.PLAYER_TURN: return
 	
 	if _count_living_enemies() == 0:

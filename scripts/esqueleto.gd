@@ -103,6 +103,7 @@ func take_damage(amount: int):
 		_die()
 	else:
 		set_anim("hurt")
+		get_parent().get_parent().get_node("they").play()
 		
 		
 
@@ -115,6 +116,7 @@ func _attack_player(direction: Vector2):
 		if player_node.has_method("take_damage"):
 			player_node.take_damage(damage)
 		await animated_sprite.animation_finished
+		get_parent().get_parent().get_node("dano").play()
 	else:
 		# Fallback caso a anima��ão de ataque não exista.
 		await get_tree().create_timer(0.5).timeout
@@ -139,6 +141,7 @@ func _die_async ():
 		animated_sprite.frame = 3
 	
 func _die():
+	get_parent().get_parent().get_node("morre").play()
 	if is_dead: return
 	is_dead = true
 	drop = load("res://cenas/drop2.tscn")
@@ -181,6 +184,7 @@ func _move_towards_player(player_pos: Vector2):
 		is_moving = true
 		_update_animation_direction((target_position - global_position).normalized())
 		animated_sprite.play("walk")
+		get_parent().get_parent().get_node("they").play()
 	else:
 		# Se não houver caminho, simplesmente termina o turno.
 		call_deferred("emit_signal", "action_taken")

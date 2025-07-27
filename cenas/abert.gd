@@ -74,3 +74,28 @@ func _on_nome_text_changed(new_text: String) -> void:
 func _on_conectar_2_pressed() -> void:
 	get_tree().change_scene_to_file("res://cenas/mapa4.tscn")	
 	pass # Replace with function body.
+
+
+func _on_conectar_2_focus_entered() -> void:
+	$bleep.play()
+	pass # Replace with function body.
+
+
+func _on_conectar_2_toggled(toggled_on: bool) -> void:
+	$bleep.play()
+	pass # Replace with function body.
+
+
+func _on_conectar_2_mouse_entered() -> void:
+	$bleep.play()
+	pass # Replace with function body.
+
+
+func _on_conectar_mouse_entered() -> void:
+	$bleep.play()
+	pass # Replace with function body.
+
+
+func _on_setup_mouse_entered() -> void:
+	$bleep.play()
+	pass # Replace with function body.

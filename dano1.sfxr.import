@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://fxquqedainr1"
+path="res://.godot/imported/dano1.sfxr-00931b15aec6042e1a8ea81db50e7914.sample"
+
+[deps]
+
+source_file="res://dano1.sfxr"
+dest_files=["res://.godot/imported/dano1.sfxr-00931b15aec6042e1a8ea81db50e7914.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0

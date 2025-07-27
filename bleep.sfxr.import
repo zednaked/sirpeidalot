@@ -1,0 +1,17 @@
+[remap]
+
+importer="com.timothyqiu.gdfxr.importer"
+type="AudioStreamWAV"
+uid="uid://dasrtm628hlr3"
+path="res://.godot/imported/bleep.sfxr-9bdd6f49d36f730545c0a2de5e1a24a7.sample"
+
+[deps]
+
+source_file="res://bleep.sfxr"
+dest_files=["res://.godot/imported/bleep.sfxr-9bdd6f49d36f730545c0a2de5e1a24a7.sample"]
+
+[params]
+
+loop=false
+bit_depth=0
+sample_rate=0
