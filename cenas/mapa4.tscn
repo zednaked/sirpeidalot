@@ -1,4 +1,4 @@
-[gd_scene load_steps=133 format=4 uid="uid://dkph3jgurh5vp"]
+[gd_scene load_steps=134 format=4 uid="uid://dkph3jgurh5vp"]
 
 [ext_resource type="Script" uid="uid://cfwe642akir1" path="res://scripts/dungeon_generator.gd" id="1_nt56w"]
 [ext_resource type="PackedScene" uid="uid://el006l0fssdl" path="res://cenas/luzsegue.tscn" id="2_vy4ia"]
@@ -122,6 +122,7 @@
 [ext_resource type="AudioStream" uid="uid://20ax26s5js1h" path="res://they.sfxr" id="119_2nqjf"]
 [ext_resource type="AudioStream" uid="uid://dasrtm628hlr3" path="res://bleep.sfxr" id="119_vy4ia"]
 [ext_resource type="AudioStream" uid="uid://dma1seq40kut" path="res://morre.sfxr" id="120_i74gy"]
+[ext_resource type="Script" uid="uid://8uev721cgp1f" path="res://cenas/log.gd" id="123_xhbev"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g6klm"]
 shader = ExtResource("6_xhbev")
@@ -1487,6 +1488,20 @@ pitch_scale = 1.71
 stream = ExtResource("119_vy4ia")
 volume_db = 4.37
 pitch_scale = 1.71
+
+[node name="log" type="RichTextLabel" parent="."]
+modulate = Color(1, 1, 1, 0.67058825)
+z_index = 11
+z_as_relative = false
+offset_left = -21.0
+offset_top = 47.0
+offset_right = 245.0
+offset_bottom = 64.0
+theme_override_font_sizes/normal_font_size = 8
+bbcode_enabled = true
+text = "[tornado radius=1 freq=2.8 connected=1] > Você entrou no nas criptas ...[/tornado]"
+vertical_alignment = 1
+script = ExtResource("123_xhbev")
 
 [connection signal="gui_input" from="UI/topo/setup" to="." method="_on_setup_gui_input"]
 

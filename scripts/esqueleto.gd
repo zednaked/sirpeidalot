@@ -79,9 +79,11 @@ func take_turn():
 	# Se o jogador estiver dentro do alcance, decide se ataca ou se move.
 	if distance_to_player < TILE_SIZE * 1.5:
 		print_debug("Ação: Atacar o jogador.")
+		Eventos.emit_signal("log", str( name + " te atacou"))
 		_attack_player(player_pos - my_pos)
 	else:
 		print_debug("Ação: Mover em direção ao jogador.")
+		
 		_move_towards_player(player_pos)
 		
 	if get_parent().get_parent().get_node("propagador"):
@@ -99,6 +101,10 @@ func take_damage(amount: int):
 		return
 	health -= amount
 	print_debug("%s recebeu %d de dano, vida restante: %d." % [self.name, amount, health])
+	
+	Eventos.emit_signal("log", str("%s recebeu %d de dano, vida restante: %d." % [self.name, amount, health]))
+	
+	
 	if health <= 0:
 		_die()
 	else:
@@ -146,6 +152,7 @@ func _die():
 	is_dead = true
 	drop = load("res://cenas/drop2.tscn")
 	print_debug("%s está morrendo." % self.name)
+	Eventos.emit_signal("log", str( name + " morreu !"))
 	if is_instance_valid(collision_shape):
 		collision_shape.disabled = true
 		if drop :
@@ -185,6 +192,7 @@ func _move_towards_player(player_pos: Vector2):
 		_update_animation_direction((target_position - global_position).normalized())
 		animated_sprite.play("walk")
 		get_parent().get_parent().get_node("they").play()
+		Eventos.emit_signal("log", str( name + " moveu-se em sua direção"))
 	else:
 		# Se não houver caminho, simplesmente termina o turno.
 		call_deferred("emit_signal", "action_taken")
