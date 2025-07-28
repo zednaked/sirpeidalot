@@ -1,7 +1,29 @@
-[gd_scene load_steps=2 format=3 uid="uid://df43caxqf3q3"]
+[gd_scene load_steps=5 format=3 uid="uid://df43caxqf3q3"]
 
-[ext_resource type="Texture2D" uid="uid://dvxb1rejes8w6" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/arrow/Just_arrow.png" id="1_ln8ok"]
+[ext_resource type="Texture2D" uid="uid://bdglltdtt3eyu" path="res://sprites/16x16.png" id="1_8r5ac"]
+[ext_resource type="Script" uid="uid://ciwfaxjs0cr6g" path="res://cenas/fleixa.gd" id="2_8r5ac"]
 
-[node name="JustArrow" type="Sprite2D"]
-visible = false
-texture = ExtResource("1_ln8ok")
+[sub_resource type="Gradient" id="Gradient_8r5ac"]
+offsets = PackedFloat32Array(0.15053764, 0.5860215, 0.7096774)
+colors = PackedColorArray(1, 1, 1, 1, 0.13793093, 0.13793093, 0.13793093, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_00bbq"]
+gradient = SubResource("Gradient_8r5ac")
+fill = 1
+fill_from = Vector2(0.50427353, 0.4957265)
+
+[node name="fleixa" type="Sprite2D"]
+texture = ExtResource("1_8r5ac")
+region_enabled = true
+region_rect = Rect2(64, 688, 16, 16)
+script = ExtResource("2_8r5ac")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(0, -5)
+target_position = Vector2(0, 12.62)
+
+[node name="PointLight2D" type="PointLight2D" parent="RayCast2D"]
+energy = 0.46
+texture = SubResource("GradientTexture2D_00bbq")
+texture_scale = 1.84
+height = 172.0

@@ -1,25 +1,38 @@
 [gd_scene load_steps=4 format=3 uid="uid://vgude01dubcg"]
 
-[ext_resource type="Script" uid="uid://bm4dm4qxyuoft" path="res://scripts/propagator.gd" id="1_lbg61"]
-[ext_resource type="PackedScene" uid="uid://drwoe2xdu8w6m" path="res://cenas/cranio.tscn" id="2_un3lp"]
-[ext_resource type="PackedScene" uid="uid://brjnkob1iywis" path="res://cenas/Jogador.tscn" id="3_un3lp"]
+[ext_resource type="PackedScene" uid="uid://ccm506u6r60qy" path="res://cenas/fleixa.tscn" id="1_t87xa"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_lbg61"]
+rough = true
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t87xa"]
+size = Vector2(20, 5)
 
 [node name="Teste" type="Node2D"]
-script = ExtResource("1_lbg61")
+visible = false
 
-[node name="cranio" parent="." instance=ExtResource("2_un3lp")]
-position = Vector2(60.999992, 73.99999)
+[node name="fleixa" parent="." instance=ExtResource("1_t87xa")]
+position = Vector2(56, 31)
 
-[node name="cranio2" parent="." instance=ExtResource("2_un3lp")]
-position = Vector2(8, 77.00001)
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(51, 48)
+zoom = Vector2(7.125, 7.125)
 
-[node name="cranio3" parent="." instance=ExtResource("2_un3lp")]
-position = Vector2(103.99999, 54.000008)
+[node name="Button" type="Button" parent="."]
+offset_left = 22.0
+offset_top = 25.0
+offset_right = 30.0
+offset_bottom = 33.0
 
-[node name="cranio4" parent="." instance=ExtResource("2_un3lp")]
-position = Vector2(82, 31)
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(55, 27)
+collision_layer = 3
+collision_mask = 3
 
-[node name="HTTPRequest" type="HTTPRequest" parent="."]
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(57, 31)
+physics_material_override = SubResource("PhysicsMaterial_lbg61")
 
-[node name="Player" parent="." instance=ExtResource("3_un3lp")]
-position = Vector2(13, 15)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(0, 38.5)
+shape = SubResource("RectangleShape2D_t87xa")

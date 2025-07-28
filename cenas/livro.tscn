@@ -1,0 +1,69 @@
+[gd_scene load_steps=6 format=3 uid="uid://cyll22b1de77x"]
+
+[ext_resource type="Script" uid="uid://o8dfvj04acm7" path="res://cenas/livro.gd" id="1_1wv7d"]
+[ext_resource type="Texture2D" uid="uid://bdglltdtt3eyu" path="res://sprites/16x16.png" id="2_sc12q"]
+
+[sub_resource type="Animation" id="Animation_1wv7d"]
+resource_name = "float"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("off:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.02, 0.033333335, 0.5, 0.52),
+"transitions": PackedFloat32Array(1, 1, 1, 4.1410594),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0), Vector2(0, 0), Vector2(0, -1.73)]
+}
+
+[sub_resource type="Animation" id="Animation_sc12q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("off:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_frrxc"]
+_data = {
+&"RESET": SubResource("Animation_sc12q"),
+&"float": SubResource("Animation_1wv7d")
+}
+
+[node name="livro" type="Node2D"]
+script = ExtResource("1_1wv7d")
+metadata/_edit_group_ = true
+
+[node name="off" type="Sprite2D" parent="."]
+texture = ExtResource("2_sc12q")
+region_enabled = true
+region_rect = Rect2(64, 96, 16, 16)
+region_filter_clip_enabled = true
+
+[node name="on" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_sc12q")
+region_enabled = true
+region_rect = Rect2(80, 96, 16, 16)
+region_filter_clip_enabled = true
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(12, -2)
+target_position = Vector2(-20, 1)
+collision_mask = 6
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_frrxc")
+}
+autoplay = "float"

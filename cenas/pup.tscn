@@ -1,0 +1,76 @@
+[gd_scene load_steps=3 format=3 uid="uid://blx4kbhn14jwa"]
+
+[ext_resource type="Script" uid="uid://bli5hcfhkhncd" path="res://cenas/pup.gd" id="1_i4og3"]
+[ext_resource type="Texture2D" uid="uid://b78ll8riaumeo" path="res://sprites/painel1.png" id="1_vyjrr"]
+
+[node name="pup" type="Control"]
+z_index = 19
+layout_mode = 3
+anchors_preset = 0
+offset_left = 4.0
+offset_top = 1.0
+offset_right = 44.0
+offset_bottom = 41.0
+size_flags_horizontal = 6
+size_flags_vertical = 6
+script = ExtResource("1_i4og3")
+metadata/_edit_use_anchors_ = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+z_index = 1
+layout_mode = 0
+offset_left = 55.047623
+offset_top = -58.5
+offset_right = 174.0476
+offset_bottom = -45.5
+theme_override_colors/default_color = Color(0.039215688, 0.07058822, 0, 1)
+theme_override_font_sizes/normal_font_size = 9
+text = "Atenção"
+horizontal_alignment = 1
+vertical_alignment = 1
+text_direction = 1
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+z_index = 1
+layout_mode = 0
+offset_left = 55.047623
+offset_top = -44.5
+offset_right = 174.0476
+offset_bottom = -10.5
+theme_override_colors/default_color = Color(0.039215688, 0.07058822, 0, 1)
+theme_override_font_sizes/normal_font_size = 7
+text = "tentar jogar sem se divertir
+faz de voce um idiota"
+horizontal_alignment = 1
+text_direction = 1
+
+[node name="RichTextLabel3" type="RichTextLabel" parent="."]
+z_index = 1
+layout_mode = 0
+offset_left = 55.047623
+offset_top = -22.499998
+offset_right = 174.0476
+offset_bottom = -10.499998
+theme_override_colors/default_color = Color(0.039215688, 0.07058822, 0, 1)
+theme_override_font_sizes/normal_font_size = 7
+text = "ok"
+horizontal_alignment = 1
+text_direction = 1
+
+[node name="inside" type="Sprite2D" parent="."]
+light_mask = 0
+position = Vector2(115.04762, -31.5)
+scale = Vector2(0.26190478, 0.26190478)
+texture = ExtResource("1_vyjrr")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 107.04762
+offset_top = -22.499998
+offset_right = 122.04762
+offset_bottom = -10.499998
+theme_override_font_sizes/font_size = 10
+autowrap_trim_flags = 192
+clip_text = true
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

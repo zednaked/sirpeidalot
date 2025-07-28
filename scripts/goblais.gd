@@ -1,4 +1,12 @@
 extends Node
+
+enum tipo_inimigo {
+	VAMPIRO,
+	ESQUELETO,
+	CRANIO
+	
+}
+
 enum ConteudoSlot {
 	COMIDA,
 	DINHEIRO,

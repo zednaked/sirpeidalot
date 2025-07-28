@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://cmdjbl5nkg0mx"]
+[gd_scene load_steps=59 format=3 uid="uid://cmdjbl5nkg0mx"]
 
 [ext_resource type="Texture2D" uid="uid://baife1m822x8f" path="res://sprites/Enemy_Animations_Set/enemies-skeleton1_attack.png" id="1_b66pk"]
 [ext_resource type="Script" uid="uid://dqgyx8jhdbw4p" path="res://scripts/esqueleto.gd" id="1_gq2x8"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://16e5ssvd2dux" path="res://sprites/Enemy_Animations_Set/enemies-skeleton1_idle.png" id="4_ey6uc"]
 [ext_resource type="Texture2D" uid="uid://cwq1qpxufri3" path="res://sprites/Enemy_Animations_Set/enemies-skeleton1_movement.png" id="5_i8qh3"]
 [ext_resource type="PackedScene" uid="uid://cjo70h14cluga" path="res://cenas/envenenado.tscn" id="7_re4gi"]
+[ext_resource type="PackedScene" uid="uid://df43caxqf3q3" path="res://cenas/arco.tscn" id="8_ey6uc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bkqu4"]
 atlas = ExtResource("1_b66pk")
@@ -366,28 +367,32 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1yycb"]
-size = Vector2(20, 18.57143)
+size = Vector2(22.857147, 24.28572)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_4bm5w"]
 polygon = PackedVector2Array(5.7142854, 5.714287, 4.285714, 1.66893e-06, 1.4285713, 5.714287)
 
 [node name="esqueleto" type="CharacterBody2D" groups=["inimigo", "propagaveis"]]
+y_sort_enabled = true
 scale = Vector2(0.7, 0.7)
 script = ExtResource("1_gq2x8")
 db = ExtResource("7_re4gi")
+detection_range = 60
+numero_acoes = 1
+tipo_inimigo = 1
 
 [node name="animacao" type="AnimatedSprite2D" parent="."]
-scale = Vector2(0.99999994, 0.99999994)
+scale = Vector2(1.2, 1.2)
 sprite_frames = SubResource("SpriteFrames_bj72j")
 animation = &"idle"
 autoplay = "idle"
-speed_scale = 1.6
+speed_scale = 1.9
 offset = Vector2(3, -6)
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -1.4285715)
-scale = Vector2(0.99999994, 0.99999994)
+position = Vector2(1.4285733, -0.7142843)
+scale = Vector2(0.9999995, 0.9999995)
 shape = SubResource("RectangleShape2D_1yycb")
 metadata/_edit_lock_ = true
 
@@ -402,3 +407,6 @@ occluder = SubResource("OccluderPolygon2D_4bm5w")
 metadata/_edit_lock_ = true
 
 [node name="efeitos" type="Node2D" parent="."]
+
+[node name="fleixa" parent="." instance=ExtResource("8_ey6uc")]
+visible = false

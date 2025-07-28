@@ -18,6 +18,7 @@ var packedp2 : PackedScene = preload("res://cenas/player2.tscn")
 var inimigo1 : PackedScene = preload("res://cenas/esqueleto.tscn")
 var inimigo2 : PackedScene = preload("res://cenas/cranio.tscn")
 var inimigo3 : PackedScene = preload("res://cenas/vamp.tscn")
+var inimigo4 : PackedScene = preload("res://cenas/esqueleto2.tscn")
 
 var iscriador: bool = false
 
@@ -65,7 +66,8 @@ func get_player2():
 	
 	
 func _ready():
-	if !get_node("propagador"):
+	if !has_node("propagador"):
+		Eventos.connect("popup",_on_pop_up )
 		iscriador = true	
 		start_game()
 		return
@@ -148,14 +150,15 @@ func _on_player_action_taken():
 	
 	if _count_living_enemies() == 0:
 		current_state = GameState.FREE_ROAM
-		if player.has_method("set_can_act"): player.set_can_act(true)
-		print_debug("Todos os inimigos derrotados! Mudando para o modo livre.")
+		if player.has_method("set_can_act"): 
+			Eventos.emit_signal("log", "Você venceu todos os inimigos")
+			player.set_can_act(true)
 		return
 	
 	if player.has_method("set_can_act"): player.set_can_act(false)
 	current_state = GameState.ENEMY_TURN
 	emit_signal("enemy_turn_started")
-	print("--- Turno dos Inimigos ---")
+	#print("--- Turno dos Inimigos ---")
 	var _unused = await _process_enemy_turns()
 
 func _process_enemy_turns():
@@ -165,8 +168,14 @@ func _process_enemy_turns():
 			living_enemies.append(enemy)
 			
 	for enemy in living_enemies:
-		enemy.take_turn()
-		await enemy.action_taken
+		if is_instance_valid(enemy) :
+			if enemy.cooldown > 0:
+				enemy.cooldown -= 1
+				
+			enemy.acoes_disponiveis = enemy.numero_acoes
+			
+			enemy.take_turn()
+			await enemy.action_taken
 	
 	_end_enemy_turn_sequence()
 
@@ -194,7 +203,8 @@ func _end_enemy_turn_sequence():
 	if _count_living_enemies() == 0:
 		current_state = GameState.FREE_ROAM
 		if player.has_method("set_can_act"): player.set_can_act(true)
-		print_debug("Último inimigo derrotado! Mudando para o modo livre.")
+		
+		#print_debug("Último inimigo derrotado! Mudando para o modo livre.")
 		return
 
 	if current_state == GameState.FREE_ROAM: return
@@ -210,12 +220,12 @@ func _end_enemy_turn_sequence():
 	if !isp2 :
 		if player.has_method("set_can_act"): player.set_can_act(true)
 		emit_signal("player_turn_started")
-		print("--- Turno do Jogador ---")
+		#print("--- Turno do Jogador ---")
 	else :
 		#if player.has_method("set_can_act"): player.set_can_act(true)
 		#todo: emitir sinal para o p2 via api
 		#emit_signal("player_turn_started")
-		print("--- Turno do Jogador 2 ---")
+		#print("--- Turno do Jogador 2 ---")
 		
 		async_fim_turno()
 		atualiza_mapa_geral()
@@ -257,7 +267,7 @@ func _create_astar_grid():
 			if astar_grid.has_point(neighbor_point_id):
 				astar_grid.connect_points(point_id, neighbor_point_id, false)
 	
-	print_debug("A* Grid created with ", astar_grid.get_point_count(), " walkable points.")
+	#print_debug("A* Grid created with ", astar_grid.get_point_count(), " walkable points.")
 
 func _get_point_id(cell: Vector2i) -> int:
 	const OFFSET = 5000 
@@ -266,7 +276,7 @@ func _get_point_id(cell: Vector2i) -> int:
 func calculate_path(start_world_pos: Vector2, end_world_pos: Vector2) -> PackedVector2Array:
 	var start_cell = floor_tilemap.local_to_map(start_world_pos)
 	var end_cell = floor_tilemap.local_to_map(end_world_pos)
-	print_debug("Pathfinding: De %s (mundo) -> %s (mapa) para %s (mundo) -> %s (mapa)" % [start_world_pos, start_cell, end_world_pos, end_cell])
+	#print_debug("Pathfinding: De %s (mundo) -> %s (mapa) para %s (mundo) -> %s (mapa)" % [start_world_pos, start_cell, end_world_pos, end_cell])
 	
 	var start_id = _get_point_id(start_cell)
 	var end_id = _get_point_id(end_cell)
@@ -300,7 +310,7 @@ func update_walkable_area(world_pos: Vector2):
 	
 	if not astar_grid.has_point(point_id):
 		astar_grid.add_point(point_id, Vector2(cell))
-		print_debug("A* Grid: Ponto adicionado em %s" % cell)
+	#	print_debug("A* Grid: Ponto adicionado em %s" % cell)
 		
 		# Conecta o novo ponto aos seus vizinhos
 		for offset in [Vector2i.UP, Vector2i.DOWN, Vector2i.LEFT, Vector2i.RIGHT]:
@@ -309,13 +319,13 @@ func update_walkable_area(world_pos: Vector2):
 			if astar_grid.has_point(neighbor_point_id):
 				astar_grid.connect_points(point_id, neighbor_point_id, false)
 				astar_grid.connect_points(neighbor_point_id, point_id, false)
-				print_debug("A* Grid: Conectado a %s" % neighbor_cell)
+	#			print_debug("A* Grid: Conectado a %s" % neighbor_cell)
 
 
 func async_evento_recebido (event_data: Dictionary):
 	
 	if event_data.get("type") =="fimturnop":
-		print ("fimturnop recebido")
+	#	print ("fimturnop recebido")
 		_on_player_action_taken()
 		
 	if event_data.get ("type") =="join":
@@ -364,13 +374,14 @@ func async_start():
 	
 	pass
 func start_game():
+	randomize()
 	var p1  = get_tree().get_first_node_in_group("player")
 	get_player2()
 	
 		
 	
 	
-	var ninimigos = 3
+	var ninimigos = 8
 	
 	var spp1 = get_tree().get_nodes_in_group("spawn_player1")[0]
 	
@@ -390,16 +401,19 @@ func start_game():
 	inimigospk.append(inimigo1)
 	inimigospk.append(inimigo2)
 	inimigospk.append(inimigo3)
+	inimigospk.append(inimigo4)
 	
 	
 	for n in ninimigos :
 		var inimigo = inimigospk.pick_random().instantiate()
 		inimigo.position = get_tree().get_nodes_in_group("spawn_inimigos").pick_random().position
+		
+
 		$inimigos.add_child(inimigo)	
 	
-	print("O jogo começou!")
 	_create_astar_grid()
 	
+	# waesta repetindo for
 	for enemy in enemies_container.get_children():
 		if enemy.has_method("set_turn_manager"):
 			enemy.set_turn_manager(self)
@@ -409,10 +423,17 @@ func start_game():
 	if player.has_method("set_can_act"):
 		player.set_can_act(true)
 	emit_signal("player_turn_started")
-	print("--- Turno do Jogador ---")
+	#print("--- Turno do Jogador ---")
 
 
 func _on_setup_gui_input(event: InputEvent) -> void:
 	if event.is_action_pressed("clique_esquerdo"):
 		get_tree().change_scene_to_file("res://cenas/main.tscn")
 	
+
+func _on_pop_up(texto):
+	var popup = load("res://cenas/pup.tscn")
+	
+	popup = popup.instantiate()
+	add_child(popup)
+	popup.get_node("RichTextLabel2").text  = texto
