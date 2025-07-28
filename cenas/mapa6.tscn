@@ -1684,7 +1684,6 @@ walls_tilemap = NodePath("paredes")
 metadata/_edit_horizontal_guides_ = [-95.0]
 
 [node name="fundo" type="ColorRect" parent="."]
-visible = false
 modulate = Color(1, 0.23529413, 1, 1)
 self_modulate = Color(1, 1, 1, 0.39215687)
 z_index = 20
