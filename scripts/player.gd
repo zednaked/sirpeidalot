@@ -6,7 +6,7 @@ signal action_taken
 
 # --- Constants ---
 const TILE_SIZE = 16
-const MOVE_SPEED = 25.0
+const MOVE_SPEED = 55.0
 var player
 # --- Attributes ---
 @export var debuff: PackedScene
@@ -40,7 +40,11 @@ func _ready():
 func _unhandled_input(event):
 	if not can_act or is_moving:
 		return
-
+	
+	for skill in $"../UI/topo/skills".get_children():
+		skill.diminui()
+		
+	
 	for debuf in $debuffs.get_children():
 		debuf.diminuitempo()
 	for buf in $buffs.get_children():
@@ -48,12 +52,15 @@ func _unhandled_input(event):
 		
 	if event.is_action_pressed("ui_accept"):
 		_pass_turn()
+		await get_tree().create_timer(0.3).timeout
 		return
 
 	var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-
+	
 	if direction.length() > 0:
 		_try_move_or_attack(direction)
+		
+	await get_tree().create_timer(0.3).timeout
 
 func _physics_process(delta):
 	if is_moving:
@@ -86,13 +93,25 @@ func _try_move_or_attack(direction: Vector2):
 		if collider.is_in_group("enemies") and collider.has_method("take_damage"):
 			print("Player attacks ", collider.name)
 			
+			#se houver skill de ataque funciona aqui
+			var incremento = 0
+			for skill in $"../UI/topo/skills".get_children():
+				if skill.tipo == Goblais.tipo_skill.ATAQUE:
+					if skill.usar() :
+						print ("aumenta dano")
+						incremento = skill.quantidade
+						
+						
+				
+			
 			$efeitos.play("attack")
-			collider.take_damage(damage)
+			collider.take_damage(damage + incremento)
 			#var filhodaputa = debuff.instantiate()
 			
 			#collider.get_node("efeitos").add_child(filhodaputa)
 			#filhodaputa.position.x = 0
 			#filhodaputa.position.y = 0
+					
 			consumed_turn = true
 		
 		# --- KEY PICKUP LOGIC ---
@@ -118,7 +137,6 @@ func _try_move_or_attack(direction: Vector2):
 			consumed_turn = true
 			
 		elif collider is StaticBody2D and collider.is_in_group ("portas"):
-			print_debug ("porta")
 			#var collision_point = interaction_ray.get_collision_point()
 			#var map_coords = collider.local_to_map(collider.to_local(collision_point))
 			#collider.set_cell(map_coords, -1)
@@ -159,8 +177,10 @@ func take_damage(amount: int):
 func _update_animation_direction(direction: Vector2):
 	if direction.x < -0.1:
 		animated_sprite.flip_h = true
+		$efeitos.flip_h = true
 	elif direction.x > 0.1:
 		animated_sprite.flip_h = false
+		$efeitos.flip_h = false
 
 func set_can_act(value: bool):
 	can_act = value

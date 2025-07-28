@@ -1,10 +1,11 @@
-[gd_scene load_steps=140 format=4 uid="uid://b7uugdrnn6oph"]
+[gd_scene load_steps=145 format=4 uid="uid://b7uugdrnn6oph"]
 
 [ext_resource type="Script" uid="uid://cfwe642akir1" path="res://scripts/dungeon_generator.gd" id="1_8k86t"]
 [ext_resource type="Shader" uid="uid://7ver7822au4k" path="res://cenas/fog2.gdshader" id="2_fjioo"]
 [ext_resource type="PackedScene" uid="uid://el006l0fssdl" path="res://cenas/luzsegue.tscn" id="3_0f64d"]
 [ext_resource type="PackedScene" uid="uid://ygv0qscvgpfk" path="res://cenas/ui.tscn" id="4_igiqj"]
 [ext_resource type="TileSet" uid="uid://74d8818b5tw4" path="res://cenas/tilemap.tres" id="5_06skc"]
+[ext_resource type="Script" uid="uid://co3gmnsr47g1" path="res://cenas/skill.gd" id="6_0f64d"]
 [ext_resource type="Script" uid="uid://dc7ijepqqe56a" path="res://cenas/trap.gd" id="7_c0njb"]
 [ext_resource type="PackedScene" uid="uid://do77payyy4q7l" path="res://cenas/trap.tscn" id="8_iopqc"]
 [ext_resource type="Texture2D" uid="uid://cde3wlbqgay87" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/flag/flag_1.png" id="9_ljhvc"]
@@ -186,6 +187,46 @@ adjustment_enabled = true
 adjustment_brightness = 0.89
 adjustment_contrast = 1.43
 adjustment_saturation = 0.65
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ocpn0"]
+light_mode = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g6klm"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0.9350336, 0.7330125, 1)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+corner_detail = 20
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_igiqj"]
+light_mode = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_06skc"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0.9350336, 0.7330125, 1)
+corner_radius_top_left = 1
+corner_radius_top_right = 1
+corner_radius_bottom_right = 1
+corner_radius_bottom_left = 1
+corner_detail = 20
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_g6klm"]
 light_mode = 1
@@ -1643,6 +1684,7 @@ walls_tilemap = NodePath("paredes")
 metadata/_edit_horizontal_guides_ = [-95.0]
 
 [node name="fundo" type="ColorRect" parent="."]
+visible = false
 modulate = Color(1, 0.23529413, 1, 1)
 self_modulate = Color(1, 1, 1, 0.39215687)
 z_index = 20
@@ -1680,8 +1722,96 @@ environment = SubResource("Environment_nt56w")
 
 [node name="UI" parent="." instance=ExtResource("4_igiqj")]
 z_index = 29
-offset_top = -98.35152
-offset_bottom = -84.35152
+offset_left = -20.0
+offset_top = -114.35152
+offset_right = 246.0
+offset_bottom = -100.35152
+
+[node name="efeitos" type="HBoxContainer" parent="UI/topo" index="1"]
+layout_mode = 2
+
+[node name="sortegrande" type="Panel" parent="UI/topo/efeitos"]
+material = SubResource("CanvasItemMaterial_ocpn0")
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_g6klm")
+
+[node name="Sprite2D2" type="Sprite2D" parent="UI/topo/efeitos/sortegrande"]
+z_index = 3
+texture_filter = 1
+position = Vector2(8, 7)
+scale = Vector2(0.6875, 0.61875004)
+texture = ExtResource("123_fjioo")
+region_enabled = true
+region_rect = Rect2(176, 656, 16, 16)
+
+[node name="slot2" parent="UI/topo" index="2"]
+material = SubResource("CanvasItemMaterial_igiqj")
+theme_override_styles/panel = SubResource("StyleBoxFlat_06skc")
+
+[node name="slot4" parent="UI/topo" index="4"]
+visible = true
+
+[node name="skills" type="HBoxContainer" parent="UI/topo" index="5"]
+layout_mode = 2
+
+[node name="skill" type="Panel" parent="UI/topo/skills"]
+material = SubResource("CanvasItemMaterial_ocpn0")
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_g6klm")
+script = ExtResource("6_0f64d")
+
+[node name="Sprite2D2" type="Sprite2D" parent="UI/topo/skills/skill"]
+z_index = 3
+texture_filter = 1
+position = Vector2(8, 7)
+scale = Vector2(0.6875, 0.61875004)
+texture = ExtResource("123_fjioo")
+region_enabled = true
+region_rect = Rect2(80, 720, 16, 16)
+
+[node name="turno" type="Panel" parent="UI/topo" index="7"]
+self_modulate = Color(1, 1, 1, 0.6313726)
+material = SubResource("CanvasItemMaterial_ocpn0")
+custom_minimum_size = Vector2(16, 0)
+layout_mode = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_g6klm")
+
+[node name="jogador" type="Sprite2D" parent="UI/topo/turno"]
+z_index = 7
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_ocpn0")
+position = Vector2(7, 6)
+scale = Vector2(0.6875, 0.61875004)
+texture = ExtResource("123_fjioo")
+region_enabled = true
+region_rect = Rect2(128, 32, 16, 16)
+
+[node name="inimigo" type="Sprite2D" parent="UI/topo/turno"]
+visible = false
+z_index = 7
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_ocpn0")
+position = Vector2(7, 6)
+scale = Vector2(0.6875, 0.61875004)
+texture = ExtResource("123_fjioo")
+region_enabled = true
+region_rect = Rect2(160, 32, 16, 16)
+
+[node name="label" type="RichTextLabel" parent="UI/topo/turno"]
+self_modulate = Color(1, 1, 1, 0.77254903)
+z_index = 7
+layout_mode = 0
+offset_left = 3.7893372
+offset_top = 2.3515167
+offset_right = 18.578674
+offset_bottom = 16.703033
+theme_override_font_sizes/normal_font_size = 8
+text = "5"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="inventario" parent="UI" index="1"]
 visible = false
@@ -1744,7 +1874,8 @@ metadata/_edit_lock_ = true
 [node name="inimigos" type="Node" parent="."]
 
 [node name="trap" parent="." instance=ExtResource("8_iopqc")]
-position = Vector2(85, -6)
+position = Vector2(88, -9)
+collision_layer = 4
 
 [node name="trap2" type="StaticBody2D" parent="." groups=["traps"]]
 position = Vector2(169, -71)
@@ -1844,10 +1975,10 @@ pitch_scale = 1.71
 modulate = Color(1, 1, 1, 0.67058825)
 z_index = 11
 z_as_relative = false
-offset_left = -21.0
-offset_top = 48.0
-offset_right = 243.0
-offset_bottom = 65.0
+offset_left = -20.0
+offset_top = 56.0
+offset_right = 244.0
+offset_bottom = 73.0
 theme_override_font_sizes/normal_font_size = 8
 bbcode_enabled = true
 text = "[tornado radius=1 freq=2.8 connected=1] > Você entrou no na arena ...[/tornado]"
@@ -2022,6 +2153,7 @@ region_rect = Rect2(96, 656, 16, 16)
 [node name="livro" parent="." instance=ExtResource("124_fjioo")]
 position = Vector2(153, -74)
 
+[connection signal="gui_input" from="UI/topo/turno" to="UI" method="_on_slot_3_gui_input"]
 [connection signal="gui_input" from="UI/topo/setup" to="." method="_on_setup_gui_input"]
 
 [editable path="UI"]

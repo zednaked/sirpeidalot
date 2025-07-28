@@ -197,6 +197,7 @@ func _attack_player(direction: Vector2):
 # Desativa sua colisão e executa a animação de morte.
 func _die_async ():
 	is_dead = true
+	numero_acoes = -1 
 	queue_free()
 	if is_instance_valid(collision_shape):
 		collision_shape.disabled = true

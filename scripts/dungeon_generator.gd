@@ -162,6 +162,7 @@ func _on_player_action_taken():
 	var _unused = await _process_enemy_turns()
 
 func _process_enemy_turns():
+	$UI/topo/turno/inimigo.visible = true
 	var living_enemies = []
 	for enemy in enemies_container.get_children():
 		if is_instance_valid(enemy) and not (enemy.has_method("is_dead") and enemy.is_dead()):
@@ -197,13 +198,13 @@ func async_fim_turno():
 		
 		
 func _end_enemy_turn_sequence():
-
-	
+	$UI/topo/turno/inimigo.visible = false
+	await get_tree().create_timer(0.1).timeout
 	
 	if _count_living_enemies() == 0:
 		current_state = GameState.FREE_ROAM
 		if player.has_method("set_can_act"): player.set_can_act(true)
-		
+		Eventos.emit_signal("log", "todos os inimigos foram mortos")		
 		#print_debug("Último inimigo derrotado! Mudando para o modo livre.")
 		return
 
@@ -226,9 +227,9 @@ func _end_enemy_turn_sequence():
 		#todo: emitir sinal para o p2 via api
 		#emit_signal("player_turn_started")
 		#print("--- Turno do Jogador 2 ---")
-		
-		async_fim_turno()
-		atualiza_mapa_geral()
+		pass
+		#async_fim_turno()
+		#atualiza_mapa_geral()
 		
 		#todo: enviar que acabou o turno
 

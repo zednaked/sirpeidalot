@@ -7,6 +7,14 @@ enum tipo_inimigo {
 	
 }
 
+enum tipo_skill{
+	ATAQUE,
+	DEFESA,
+	RECUPERAVIDA,
+	GANHAACAO,
+	
+}
+
 enum ConteudoSlot {
 	COMIDA,
 	DINHEIRO,
