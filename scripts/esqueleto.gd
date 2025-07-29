@@ -11,7 +11,7 @@ signal action_taken
 
 # --- Constantes ---
 const TILE_SIZE = 16
-const MOVE_SPEED = 25.0
+const MOVE_SPEED = 20.0
 
 # --- Atributos ---
 @export var db: PackedScene
@@ -48,7 +48,19 @@ func _ready():
 	target_position = global_position
 	add_to_group("enemies")
 
+func is_p1_bloqueado () -> bool :
+	
+	return is_bloqueado(player_node.position)
+
 func _physics_process(delta):
+	
+	if is_p1_bloqueado() : 
+		visible = false
+	else:
+		visible = true
+		modulate = Color.WHITE
+		
+	
 	if is_dead:
 		if $animacao.get_animation() != "death":
 			if is_instance_valid(collision_shape):
@@ -64,6 +76,7 @@ func _physics_process(delta):
 	if is_dead:
 		#animated_sprite.frame = 3
 		return
+		
 	if is_moving:
 		
 		if global_position.distance_to(target_position) > 0.1:
@@ -112,6 +125,10 @@ func take_turn():
 	
 	# Se o jogador estiver dentro do alcance, decide se ataca ou se move.
 	while acoes_disponiveis > 0:
+		if is_p1_bloqueado() :
+			visible = true
+			modulate = Color.DARK_SLATE_GRAY
+		
 		if is_dead:
 			_die()
 		var temp = acoes_disponiveis	
@@ -123,7 +140,7 @@ func take_turn():
 			_attack_player(player_pos - my_pos)
 			
 		if tipo_inimigo == Goblais.tipo_inimigo.VAMPIRO:
-			if distance_to_player < (TILE_SIZE * 1.5) * 5 and acoes_disponiveis > 3 and cooldown == 0 : #faz ele nao atacar sempre de primeira
+			if distance_to_player < (TILE_SIZE * 1.5) * 5 and acoes_disponiveis > 3 and cooldown == 0 and !is_bloqueado(player_node.position) : #faz ele nao atacar sempre de primeira
 				#player_node.position.angle_to(position)
 				# em quem dispara a flecha, ex:
 				
@@ -152,7 +169,17 @@ func take_turn():
 	if get_parent().get_parent().has_node("propagador"):
 		turn_manager.atualiza_mapa_geral() #sempre que um 
 
-# --- Funções de Combate ---
+
+func is_bloqueado (target_position) -> bool :
+	
+	$VisionRayCast.set_target_position (target_position - $VisionRayCast.global_position  ) 
+	$VisionRayCast.force_raycast_update()
+	if $VisionRayCast.is_colliding():
+		if "player" in $VisionRayCast.get_collider() :
+			return  false
+			
+		return true	
+	return false
 
 func set_anim (animac: String):
 	$animacao.play (animac)

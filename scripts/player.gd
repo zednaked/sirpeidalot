@@ -6,7 +6,7 @@ signal action_taken
 
 # --- Constants ---
 const TILE_SIZE = 16
-const MOVE_SPEED = 55.0
+const MOVE_SPEED = 15.0
 var player
 # --- Attributes ---
 @export var debuff: PackedScene

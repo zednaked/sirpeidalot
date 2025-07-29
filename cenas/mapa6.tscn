@@ -2177,6 +2177,7 @@ z_index = 20
 z_as_relative = false
 texture_filter = 1
 material = SubResource("ShaderMaterial_g6klm")
+anchors_preset = -1
 offset_left = -22.0
 offset_top = -95.0
 offset_right = 245.0
@@ -2208,6 +2209,7 @@ environment = SubResource("Environment_nt56w")
 
 [node name="UI" parent="." instance=ExtResource("4_igiqj")]
 z_index = 29
+anchors_preset = -1
 offset_left = -20.0
 offset_top = -114.35152
 offset_right = 246.0
@@ -2317,6 +2319,7 @@ vertical_alignment = 1
 visible = false
 z_index = 20
 material = SubResource("CanvasItemMaterial_g6klm")
+anchors_preset = -1
 offset_left = -48.0
 offset_top = 33.351517
 offset_right = 49.613235
@@ -2402,7 +2405,7 @@ visible = false
 occluder = SubResource("OccluderPolygon2D_p8tku")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="trap" groups=["stairs"]]
-position = Vector2(0, 0.5)
+position = Vector2(0, -1.5)
 shape = SubResource("RectangleShape2D_iwfo7")
 
 [node name="animacao" type="AnimatedSprite2D" parent="trap"]
@@ -2501,6 +2504,7 @@ autoplay = "fadefrom"
 visible = false
 z_index = 2
 z_as_relative = true
+anchors_preset = -1
 mouse_filter = 2
 
 [node name="anda" type="AudioStreamPlayer2D" parent="."]
@@ -2534,6 +2538,7 @@ pitch_scale = 1.71
 modulate = Color(1, 1, 1, 0.67058825)
 z_index = 11
 z_as_relative = false
+anchors_preset = -1
 offset_left = -20.0
 offset_top = 56.0
 offset_right = 244.0
@@ -2713,6 +2718,7 @@ region_rect = Rect2(96, 656, 16, 16)
 position = Vector2(153, -74)
 
 [node name="dialogo" type="Sprite2D" parent="."]
+visible = false
 self_modulate = Color(1.3060715, 1.3060715, 1.3060715, 1)
 light_mask = 0
 z_index = 11
@@ -2723,14 +2729,16 @@ flip_h = true
 script = ExtResource("128_i076p")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="dialogo"]
+anchors_preset = -1
 offset_left = -216.12907
 offset_top = -26.022308
-offset_right = 222.58064
+offset_right = 193.54836
 offset_bottom = 74.349434
 bbcode_enabled = true
 text = "O Mestre pediu para não ser perturbado durante os experimentos. Talvez seja a hora de começar meus próprios experimentos. [tornado radius=4 freq=38.8 connected=1] Peguem-no, rapazes.[/tornado]"
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="dialogo"]
+anchors_preset = -1
 offset_left = -138.70969
 offset_top = -74.34944
 offset_right = 225.80643
@@ -2746,6 +2754,7 @@ region_enabled = true
 region_rect = Rect2(0, 0, 16, 16)
 
 [node name="Button" type="Button" parent="dialogo"]
+anchors_preset = -1
 offset_left = 167.74191
 offset_top = 29.739777
 offset_right = 216.129
