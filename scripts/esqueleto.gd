@@ -50,8 +50,14 @@ func _ready():
 
 func _physics_process(delta):
 	if is_dead:
-		if $animacao.get_animation() == "idle":
-			queue_free()
+		if $animacao.get_animation() != "death":
+			if is_instance_valid(collision_shape):
+				collision_shape.disabled = true
+		
+			animated_sprite.play("death",1,true)
+			
+			animated_sprite.frame = animated_sprite.sprite_frames.get_frame_count("death")
+		#	_die()
 	# Interpola suavemente a posição do esqueleto até o alvo se estiver se movendo.
 	
 	#$VisionRayCast.force_raycast_update()
@@ -106,7 +112,8 @@ func take_turn():
 	
 	# Se o jogador estiver dentro do alcance, decide se ataca ou se move.
 	while acoes_disponiveis > 0:
-		
+		if is_dead:
+			_die()
 		var temp = acoes_disponiveis	
 		
 		if distance_to_player < TILE_SIZE * 1.5 and acoes_disponiveis >= 2:
@@ -205,10 +212,12 @@ func _die_async ():
 	if is_instance_valid(animated_sprite):
 		animated_sprite.play("death",3,true)
 		animated_sprite.frame = 3
+
+
 	
 func _die():
 	get_parent().get_parent().get_node("morre").play()
-	if is_dead: return
+	#if is_dead: return
 	is_dead = true
 	drop = load("res://cenas/drop2.tscn")
 	#print_debug("%s está morrendo." % self.name)

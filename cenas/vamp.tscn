@@ -380,14 +380,16 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1yycb"]
-size = Vector2(20, 18.750006)
+size = Vector2(17.50001, 16.250008)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_4bm5w"]
 polygon = PackedVector2Array(5.7142854, 5.714287, 4.285714, 1.66893e-06, 1.4285713, 5.714287)
 
 [node name="vamp" type="CharacterBody2D" groups=["inimigo", "propagaveis"]]
 y_sort_enabled = true
+position = Vector2(0.99999994, 0)
 scale = Vector2(0.8, 0.8)
+collision_mask = 3
 script = ExtResource("1_schca")
 db = ExtResource("2_cqgs4")
 detection_range = 120
@@ -406,14 +408,15 @@ metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 y_sort_enabled = true
-position = Vector2(0, -0.62499833)
-scale = Vector2(0.99999946, 0.99999946)
+position = Vector2(7.1525574e-07, -0.62499934)
+scale = Vector2(0.99999934, 0.99999934)
 shape = SubResource("RectangleShape2D_1yycb")
 metadata/_edit_lock_ = true
 
 [node name="VisionRayCast" type="RayCast2D" parent="."]
 position = Vector2(0, -0.71428454)
 target_position = Vector2(0, 16)
+collision_mask = 3
 metadata/_edit_lock_ = true
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]

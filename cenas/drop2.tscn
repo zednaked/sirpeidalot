@@ -2243,6 +2243,8 @@ tipo = 3
 dano = 5
 
 [node name="drop" type="Area2D" parent="." groups=["drop"]]
+collision_layer = 8
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="drop"]
 position = Vector2(7.4859467, 6.794592)

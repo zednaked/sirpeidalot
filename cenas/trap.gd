@@ -1,5 +1,18 @@
-extends StaticBody2D
-func collect():
-	# Se este objeto for uma porta, atualiza a grade de navegação antes de desaparecer.
-	if is_in_group("traps"):
-		$animacao.play("trapchao")	
+extends Area2D
+var cooldown = 0 
+
+
+
+
+
+
+
+func _on_body_entered(body: Node2D) -> void:
+	if !cooldown:
+		for infeliz in  get_overlapping_bodies():
+			if "take_damage" in infeliz:
+				if infeliz.take_damage(50):
+					print ("creu")
+				$animacao.play("trapchao")
+				cooldown = 2	
+	

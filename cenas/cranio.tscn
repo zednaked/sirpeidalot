@@ -98,7 +98,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1yycb"]
-size = Vector2(25.714287, 23.57143)
+size = Vector2(15.714289, 17.142864)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_4bm5w"]
 polygon = PackedVector2Array(5.7142854, 5.714287, 4.285714, 1.66893e-06, 1.4285713, 5.714287)
@@ -106,9 +106,10 @@ polygon = PackedVector2Array(5.7142854, 5.714287, 4.285714, 1.66893e-06, 1.42857
 [node name="cranio" type="CharacterBody2D" groups=["inimigo", "propagaveis"]]
 y_sort_enabled = true
 scale = Vector2(0.7, 0.7)
+collision_mask = 3
 script = ExtResource("1_7p2de")
 health = 25
-damage = 5
+damage = 20
 detection_range = 200
 numero_acoes = 3
 tipo_inimigo = 2
@@ -124,14 +125,15 @@ offset = Vector2(3, -6)
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(2.857143, -3.9285707)
-scale = Vector2(0.9999998, 0.9999998)
+position = Vector2(3.571427, -5.714284)
+scale = Vector2(0.9999996, 0.9999996)
 shape = SubResource("RectangleShape2D_1yycb")
 metadata/_edit_lock_ = true
 
 [node name="VisionRayCast" type="RayCast2D" parent="."]
 position = Vector2(0, -0.71428454)
 target_position = Vector2(0, 16)
+collision_mask = 3
 metadata/_edit_lock_ = true
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]

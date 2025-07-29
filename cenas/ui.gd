@@ -12,3 +12,6 @@ func _on_slot_3_gui_input(event: InputEvent) -> void:
 func _on_setup_gui_input(event: InputEvent) -> void:
 
 	pass # Replace with function body.
+
+func _physics_process(delta: float) -> void:
+	$topo/vida.value = get_tree().get_first_node_in_group("player").health

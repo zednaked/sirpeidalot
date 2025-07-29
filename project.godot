@@ -52,6 +52,7 @@ player=""
 inimigo=""
 player2=""
 drop=""
+traps=""
 
 [input]
 

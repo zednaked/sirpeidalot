@@ -169,7 +169,7 @@ func _pickup_key(key_node):
 
 func take_damage(amount: int):
 	health -= amount
-	print_debug("Player took %d damage, has %d health left." % [amount, health])
+	#print_debug("Player took %d damage, has %d health left." % [amount, health])
 	
 
 # --- Helper Functions ---

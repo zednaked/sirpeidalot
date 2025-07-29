@@ -200,7 +200,9 @@ func async_fim_turno():
 func _end_enemy_turn_sequence():
 	$UI/topo/turno/inimigo.visible = false
 	await get_tree().create_timer(0.1).timeout
-	
+	for trap in get_tree().get_nodes_in_group("traps"):
+		trap.cooldown -= 1
+		if trap.cooldown < 0 : trap.cooldown = 0 
 	if _count_living_enemies() == 0:
 		current_state = GameState.FREE_ROAM
 		if player.has_method("set_can_act"): player.set_can_act(true)
