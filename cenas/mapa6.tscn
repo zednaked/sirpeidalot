@@ -1,4 +1,4 @@
-[gd_scene load_steps=149 format=4 uid="uid://b7uugdrnn6oph"]
+[gd_scene load_steps=153 format=4 uid="uid://b7uugdrnn6oph"]
 
 [ext_resource type="Script" uid="uid://cfwe642akir1" path="res://scripts/dungeon_generator.gd" id="1_8k86t"]
 [ext_resource type="Shader" uid="uid://7ver7822au4k" path="res://cenas/fog2.gdshader" id="2_fjioo"]
@@ -7,6 +7,8 @@
 [ext_resource type="TileSet" uid="uid://74d8818b5tw4" path="res://cenas/tilemap.tres" id="5_06skc"]
 [ext_resource type="Script" uid="uid://co3gmnsr47g1" path="res://cenas/skill.gd" id="6_0f64d"]
 [ext_resource type="Script" uid="uid://dc7ijepqqe56a" path="res://cenas/trap.gd" id="7_c0njb"]
+[ext_resource type="Texture2D" uid="uid://bylaih1phdvao" path="res://sprites/painelquadrado.png" id="7_igiqj"]
+[ext_resource type="Texture2D" uid="uid://b78ll8riaumeo" path="res://sprites/painel1.png" id="8_06skc"]
 [ext_resource type="Texture2D" uid="uid://cde3wlbqgay87" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/flag/flag_1.png" id="9_ljhvc"]
 [ext_resource type="Texture2D" uid="uid://cun3015t1hx51" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/flag/flag_2.png" id="10_dxpe4"]
 [ext_resource type="Texture2D" uid="uid://jjlu5m5cbge8" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/flag/flag_3.png" id="11_1h32x"]
@@ -125,6 +127,8 @@
 [ext_resource type="Texture2D" uid="uid://bdglltdtt3eyu" path="res://sprites/16x16.png" id="123_fjioo"]
 [ext_resource type="Script" uid="uid://8uev721cgp1f" path="res://cenas/log.gd" id="123_m7ri5"]
 [ext_resource type="PackedScene" uid="uid://cyll22b1de77x" path="res://cenas/livro.tscn" id="124_fjioo"]
+[ext_resource type="Script" uid="uid://batb5fqe4cfk0" path="res://cenas/dialogo.gd" id="128_i076p"]
+[ext_resource type="Texture2D" uid="uid://ii5r2qm08o5t" path="res://2D Dungeon Asset Pack_v5.2/character and tileset/Dungeon_Enemy_v2.png" id="129_iopqc"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g6klm"]
 shader = ExtResource("2_fjioo")
@@ -2313,24 +2317,41 @@ vertical_alignment = 1
 visible = false
 z_index = 20
 material = SubResource("CanvasItemMaterial_g6klm")
+offset_left = -48.0
+offset_top = 33.351517
+offset_right = 49.613235
+offset_bottom = 127.36749
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_uyo7u")
 
-[node name="Panel" parent="UI/inventario" index="0"]
+[node name="Painelquadrado" type="Sprite2D" parent="UI/inventario" index="0"]
+self_modulate = Color(1.1333088, 1.1333088, 1.1333088, 1)
+light_mask = 0
+position = Vector2(48.769745, 47.37556)
+scale = Vector2(0.27338985, 0.30601588)
+texture = ExtResource("7_igiqj")
+
+[node name="Panel" parent="UI/inventario" index="1"]
 modulate = Color(0.37882295, 0.37882295, 0.37882295, 1)
 self_modulate = Color(1.1745039, 1.1745039, 1.1745039, 1)
 
-[node name="Panel2" parent="UI/inventario" index="1"]
+[node name="Panel2" parent="UI/inventario" index="2"]
 self_modulate = Color(0.4026037, 0.40260395, 0.40260383, 1)
+offset_top = 63.514816
+offset_bottom = 83.62791
 
-[node name="mochila" parent="UI/inventario" index="2"]
+[node name="mochila" parent="UI/inventario" index="3"]
 z_index = 4
 focus_mode = 2
 
-[node name="Label" parent="UI/inventario" index="4"]
-offset_left = -66.85814
+[node name="equipado" parent="UI/inventario" index="4"]
+offset_top = 65.81438
+offset_bottom = 81.27981
+
+[node name="Label" parent="UI/inventario" index="5"]
+offset_left = -44.451195
 offset_top = 4.416725
-offset_right = 70.005615
+offset_right = 45.548805
 offset_bottom = -13.6741295
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -2370,7 +2391,7 @@ metadata/_edit_lock_ = true
 [node name="inimigos" type="Node" parent="."]
 
 [node name="trap" type="Area2D" parent="." groups=["traps"]]
-position = Vector2(184, 8)
+position = Vector2(137, -7)
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("7_c0njb")
@@ -2389,7 +2410,7 @@ sprite_frames = SubResource("SpriteFrames_wf35e")
 animation = &"trapchao"
 
 [node name="trap2" type="Area2D" parent="." groups=["traps"]]
-position = Vector2(121, -5)
+position = Vector2(212, -19)
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("117_0f64d")
@@ -2411,7 +2432,7 @@ frame = 4
 frame_progress = 1.0
 
 [node name="trap4" type="Area2D" parent="." groups=["traps"]]
-position = Vector2(72, -67)
+position = Vector2(24, -35)
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("117_0f64d")
@@ -2691,12 +2712,53 @@ region_rect = Rect2(96, 656, 16, 16)
 [node name="livro" parent="." instance=ExtResource("124_fjioo")]
 position = Vector2(153, -74)
 
+[node name="dialogo" type="Sprite2D" parent="."]
+self_modulate = Color(1.3060715, 1.3060715, 1.3060715, 1)
+light_mask = 0
+z_index = 11
+position = Vector2(118.00001, -22)
+scale = Vector2(0.31, 0.269)
+texture = ExtResource("8_06skc")
+flip_h = true
+script = ExtResource("128_i076p")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="dialogo"]
+offset_left = -216.12907
+offset_top = -26.022308
+offset_right = 222.58064
+offset_bottom = 74.349434
+bbcode_enabled = true
+text = "O Mestre pediu para não ser perturbado durante os experimentos. Talvez seja a hora de começar meus próprios experimentos. [tornado radius=4 freq=38.8 connected=1] Peguem-no, rapazes.[/tornado]"
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="dialogo"]
+offset_left = -138.70969
+offset_top = -74.34944
+offset_right = 225.80643
+offset_bottom = -52.0446
+text = "Ser das profundezas :"
+
+[node name="Sprite2D" type="Sprite2D" parent="dialogo"]
+texture_filter = 1
+position = Vector2(-187.0968, -81.78438)
+scale = Vector2(4.913307, 4.913307)
+texture = ExtResource("129_iopqc")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 16)
+
+[node name="Button" type="Button" parent="dialogo"]
+offset_left = 167.74191
+offset_top = 29.739777
+offset_right = 216.129
+offset_bottom = 66.914505
+text = "Ok"
+
 [connection signal="gui_input" from="UI/topo/turno" to="UI" method="_on_slot_3_gui_input"]
 [connection signal="gui_input" from="UI/topo/setup" to="." method="_on_setup_gui_input"]
 [connection signal="area_entered" from="trap" to="trap" method="_on_area_entered"]
 [connection signal="body_entered" from="trap" to="trap" method="_on_body_entered"]
 [connection signal="body_entered" from="trap2" to="trap2" method="_on_body_entered"]
 [connection signal="body_entered" from="trap4" to="trap4" method="_on_body_entered"]
+[connection signal="pressed" from="dialogo/Button" to="dialogo" method="_on_button_pressed"]
 
 [editable path="UI"]
 [editable path="transicao"]
