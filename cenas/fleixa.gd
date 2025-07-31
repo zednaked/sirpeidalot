@@ -23,6 +23,6 @@ func _physics_process(delta: float) -> void:
 				return
 					
 			#todo toma dano
-			get_tree().get_first_node_in_group("player").take_damage(20)
+			get_tree().get_first_node_in_group("player").take_damage(4)
 			disparado = false
 			queue_free()

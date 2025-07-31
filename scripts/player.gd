@@ -6,14 +6,15 @@ signal action_taken
 
 # --- Constants ---
 const TILE_SIZE = 16
-const MOVE_SPEED = 15.0
+const MOVE_SPEED = 22.0
 var player
 # --- Attributes ---
 @export var debuff: PackedScene
 @export var health: int = 100
 
-@export var damage: int = 50
+@export var damage: int = 5
 var has_key: bool = true
+var chance_dodge: int = 10
 
 # --- References ---
 @onready var animated_sprite: AnimatedSprite2D = $animacao
@@ -23,6 +24,15 @@ var has_key: bool = true
 var can_act: bool = false
 var is_moving: bool = false
 var target_position: Vector2
+
+func doesdodge()  -> bool:
+	randomize()
+	var temp = randi_range(0,100)
+	
+	if chance_dodge > temp:
+		return true
+		
+	return false
 
 func on_vez_jogador():
 	can_act = true
@@ -168,6 +178,11 @@ func _pickup_key(key_node):
 # --- Combat Functions ---
 
 func take_damage(amount: int):
+	if doesdodge():
+		$microtexto.start ("Esquivou !!!!" )
+		return
+		
+	$microtexto.start ("-" + str (amount) )
 	health -= amount
 	get_parent().get_node("Camera2D").shake(0.1, 5)
 	

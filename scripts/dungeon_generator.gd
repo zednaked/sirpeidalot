@@ -12,6 +12,8 @@ extends Node2D
 @export var floor_tilemap: TileMapLayer  # Camada com os tiles de chão (andáveis)
 @export var walls_tilemap: TileMapLayer  # Camada com paredes e obstáculos
 
+@export var nini: int = 5
+
 var packedp1 : PackedScene = preload("res://cenas/Jogador.tscn")
 var packedp2 : PackedScene = preload("res://cenas/player2.tscn")
 
@@ -163,6 +165,7 @@ func _on_player_action_taken():
 	var _unused = await _process_enemy_turns()
 
 func _process_enemy_turns():
+	#await get_tree().create_timer(0.5).timeout
 	$UI/topo/turno/inimigo.visible = true
 	var living_enemies = []
 	for enemy in enemies_container.get_children():
@@ -178,7 +181,7 @@ func _process_enemy_turns():
 			
 			enemy.take_turn()
 			await enemy.action_taken
-	
+		#	await get_tree().create_timer(0.3).timeout
 	_end_enemy_turn_sequence()
 
 
@@ -385,7 +388,7 @@ func start_game():
 		
 	
 	
-	var ninimigos = 4
+	
 	
 	var spp1 = get_tree().get_nodes_in_group("spawn_player1")[0]
 	
@@ -411,7 +414,7 @@ func start_game():
 		
 		
 		
-		for n in ninimigos :
+		for n in nini :
 			var inimigo = inimigospk.pick_random().instantiate()
 			inimigo.position = get_tree().get_nodes_in_group("spawn_inimigos").pick_random().position
 			

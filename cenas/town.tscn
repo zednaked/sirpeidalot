@@ -1,4 +1,4 @@
-[gd_scene load_steps=183 format=4 uid="uid://gajhpi1vsd7t"]
+[gd_scene load_steps=187 format=4 uid="uid://gajhpi1vsd7t"]
 
 [ext_resource type="Script" uid="uid://cfwe642akir1" path="res://scripts/dungeon_generator.gd" id="1_cxase"]
 [ext_resource type="Shader" uid="uid://7ver7822au4k" path="res://cenas/fog2.gdshader" id="2_32udx"]
@@ -135,6 +135,7 @@
 [ext_resource type="Texture2D" uid="uid://cx8isr32873tp" path="res://sprites/Meza.png" id="132_qkthq"]
 [ext_resource type="Script" uid="uid://cmdr0ghrfuph7" path="res://cenas/tacher.gd" id="134_0rnp4"]
 [ext_resource type="Script" uid="uid://1wrl1oerc7j8" path="res://cenas/getulho.gd" id="135_0rnp4"]
+[ext_resource type="Script" uid="uid://dxbycrtyxih0r" path="res://cenas/microtexto.gd" id="136_lnbvb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g6klm"]
 shader = ExtResource("2_32udx")
@@ -146,7 +147,7 @@ shader_parameter/fog_direction = Vector2(1.2, 1)
 shader_parameter/scroll_noise_tex = true
 shader_parameter/noise_scroll_direction = Vector2(0.4, 0.1)
 
-[sub_resource type="Shader" id="Shader_8k86t"]
+[sub_resource type="Shader" id="Shader_lnbvb"]
 code = "shader_type canvas_item;
 
 uniform vec2 mask_position = vec2(0.5, 0.5);
@@ -172,10 +173,10 @@ void fragment() {
 "
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fjioo"]
-shader = SubResource("Shader_8k86t")
+shader = SubResource("Shader_lnbvb")
 shader_parameter/mask_position = Vector2(0.565, 0.12)
 shader_parameter/mask_size = Vector2(0.215, 0.27)
-shader_parameter/darkness = 0.9450000000069848
+shader_parameter/darkness = 0.7400000000052387
 shader_parameter/edge_softness = 0.3249999999970896
 
 [sub_resource type="Environment" id="Environment_nt56w"]
@@ -1748,12 +1749,12 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="Gradient" id="Gradient_x8fve"]
+[sub_resource type="Gradient" id="Gradient_lnbvb"]
 offsets = PackedFloat32Array(0.07017544, 0.64327484)
 colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_chwkk"]
-gradient = SubResource("Gradient_x8fve")
+gradient = SubResource("Gradient_lnbvb")
 fill = 1
 fill_from = Vector2(0.4871795, 0.47435898)
 
@@ -1818,6 +1819,80 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xk3gj"]
 size = Vector2(23.194643, 25.022564)
+
+[sub_resource type="Animation" id="Animation_lnbvb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:theme_override_colors/default_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_0rnp4"]
+resource_name = "sobe"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.93333334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-1.7181207, -12.511278)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:theme_override_colors/default_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.6666667, 0.9666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.96666664),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"fim"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xk3gj"]
+_data = {
+&"RESET": SubResource("Animation_lnbvb"),
+&"sobe": SubResource("Animation_0rnp4")
+}
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2u25j"]
 atlas = ExtResource("131_gim83")
@@ -1903,7 +1978,6 @@ walls_tilemap = NodePath("paredes")
 metadata/_edit_horizontal_guides_ = [-95.0]
 
 [node name="fundo" type="ColorRect" parent="."]
-visible = false
 modulate = Color(1, 0.23529413, 1, 1)
 self_modulate = Color(1, 1, 1, 0.39215687)
 z_index = 20
@@ -2165,11 +2239,8 @@ position = Vector2(105, -78)
 autoplay = "fadefrom"
 
 [node name="rect" parent="transicao" index="0"]
-visible = false
 z_index = 2
 z_as_relative = true
-anchors_preset = -1
-mouse_filter = 2
 
 [node name="anda" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("120_22ihi")
@@ -2431,7 +2502,7 @@ shape = SubResource("RectangleShape2D_lnbvb")
 visible = false
 modulate = Color(1.4525887, 1.4525887, 1.4525887, 1)
 light_mask = 0
-z_index = 3
+z_index = 19
 position = Vector2(-13.538467, -84)
 scale = Vector2(0.45355985, 0.4196239)
 texture = ExtResource("7_0rnp4")
@@ -2664,7 +2735,7 @@ text = "cancelar"
 visible = false
 modulate = Color(1.4525887, 1.4525887, 1.4525887, 1)
 light_mask = 0
-z_index = 3
+z_index = 19
 position = Vector2(-13.538467, -84)
 scale = Vector2(0.45355985, 0.4196239)
 texture = ExtResource("7_0rnp4")
@@ -2905,7 +2976,7 @@ text = "cancelar"
 visible = false
 modulate = Color(1.4525887, 1.4525887, 1.4525887, 1)
 light_mask = 0
-z_index = 3
+z_index = 19
 position = Vector2(-13.538467, -84)
 scale = Vector2(0.45355985, 0.4196239)
 texture = ExtResource("7_0rnp4")
@@ -3171,8 +3242,8 @@ frame_progress = 0.013320566
 [node name="PointLight2D" type="PointLight2D" parent="fogo"]
 position = Vector2(3.6923018, 3.6923075)
 scale = Vector2(3.1923082, 3.2307694)
-color = Color(1, 0.70980394, 0.33333334, 1)
-energy = 1.09
+color = Color(0.98421365, 0.8309806, 0.7121054, 1)
+energy = 2.41
 shadow_enabled = true
 texture = SubResource("GradientTexture2D_chwkk")
 texture_scale = 1.51
@@ -3248,6 +3319,30 @@ collision_mask = 2
 position = Vector2(-0.42954254, 1.4436102)
 scale = Vector2(1, 0.9999998)
 shape = SubResource("RectangleShape2D_xk3gj")
+
+[node name="microtexto" type="Node2D" parent="tacher"]
+modulate = Color(0.18230277, 0.6785568, 0.38121238, 1)
+scale = Vector2(1, 0.9999998)
+script = ExtResource("136_lnbvb")
+
+[node name="texto" type="RichTextLabel" parent="tacher/microtexto"]
+anchors_preset = -1
+offset_left = -31.785233
+offset_top = -16.360905
+offset_right = 34.36241
+offset_bottom = 1.9248123
+size_flags_vertical = 0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/normal_font_size = 7
+bbcode_enabled = true
+text = "[tornado radius=0.7 freq=24.2 connected=1]Opa ![/tornado]"
+horizontal_alignment = 1
+
+[node name="animacao" type="AnimationPlayer" parent="tacher/microtexto/texto"]
+libraries = {
+&"": SubResource("AnimationLibrary_xk3gj")
+}
+autoplay = "sobe"
 
 [node name="fogo2" type="AnimatedSprite2D" parent="."]
 visible = false
@@ -3592,6 +3687,29 @@ collision_mask = 2
 position = Vector2(3.8657608, -2.8872166)
 scale = Vector2(1, 0.99999976)
 shape = SubResource("RectangleShape2D_xk3gj")
+
+[node name="microtexto" type="Node2D" parent="getulho"]
+modulate = Color(0.18230277, 0.6785568, 0.38121238, 1)
+scale = Vector2(1, 0.9999998)
+script = ExtResource("136_lnbvb")
+
+[node name="texto" type="RichTextLabel" parent="getulho/microtexto"]
+anchors_preset = -1
+offset_left = -31.785233
+offset_top = -16.360905
+offset_right = 34.36241
+offset_bottom = 1.9248123
+size_flags_vertical = 0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/normal_font_size = 7
+bbcode_enabled = true
+horizontal_alignment = 1
+
+[node name="animacao" type="AnimationPlayer" parent="getulho/microtexto/texto"]
+libraries = {
+&"": SubResource("AnimationLibrary_xk3gj")
+}
+autoplay = "sobe"
 
 [connection signal="gui_input" from="UI/topo/turno" to="UI" method="_on_slot_3_gui_input"]
 [connection signal="gui_input" from="UI/topo/setup" to="." method="_on_setup_gui_input"]

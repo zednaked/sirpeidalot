@@ -8,4 +8,6 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 
 func _on_button_pressed() -> void:
 	$venda.visible = false
+	$microtexto.start("Volte sempre")
+	
 	pass # Replace with function body.

@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://cmdjbl5nkg0mx"]
+[gd_scene load_steps=63 format=3 uid="uid://cmdjbl5nkg0mx"]
 
 [ext_resource type="Texture2D" uid="uid://baife1m822x8f" path="res://sprites/Enemy_Animations_Set/enemies-skeleton1_attack.png" id="1_b66pk"]
 [ext_resource type="Script" uid="uid://dqgyx8jhdbw4p" path="res://scripts/esqueleto.gd" id="1_gq2x8"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cwq1qpxufri3" path="res://sprites/Enemy_Animations_Set/enemies-skeleton1_movement.png" id="5_i8qh3"]
 [ext_resource type="PackedScene" uid="uid://cjo70h14cluga" path="res://cenas/envenenado.tscn" id="7_re4gi"]
 [ext_resource type="PackedScene" uid="uid://df43caxqf3q3" path="res://cenas/arco.tscn" id="8_ey6uc"]
+[ext_resource type="Script" uid="uid://dxbycrtyxih0r" path="res://cenas/microtexto.gd" id="9_i8qh3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_bkqu4"]
 atlas = ExtResource("1_b66pk")
@@ -372,6 +373,80 @@ size = Vector2(20.000011, 18.571442)
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_4bm5w"]
 polygon = PackedVector2Array(5.7142854, 5.714287, 4.285714, 1.66893e-06, 1.4285713, 5.714287)
 
+[sub_resource type="Animation" id="Animation_lnbvb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:theme_override_colors/default_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_0rnp4"]
+resource_name = "sobe"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.93333334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-1.7181207, -12.511278)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:theme_override_colors/default_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.6666667, 0.9666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.96666664),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"fim"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xk3gj"]
+_data = {
+&"RESET": SubResource("Animation_lnbvb"),
+&"sobe": SubResource("Animation_0rnp4")
+}
+
 [node name="esqueleto" type="CharacterBody2D" groups=["inimigo", "propagaveis"]]
 y_sort_enabled = true
 scale = Vector2(0.7, 0.7)
@@ -414,3 +489,27 @@ metadata/_edit_lock_ = true
 
 [node name="fleixa" parent="." instance=ExtResource("8_ey6uc")]
 visible = false
+
+[node name="microtexto" type="Node2D" parent="."]
+modulate = Color(0.18230277, 0.6785568, 0.38121238, 1)
+scale = Vector2(1, 0.9999998)
+script = ExtResource("9_i8qh3")
+
+[node name="texto" type="RichTextLabel" parent="microtexto"]
+anchors_preset = -1
+offset_left = -31.785233
+offset_top = -16.360905
+offset_right = 34.36241
+offset_bottom = 1.9248123
+size_flags_vertical = 0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/normal_font_size = 7
+bbcode_enabled = true
+text = "[tornado radius=0.7 freq=24.2 connected=1]Opa ![/tornado]"
+horizontal_alignment = 1
+
+[node name="animacao" type="AnimationPlayer" parent="microtexto/texto"]
+libraries = {
+&"": SubResource("AnimationLibrary_xk3gj")
+}
+autoplay = "sobe"

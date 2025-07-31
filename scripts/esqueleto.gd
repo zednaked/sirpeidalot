@@ -22,6 +22,7 @@ const MOVE_SPEED = 20.0
 @export var numero_acoes = 2
 @onready var arco : PackedScene = preload("res://cenas/arco.tscn")
 @export var tipo_inimigo : Goblais.tipo_inimigo
+@export var chance_dodge = 10
 
 var acoes_disponiveis = 2 # a cada inicio 
 
@@ -137,7 +138,9 @@ func take_turn():
 			
 			Eventos.emit_signal("log", str( name + " te atacou"))
 			acoes_disponiveis -=2
+			await get_tree().create_timer(0.5).timeout
 			_attack_player(player_pos - my_pos)
+			
 			
 		if tipo_inimigo == Goblais.tipo_inimigo.VAMPIRO:
 			if distance_to_player < (TILE_SIZE * 1.5) * 5 and acoes_disponiveis > 3 and cooldown == 0 and !is_bloqueado(player_node.position) : #faz ele nao atacar sempre de primeira
@@ -150,7 +153,7 @@ func take_turn():
 				get_parent().get_parent().add_child(flecha)
 				animated_sprite.play("atack")
 				acoes_disponiveis -= 3 #foça ele a atacar e ficar parado
-				await get_tree().create_timer(0.3).timeout
+				await get_tree().create_timer(0.2).timeout
 				cooldown = cooldown_max
 		
 		
@@ -159,7 +162,7 @@ func take_turn():
 			acoes_disponiveis -=1
 			_move_towards_player(player_pos)
 			
-		await get_tree().create_timer(0.3).timeout
+		await get_tree().create_timer(0.7).timeout
 		
 		if acoes_disponiveis == temp : acoes_disponiveis = -1
 		
@@ -184,10 +187,26 @@ func is_bloqueado (target_position) -> bool :
 func set_anim (animac: String):
 	$animacao.play (animac)
 	
+
+func doesdodge()  -> bool:
+	randomize()
+	var temp = randi_range(0,100)
+	
+	if chance_dodge > temp:
+		return true
+		
+	return false
 # Reduz a vida do esqueleto ao receber dano.
 func take_damage(amount: int):
+	if doesdodge() :
+		$microtexto.start("Esquivou !!!")
+		return
+	
+	$microtexto.start("-" + str(amount))
 	if is_dead:
 		return
+		
+		
 	health -= amount
 	#print_debug("%s recebeu %d de dano, vida restante: %d." % [self.name, amount, health])
 	
@@ -199,6 +218,7 @@ func take_damage(amount: int):
 	else:
 		set_anim("hurt")
 		get_parent().get_parent().get_node("they").play()
+		await get_tree().create_timer(0.3).timeout
 		
 		
 
@@ -244,6 +264,7 @@ func _die_async ():
 	
 func _die():
 	get_parent().get_parent().get_node("morre").play()
+	numero_acoes = -10
 	#if is_dead: return
 	is_dead = true
 	drop = load("res://cenas/ouro.tscn")
@@ -307,6 +328,7 @@ func _move_towards_player(player_pos: Vector2):
 		animated_sprite.play("walk")
 		get_parent().get_parent().get_node("they").play()
 		Eventos.emit_signal("log", str( name + " moveu-se em sua direção"))
+		await get_tree().create_timer(0.5).timeout
 	#else:
 		# Se não houver caminho, simplesmente termina o turno.
 	#	call_deferred("emit_signal", "action_taken")

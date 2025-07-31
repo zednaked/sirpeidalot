@@ -2751,8 +2751,6 @@ autoplay = "fadefrom"
 visible = false
 z_index = 2
 z_as_relative = true
-anchors_preset = -1
-mouse_filter = 2
 
 [node name="anda" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("118_3ghjx")
@@ -3191,6 +3189,9 @@ offset_left = -44.451195
 offset_top = 4.416725
 offset_right = 45.548805
 offset_bottom = -13.6741295
+
+[node name="transicao2" parent="." instance=ExtResource("117_y1s5a")]
+autoplay = "fadefrom"
 
 [connection signal="area_entered" from="trap" to="trap" method="_on_area_entered"]
 [connection signal="body_entered" from="trap" to="trap" method="_on_body_entered"]
