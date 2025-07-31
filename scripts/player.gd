@@ -12,7 +12,7 @@ var player
 @export var debuff: PackedScene
 @export var health: int = 100
 
-@export var damage: int = 25
+@export var damage: int = 50
 var has_key: bool = true
 
 # --- References ---
@@ -169,6 +169,8 @@ func _pickup_key(key_node):
 
 func take_damage(amount: int):
 	health -= amount
+	get_parent().get_node("Camera2D").shake(0.1, 5)
+	
 	#print_debug("Player took %d damage, has %d health left." % [amount, health])
 	
 

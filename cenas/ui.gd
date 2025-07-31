@@ -15,3 +15,5 @@ func _on_setup_gui_input(event: InputEvent) -> void:
 
 func _physics_process(delta: float) -> void:
 	$topo/vida.value = get_tree().get_first_node_in_group("player").health
+	
+	$topo/ouro/label.text = str ( Goblais.ouro)

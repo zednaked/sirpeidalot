@@ -405,8 +405,10 @@ scale = Vector2(0.8, 0.8)
 collision_mask = 3
 script = ExtResource("1_subam")
 db = ExtResource("2_ijwnu")
+health = 80
+damage = 4
 detection_range = 120
-numero_acoes = 4
+numero_acoes = 3
 tipo_inimigo = 1
 
 [node name="animacao" type="AnimatedSprite2D" parent="."]

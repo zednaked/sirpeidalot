@@ -39,6 +39,7 @@ animations = [{
 }]
 
 [node name="Player" type="CharacterBody2D" groups=["player", "propagaveis"]]
+z_index = 1
 y_sort_enabled = true
 collision_layer = 2
 collision_mask = 11
@@ -46,6 +47,8 @@ platform_floor_layers = 4294967040
 platform_wall_layers = 1
 script = ExtResource("1_ec23w")
 debuff = ExtResource("2_qt7mt")
+health = 70
+damage = 55
 
 [node name="animacao" parent="." instance=ExtResource("2_81edp")]
 autoplay = "idle"

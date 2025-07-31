@@ -260,7 +260,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("72_raeyf")
 }],
-"loop": true,
+"loop": false,
 "name": &"chestgrandeabrindo",
 "speed": 5.0
 }, {

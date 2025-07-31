@@ -246,7 +246,7 @@ func _die():
 	get_parent().get_parent().get_node("morre").play()
 	#if is_dead: return
 	is_dead = true
-	drop = load("res://cenas/drop2.tscn")
+	drop = load("res://cenas/ouro.tscn")
 	#print_debug("%s está morrendo." % self.name)
 	Eventos.emit_signal("log", str( name + " morreu !"))
 	

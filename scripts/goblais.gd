@@ -43,7 +43,8 @@ enum bebidas {
 }
 
 
-var gold = 0
+
+var ouro = 0
 var armadura = 0
 var dano = 0
 var vida = 100

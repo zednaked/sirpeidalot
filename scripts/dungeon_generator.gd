@@ -19,6 +19,7 @@ var inimigo1 : PackedScene = preload("res://cenas/esqueleto.tscn")
 var inimigo2 : PackedScene = preload("res://cenas/cranio.tscn")
 var inimigo3 : PackedScene = preload("res://cenas/vamp.tscn")
 var inimigo4 : PackedScene = preload("res://cenas/esqueleto2.tscn")
+var inimigo5 : PackedScene = preload ("res://cenas/slime.tscn")
 
 var iscriador: bool = false
 
@@ -181,12 +182,12 @@ func _process_enemy_turns():
 	_end_enemy_turn_sequence()
 
 
-func atualiza_mapa_geral():
+func atualiza_mapa_geral() -> void:
 	$propagador.send_scene_state()
 	var event = {
 		"type": "atualizarmapa",
 		"source": Goblais.nome
-	}
+	} 
 	$propagador.send_event(event)	
 
 func async_fim_turno():
@@ -384,7 +385,7 @@ func start_game():
 		
 	
 	
-	var ninimigos = 8
+	var ninimigos = 4
 	
 	var spp1 = get_tree().get_nodes_in_group("spawn_player1")[0]
 	
@@ -398,29 +399,32 @@ func start_game():
 	player.action_taken.connect(_on_player_action_taken)
 	
 	#spawna inimigos para a fase 
+	if name != "town" : 
 	
-	var inimigospk: Array
-	inimigospk.append(inimigo1)
-	inimigospk.append(inimigo1)
-	inimigospk.append(inimigo2)
-	inimigospk.append(inimigo3)
-	inimigospk.append(inimigo4)
-	
-	
-	for n in ninimigos :
-		var inimigo = inimigospk.pick_random().instantiate()
-		inimigo.position = get_tree().get_nodes_in_group("spawn_inimigos").pick_random().position
+		var inimigospk: Array
+		inimigospk.append(inimigo5)
+		inimigospk.append(inimigo5)
+		inimigospk.append(inimigo1)
+		inimigospk.append(inimigo2)
+		inimigospk.append(inimigo3)
+		inimigospk.append(inimigo4)
 		
+		
+		
+		for n in ninimigos :
+			var inimigo = inimigospk.pick_random().instantiate()
+			inimigo.position = get_tree().get_nodes_in_group("spawn_inimigos").pick_random().position
+			
 
-		$inimigos.add_child(inimigo)	
-	
-	_create_astar_grid()
-	
-	# waesta repetindo for
-	for enemy in enemies_container.get_children():
-		if enemy.has_method("set_turn_manager"):
-			enemy.set_turn_manager(self)
-			enemy.player_node = player
+			$inimigos.add_child(inimigo)	
+		
+		_create_astar_grid()
+		
+		# waesta repetindo for
+		for enemy in enemies_container.get_children():
+			if enemy.has_method("set_turn_manager"):
+				enemy.set_turn_manager(self)
+				enemy.player_node = player
 
 	current_state = GameState.PLAYER_TURN
 	if player.has_method("set_can_act"):
