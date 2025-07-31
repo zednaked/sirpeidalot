@@ -3159,11 +3159,6 @@ offset_right = -109.246704
 offset_bottom = 123.02658
 text = "cancelar"
 
-[node name="Mercante" type="Sprite2D" parent="."]
-modulate = Color(0.7372549, 0.78431374, 1, 1)
-position = Vector2(72, -57.36539)
-scale = Vector2(0.15210769, 0.12313889)
-
 [node name="fogo" type="AnimatedSprite2D" parent="."]
 self_modulate = Color(1, 0.56, 0.56, 1)
 texture_filter = 1

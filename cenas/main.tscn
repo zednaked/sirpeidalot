@@ -11,7 +11,6 @@
 [ext_resource type="Texture2D" uid="uid://jjlu5m5cbge8" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/flag/flag_3.png" id="9_tqrn8"]
 [ext_resource type="Texture2D" uid="uid://cpkbe827e5es5" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/flag/flag_4.png" id="10_mgmov"]
 [ext_resource type="Texture2D" uid="uid://ckrv43hnyi6ls" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/mini_box_1/mini_box_1_1.png" id="11_3so7d"]
-[ext_resource type="PackedScene" uid="uid://do77payyy4q7l" path="res://cenas/trap.tscn" id="11_s5f7n"]
 [ext_resource type="Script" uid="uid://bm4dm4qxyuoft" path="res://scripts/propagator.gd" id="12_cnd82"]
 [ext_resource type="Texture2D" uid="uid://dnfuruynjig6e" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/mini_box_1/mini_box_1_2.png" id="12_wwtyv"]
 [ext_resource type="Texture2D" uid="uid://chbnor23by6tc" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/mini_box_1/mini_box_1_3.png" id="13_0x3b0"]
@@ -1102,6 +1101,8 @@ corner_radius_bottom_right = 3
 corner_radius_bottom_left = 3
 corner_detail = 5
 
+[sub_resource type="Theme" id="Theme_0vgyr"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0vgyr"]
 content_margin_left = 0.0
 content_margin_top = 0.0
@@ -1153,6 +1154,7 @@ autoplay = "fadefrom"
 [node name="rect" parent="transicao" index="0"]
 visible = false
 z_index = 8
+anchors_preset = -1
 focus_behavior_recursive = 2
 mouse_filter = 2
 
@@ -1184,6 +1186,7 @@ self_modulate = Color(1, 1, 1, 0.39215687)
 z_index = 8
 texture_filter = 1
 material = SubResource("ShaderMaterial_g6klm")
+anchors_preset = -1
 offset_left = -14.0
 offset_top = -94.0
 offset_right = 243.0
@@ -1210,10 +1213,6 @@ sprite_frames = ExtResource("7_1yf8t")
 animation = &"bandeira"
 autoplay = "bandeira"
 frame_progress = 0.3497669
-
-[node name="trap" parent="cenario" instance=ExtResource("11_s5f7n")]
-position = Vector2(148, 8)
-metadata/_edit_lock_ = true
 
 [node name="luzlado2" type="AnimatedSprite2D" parent="cenario"]
 position = Vector2(156, -23)
@@ -1288,6 +1287,7 @@ texture_scale = 1.47
 [node name="Panel" type="Panel" parent="."]
 visible = false
 light_mask = 0
+anchors_preset = -1
 offset_left = 66.0
 offset_top = -77.0
 offset_right = 161.0
@@ -1385,6 +1385,7 @@ autostart = true
 
 [node name="Panel2" type="Panel" parent="."]
 light_mask = 0
+anchors_preset = -1
 offset_left = 66.0
 offset_top = -78.0
 offset_right = 161.0
@@ -1434,17 +1435,20 @@ horizontal_alignment = 1
 [node name="HFlowContainer" type="HFlowContainer" parent="Panel2"]
 layout_mode = 0
 offset_left = 21.0
-offset_top = 25.0
+offset_top = 30.0
 offset_right = 75.0
 offset_bottom = 93.0
+theme = SubResource("Theme_0vgyr")
 alignment = 1
+last_wrap_alignment = 2
 
 [node name="conectar2" type="Button" parent="Panel2/HFlowContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 8
-text = "Um jogador"
+text = "Jogar"
 
 [node name="conectar" type="Button" parent="Panel2/HFlowContainer"]
+visible = false
 layout_mode = 2
 theme_override_font_sizes/font_size = 8
 text = "multiplayer"
@@ -1457,6 +1461,7 @@ text = "Configurar"
 [node name="msg" type="Panel" parent="."]
 visible = false
 light_mask = 0
+anchors_preset = -1
 offset_left = 66.0
 offset_top = -62.0
 offset_right = 161.0
