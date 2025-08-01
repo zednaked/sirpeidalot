@@ -38,21 +38,17 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		$Desafios1.visible = true
 
 func _on_button_pressed() -> void:
-	if get_parent().name == "town":
-		get_tree().change_scene_to_file("res://cenas/mapa6_1.tscn")	
-	else:
-		match get_parent().name:
-			"town":
-				get_tree().change_scene_to_file("res://cenas/criptasi.tscn")	
-			"criptasi":
-				get_tree().change_scene_to_file("res://cenas/criptasii_1.tscn")	
-			"criptasii":
-				get_tree().change_scene_to_file("res://cenas/criptasiii.tscn")	
-			"criptasiii":
-				get_tree().change_scene_to_file("res://cenas/town.tscn")	
-				pass
+	
+	match get_parent().name:
+		"town":
+			get_tree().change_scene_to_file("res://cenas/criptasi.tscn")	
+		"criptasi":
+			get_tree().change_scene_to_file("res://cenas/criptasii_1.tscn")	
+		"criptasii":
+			get_tree().change_scene_to_file("res://cenas/criptasiii.tscn")	
+		"criptasiii":
+			get_tree().change_scene_to_file("res://cenas/town.tscn")	
 		
-	pass # Replace with function body.
 
 
 func _on_button_2_pressed() -> void:

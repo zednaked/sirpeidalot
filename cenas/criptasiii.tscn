@@ -176,7 +176,7 @@ shader_parameter/mask_size = Vector2(0.215, 0.27)
 shader_parameter/darkness = 2.4750000000058208
 shader_parameter/edge_softness = 0.41000000000349246
 
-[sub_resource type="Environment" id="Environment_nt56w"]
+[sub_resource type="Environment" id="Environment_u5fay"]
 background_mode = 3
 background_energy_multiplier = 0.0
 ambient_light_source = 1
@@ -192,9 +192,9 @@ glow_bloom = 0.36
 glow_hdr_threshold = 1.56
 glow_hdr_luminance_cap = 75.45
 adjustment_enabled = true
-adjustment_brightness = 0.89
-adjustment_contrast = 1.17
-adjustment_saturation = 1.04
+adjustment_brightness = 0.7
+adjustment_contrast = 1.11
+adjustment_saturation = 1.54
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_dnrgs"]
 animations = [{
@@ -1700,7 +1700,7 @@ visibility_layer = 0
 z_index = 2
 z_as_relative = false
 position = Vector2(22, 95)
-color = Color(0.9189328, 0.6311143, 0.51356554, 1)
+color = Color(0.952735, 0.6205857, 0.70603937, 1)
 metadata/_edit_lock_ = true
 
 [node name="ColorRect2" parent="fundo" instance=ExtResource("3_ap4j7")]
@@ -1714,7 +1714,7 @@ offset_right = 271.0
 offset_bottom = 162.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="fundo"]
-environment = SubResource("Environment_nt56w")
+environment = SubResource("Environment_u5fay")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(112, -17)
