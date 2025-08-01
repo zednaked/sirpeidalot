@@ -3,7 +3,8 @@ extends Node
 enum tipo_inimigo {
 	VAMPIRO,
 	ESQUELETO,
-	CRANIO
+	CRANIO,
+	GLOBLIN,
 	
 }
 

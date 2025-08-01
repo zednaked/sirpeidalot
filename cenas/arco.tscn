@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://df43caxqf3q3"]
 
-[ext_resource type="Texture2D" uid="uid://bdglltdtt3eyu" path="res://sprites/16x16.png" id="1_8r5ac"]
+[ext_resource type="Texture2D" uid="uid://dvxb1rejes8w6" path="res://sprites/2D Pixel Dungeon Asset Pack/items and trap_animation/arrow/Just_arrow.png" id="1_8r5ac"]
 [ext_resource type="Script" uid="uid://ciwfaxjs0cr6g" path="res://cenas/fleixa.gd" id="2_8r5ac"]
 
 [sub_resource type="Gradient" id="Gradient_8r5ac"]
@@ -14,8 +14,7 @@ fill_from = Vector2(0.50427353, 0.4957265)
 
 [node name="fleixa" type="Sprite2D"]
 texture = ExtResource("1_8r5ac")
-region_enabled = true
-region_rect = Rect2(64, 688, 16, 16)
+region_rect = Rect2(176, 2144, 16, 16)
 script = ExtResource("2_8r5ac")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]

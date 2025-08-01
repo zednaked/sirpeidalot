@@ -21,6 +21,7 @@ const MOVE_SPEED = 20.0
 @export var detection_range: int = 160 /2 # Distância em pixels para detectar o jogador (5 tiles)
 @export var numero_acoes = 2
 @onready var arco : PackedScene = preload("res://cenas/arco.tscn")
+@onready var boladefogo : PackedScene = preload("res://cenas/boladefogo.tscn")
 @export var tipo_inimigo : Goblais.tipo_inimigo
 @export var chance_dodge = 10
 
@@ -141,16 +142,30 @@ func take_turn():
 			await get_tree().create_timer(0.5).timeout
 			_attack_player(player_pos - my_pos)
 			
-			
+		if tipo_inimigo == Goblais.tipo_inimigo.GLOBLIN:
+			if distance_to_player < (TILE_SIZE * 1.5) * 5 and acoes_disponiveis == 3 and cooldown == 0 and !is_bloqueado(player_node.position) : #faz ele nao atacar sempre de primeira			
+				randomize()
+				var _chance = randi_range(0,100)
+				if _chance > 30:
+					Eventos.emit_signal("log", str( name + " fez a fleixa"))
+					var flecha = arco.instantiate()
+					flecha.position = position
+					flecha.shoot (player_node.position)
+					get_parent().get_parent().add_child(flecha)
+					animated_sprite.play("atack")
+					acoes_disponiveis -= 3 #foça ele a atacar e ficar parado
+					await get_tree().create_timer(0.2).timeout
+					cooldown = cooldown_max	
+				
 		if tipo_inimigo == Goblais.tipo_inimigo.VAMPIRO:
 			if distance_to_player < (TILE_SIZE * 1.5) * 5 and acoes_disponiveis > 3 and cooldown == 0 and !is_bloqueado(player_node.position) : #faz ele nao atacar sempre de primeira
 				#player_node.position.angle_to(position)
 				# em quem dispara a flecha, ex:
-				
-				var flecha = arco.instantiate()
-				flecha.position = position
-				flecha.shoot (player_node.position)
-				get_parent().get_parent().add_child(flecha)
+				Eventos.emit_signal("log", str( name + " mandou uma bola de fogo"))
+				var _boladefogo = boladefogo.instantiate()
+				_boladefogo.position = position
+				_boladefogo.shoot (player_node.position)
+				get_parent().get_parent().add_child(_boladefogo)
 				animated_sprite.play("atack")
 				acoes_disponiveis -= 3 #foça ele a atacar e ficar parado
 				await get_tree().create_timer(0.2).timeout

@@ -1140,6 +1140,7 @@ z_index = 10
 
 [node name="UI" parent="." instance=ExtResource("3_0kcm2")]
 z_index = 13
+anchors_preset = -1
 offset_top = -98.35152
 offset_bottom = -84.35152
 
@@ -1147,6 +1148,7 @@ offset_bottom = -84.35152
 visible = false
 z_index = 10
 material = SubResource("CanvasItemMaterial_g6klm")
+anchors_preset = -1
 mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_uyo7u")
 
@@ -1220,6 +1222,7 @@ z_index = 20
 z_as_relative = false
 texture_filter = 1
 material = SubResource("ShaderMaterial_g6klm")
+anchors_preset = -1
 offset_left = -22.0
 offset_top = -95.0
 offset_right = 245.0
@@ -1453,10 +1456,8 @@ position = Vector2(216, -75)
 autoplay = "fadefrom"
 
 [node name="rect" parent="transicao" index="0"]
-visible = false
 z_index = 2
 z_as_relative = true
-mouse_filter = 2
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_nt56w")

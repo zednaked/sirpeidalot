@@ -6,7 +6,6 @@
 [node name="pup" type="Control"]
 z_index = 19
 layout_mode = 3
-anchors_preset = 0
 offset_left = 4.0
 offset_top = 1.0
 offset_right = 44.0

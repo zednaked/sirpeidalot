@@ -22,6 +22,7 @@ var inimigo2 : PackedScene = preload("res://cenas/cranio.tscn")
 var inimigo3 : PackedScene = preload("res://cenas/vamp.tscn")
 var inimigo4 : PackedScene = preload("res://cenas/esqueleto2.tscn")
 var inimigo5 : PackedScene = preload ("res://cenas/slime.tscn")
+var inimigo6 : PackedScene = preload ("res://cenas/globin.tscn")
 
 var iscriador: bool = false
 
@@ -405,12 +406,13 @@ func start_game():
 	if name != "town" : 
 	
 		var inimigospk: Array
-		inimigospk.append(inimigo5)
+		inimigospk.append(inimigo6)
 		inimigospk.append(inimigo5)
 		inimigospk.append(inimigo1)
 		inimigospk.append(inimigo2)
 		inimigospk.append(inimigo3)
 		inimigospk.append(inimigo4)
+		
 		
 		
 		

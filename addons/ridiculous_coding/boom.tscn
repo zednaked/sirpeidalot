@@ -91,7 +91,7 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ocb2c"]
 _data = {
-"default": SubResource("Animation_pxf6h")
+&"default": SubResource("Animation_pxf6h")
 }
 
 [node name="Node2D" type="Node2D"]
@@ -101,8 +101,7 @@ script = ExtResource("4")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_ld5tu")
-frame = 6
-frame_progress = 1.0
+frame_progress = 0.138352
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2")
@@ -113,8 +112,9 @@ autoplay = true
 one_shot = true
 
 [node name="Label" type="Label" parent="."]
-modulate = Color(0.852828, 1.64201, 1.90577, 1)
+modulate = Color(1.6637874, 0.83004236, 0.7133471, 1)
 texture_filter = 1
+anchors_preset = -1
 offset_left = -35.0
 offset_top = -70.0
 offset_right = 35.0
@@ -127,7 +127,7 @@ uppercase = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_ocb2c")
+&"": SubResource("AnimationLibrary_ocb2c")
 }
 autoplay = "default"
 

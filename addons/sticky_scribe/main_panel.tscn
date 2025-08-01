@@ -173,6 +173,7 @@ one_shot = true
 theme_type_variation = &"PopupMenu"
 
 [node name="BackingPanel" type="PanelContainer" parent="TagPalettePopup"]
+anchors_preset = -1
 offset_left = 4.0
 offset_top = 4.0
 offset_right = 96.0

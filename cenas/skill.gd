@@ -1,7 +1,7 @@
 extends Panel
 
 @export var tipo : Goblais.tipo_skill = Goblais.tipo_skill.ATAQUE
-@export var quantidade : int = 30
+@export var quantidade : int = 5
 
 @export var cooldown : int = 2
 

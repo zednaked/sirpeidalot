@@ -39,27 +39,15 @@ floor_tilemap = NodePath("chao")
 walls_tilemap = NodePath("paredes")
 
 [node name="UI" parent="." instance=ExtResource("2_2ttf5")]
+anchors_preset = -1
 
 [node name="inventario" parent="UI" index="1"]
 visible = false
+anchors_preset = -1
 
-[node name="slot5" parent="UI/inventario/mochila" index="0"]
-tipo = 0
-
-[node name="slot6" parent="UI/inventario/mochila" index="1"]
-tipo = 1
-
-[node name="slot7" parent="UI/inventario/mochila" index="2" instance=ExtResource("3_r2qca")]
+[node name="slot7" parent="UI/inventario/mochila" index="0" instance=ExtResource("3_r2qca")]
 layout_mode = 2
 tipo = 4
-
-[node name="slot8" parent="UI/inventario/equipado" index="0"]
-tipo = 3
-equipamentos = 1
-
-[node name="slot6" parent="UI/inventario/equipado" index="1"]
-tipo = 3
-equipamentos = 2
 
 [node name="LineEdit" type="LineEdit" parent="UI"]
 custom_minimum_size = Vector2(0, 10)
@@ -110,28 +98,28 @@ metadata/_edit_lock_ = true
 
 [node name="Node" type="Node" parent="."]
 
-[node name="esqueleto" parent="Node" groups=["propagaveis"] instance=ExtResource("5_01pqn")]
+[node name="esqueleto" parent="Node" instance=ExtResource("5_01pqn")]
 position = Vector2(39.56745, -54.450954)
 db = null
 drop = ExtResource("6_8vdgq")
 
-[node name="esqueleto4" parent="Node" groups=["propagaveis"] instance=ExtResource("5_01pqn")]
+[node name="esqueleto4" parent="Node" instance=ExtResource("5_01pqn")]
 position = Vector2(136, 39.999992)
 db = null
 
-[node name="esqueleto2" parent="Node" groups=["propagaveis"] instance=ExtResource("5_01pqn")]
+[node name="esqueleto2" parent="Node" instance=ExtResource("5_01pqn")]
 position = Vector2(237, 7.999996)
 db = null
 
-[node name="esqueleto3" parent="Node" groups=["propagaveis"] instance=ExtResource("5_01pqn")]
+[node name="esqueleto3" parent="Node" instance=ExtResource("5_01pqn")]
 position = Vector2(141, 7.9999995)
 db = null
 
-[node name="vamp" parent="Node" groups=["propagaveis"] instance=ExtResource("7_b2xba")]
+[node name="vamp" parent="Node" instance=ExtResource("7_b2xba")]
 position = Vector2(7.9999995, -9.999999)
 drop = ExtResource("8_pptv1")
 
-[node name="vamp2" parent="Node" groups=["propagaveis"] instance=ExtResource("7_b2xba")]
+[node name="vamp2" parent="Node" instance=ExtResource("7_b2xba")]
 position = Vector2(159.99998, 22)
 
 [node name="chave" parent="." groups=["key", "propagaveis"] instance=ExtResource("9_mhdwj")]
@@ -143,6 +131,7 @@ self_modulate = Color(1, 1, 1, 0.39215687)
 z_index = 8
 texture_filter = 1
 material = SubResource("ShaderMaterial_g6klm")
+anchors_preset = -1
 offset_left = -14.0
 offset_top = -94.0
 offset_right = 243.0

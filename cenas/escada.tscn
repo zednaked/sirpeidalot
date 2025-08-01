@@ -11,11 +11,9 @@ size = Vector2(17, 14)
 script = ExtResource("1_tf11a")
 
 [node name="sprite" parent="." instance=ExtResource("3_3pung")]
-visible = true
 position = Vector2(233, -87)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("4_5tvnj")
-region_enabled = true
 region_rect = Rect2(144, 48, 16, 16)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["stairs"]]

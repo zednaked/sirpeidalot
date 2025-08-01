@@ -8,6 +8,12 @@
 
 config_version=5
 
+[GD-Sync]
+
+version="0.11"
+publicKey="aec377f14e1e9131"
+privateKey="ea83eabe436389f6"
+
 [application]
 
 config/name="SirPeidalot"
@@ -19,6 +25,7 @@ config/icon="res://icon.svg"
 
 Goblais="*res://scripts/goblais.gd"
 Eventos="*res://scripts/eventos.gd"
+GDSync="*res://addons/GD-Sync/MultiplayerClient.gd"
 
 [debug]
 
@@ -38,7 +45,7 @@ window/vsync/vsync_mode=2
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/coi_serviceworker/plugin.cfg", "res://addons/gdfxr/plugin.cfg", "res://addons/ridiculous_coding/plugin.cfg")
+enabled=PackedStringArray("res://addons/GD-Sync/plugin.cfg", "res://addons/coi_serviceworker/plugin.cfg", "res://addons/gdfxr/plugin.cfg", "res://addons/ridiculous_coding/plugin.cfg")
 
 [file_customization]
 

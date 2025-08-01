@@ -109,7 +109,7 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8epm6"]
 _data = {
-"default": SubResource("Animation_u2m4c")
+&"default": SubResource("Animation_u2m4c")
 }
 
 [sub_resource type="Gradient" id="Gradient_mplh3"]
@@ -130,10 +130,9 @@ texture_filter = 1
 script = ExtResource("1_tp8nq")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-scale = Vector2(5, 5)
+scale = Vector2(1.0508465, 1.0508465)
 sprite_frames = SubResource("SpriteFrames_g4ki7")
-frame = 7
-frame_progress = 1.0
+frame_progress = 0.173128
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_xg6qd")
@@ -142,29 +141,29 @@ autoplay = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_8epm6")
+&"": SubResource("AnimationLibrary_8epm6")
 }
 autoplay = "default"
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
-emitting = false
 amount = 50
-process_material = SubResource("ParticleProcessMaterial_5k50n")
 lifetime = 0.5
 one_shot = true
 explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_5k50n")
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
 
 [node name="Label" type="Label" parent="."]
-modulate = Color(1.88557, 1.35563, 0.609976, 1)
+modulate = Color(0.64276934, 1.3741121, 0.9226092, 1)
 texture_filter = 1
+anchors_preset = -1
 offset_left = -35.0
-offset_top = -70.0
+offset_top = -32.12076
 offset_right = 35.0
-offset_bottom = -47.0
-scale = Vector2(2, 2)
+offset_bottom = -9.120762
+scale = Vector2(1.0031779, 1.0031779)
 pivot_offset = Vector2(35, 8)
 theme_override_fonts/font = ExtResource("4_ullf3")
 theme_override_font_sizes/font_size = 16

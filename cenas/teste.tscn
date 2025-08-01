@@ -19,6 +19,7 @@ position = Vector2(51, 48)
 zoom = Vector2(7.125, 7.125)
 
 [node name="Button" type="Button" parent="."]
+anchors_preset = -1
 offset_left = 22.0
 offset_top = 25.0
 offset_right = 30.0

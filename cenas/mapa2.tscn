@@ -1109,11 +1109,13 @@ floor_tilemap = NodePath("chao")
 walls_tilemap = NodePath("paredes")
 
 [node name="UI" parent="." instance=ExtResource("2_jfjtm")]
+anchors_preset = -1
 
 [node name="inventario" parent="UI" index="1"]
 visible = false
 z_index = 1
 material = SubResource("CanvasItemMaterial_g6klm")
+anchors_preset = -1
 mouse_filter = 1
 theme_override_styles/panel = ExtResource("3_e3j6b")
 
@@ -1168,6 +1170,7 @@ z_index = 2
 z_as_relative = false
 texture_filter = 1
 material = SubResource("ShaderMaterial_g6klm")
+anchors_preset = -1
 offset_left = -14.0
 offset_top = -94.0
 offset_right = 243.0
@@ -1405,10 +1408,8 @@ position = Vector2(232, -59)
 autoplay = "fadefrom"
 
 [node name="rect" parent="transicao" index="0"]
-visible = false
 z_index = 2
 z_as_relative = true
-mouse_filter = 2
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_lacmf")

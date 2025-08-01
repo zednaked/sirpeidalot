@@ -63,7 +63,7 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gwr1r"]
 _data = {
-"default": SubResource("7")
+&"default": SubResource("7")
 }
 
 [node name="Node2D" type="Node2D"]
@@ -71,18 +71,18 @@ texture_filter = 1
 script = ExtResource("1")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(-50, 0)
+position = Vector2(-70.61151, 0)
 rotation = -1.57079
 scale = Vector2(2, 2)
 sprite_frames = SubResource("6")
-frame_progress = 0.432846
+frame_progress = 0.008076036
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_gwr1r")
+&"": SubResource("AnimationLibrary_gwr1r")
 }
 autoplay = "default"
 

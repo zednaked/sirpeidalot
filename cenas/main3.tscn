@@ -51,9 +51,6 @@ position = Vector2(9, -54)
 disable_mode = 2
 metadata/_edit_group_ = true
 
-[node name="InteractionRayCast" parent="Player" index="2"]
-collide_with_areas = true
-
 [node name="bandeiradeparede" type="AnimatedSprite2D" parent="."]
 position = Vector2(7.5, -88.5)
 scale = Vector2(0.8125, 0.8125)

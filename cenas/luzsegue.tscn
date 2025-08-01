@@ -17,6 +17,7 @@ light_mask = 0
 z_index = 2
 z_as_relative = false
 material = SubResource("ShaderMaterial_fnqot")
+anchors_preset = -1
 offset_left = -26.0
 offset_top = -104.0
 offset_right = 249.0

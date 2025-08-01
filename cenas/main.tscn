@@ -1152,11 +1152,8 @@ script = ExtResource("1_0vgyr")
 autoplay = "fadefrom"
 
 [node name="rect" parent="transicao" index="0"]
-visible = false
 z_index = 8
-anchors_preset = -1
 focus_behavior_recursive = 2
-mouse_filter = 2
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 light_mask = 0
