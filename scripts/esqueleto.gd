@@ -320,7 +320,7 @@ func _move_towards_player(player_pos: Vector2):
 		emit_signal("action_taken")
 		return
 	
-	
+	turn_manager._create_astar_grid()
 	var path = turn_manager.calculate_path(global_position, player_pos)
 	#print_debug("Path for ", self.name, ": ", path)
 	

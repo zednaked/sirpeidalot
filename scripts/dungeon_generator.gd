@@ -161,8 +161,9 @@ func _on_player_action_taken():
 	
 	if player.has_method("set_can_act"): player.set_can_act(false)
 	current_state = GameState.ENEMY_TURN
+	
+	#todo ach oque nao faz sentido emitir sinal , só chamar a funcao
 	emit_signal("enemy_turn_started")
-	#print("--- Turno dos Inimigos ---")
 	var _unused = await _process_enemy_turns()
 
 func _process_enemy_turns():
@@ -170,6 +171,7 @@ func _process_enemy_turns():
 	$UI/topo/turno/inimigo.visible = true
 	var living_enemies = []
 	for enemy in enemies_container.get_children():
+		#paia>>>>>
 		if is_instance_valid(enemy) and not (enemy.has_method("is_dead") and enemy.is_dead()):
 			living_enemies.append(enemy)
 			
@@ -254,7 +256,8 @@ func _create_astar_grid():
 	
 	# Pega a posição de todas as portas para tratá-las como paredes inicialmente
 	var door_cells = []
-	for door in get_tree().get_nodes_in_group("portas"):
+	for door in get_tree().get_nodes_in_group("porta"):
+		
 		door_cells.append(floor_tilemap.local_to_map(door.global_position))
 
 	var used_cells = floor_tilemap.get_used_cells()
