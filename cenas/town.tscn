@@ -187,6 +187,10 @@ ambient_light_color = Color(0.34400043, 0.78788126, 0.7747191, 1)
 ambient_light_energy = 0.0
 reflected_light_source = 1
 tonemap_exposure = 0.83
+ssr_max_steps = 50
+ssao_radius = 2.82
+ssao_intensity = 5.77
+ssil_intensity = 3.6
 glow_enabled = true
 glow_normalized = true
 glow_intensity = 0.87
@@ -2011,6 +2015,8 @@ offset_left = -4.0
 offset_top = -9.0
 offset_right = 271.0
 offset_bottom = 162.0
+mouse_filter = 2
+metadata/_edit_lock_ = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="fundo"]
 environment = SubResource("Environment_nt56w")

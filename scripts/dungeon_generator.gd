@@ -452,3 +452,6 @@ func _on_pop_up(texto):
 	popup = popup.instantiate()
 	add_child(popup)
 	popup.get_node("RichTextLabel2").text  = texto
+
+
+	

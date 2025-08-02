@@ -45,11 +45,13 @@ window/vsync/vsync_mode=2
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/GD-Sync/plugin.cfg", "res://addons/coi_serviceworker/plugin.cfg", "res://addons/gdfxr/plugin.cfg", "res://addons/ridiculous_coding/plugin.cfg")
+enabled=PackedStringArray("res://addons/GD-Sync/plugin.cfg", "res://addons/_Godot-IDE_/plugin.cfg", "res://addons/coi_serviceworker/plugin.cfg", "res://addons/gdfxr/plugin.cfg", "res://addons/ridiculous_coding/plugin.cfg")
 
 [file_customization]
 
 folder_colors={
+"res://addons/_Godot-IDE_/plugins/": "blue",
+"res://addons/_Godot-IDE_/shared_resources/": "teal",
 "res://cenas/": "green",
 "res://scripts/": "purple"
 }
@@ -84,7 +86,6 @@ driver/threads/thread_model=2
 textures/vram_compression/import_etc2_astc=true
 lights_and_shadows/directional_shadow/soft_shadow_filter_quality=0
 lights_and_shadows/positional_shadow/soft_shadow_filter_quality=0
-anti_aliasing/screen_space_roughness_limiter/enabled=false
 textures/decals/filter=0
 textures/light_projectors/filter=0
 2d/snap/snap_2d_transforms_to_pixel=true

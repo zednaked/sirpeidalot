@@ -8,7 +8,7 @@ func _on_conectar_pressed() -> void:
 
 
 func _on_timer_timeout() -> void:
-	$propagador.fetch_jogadores()
+	pass
 
 
 func _on_voltar_pressed() -> void:

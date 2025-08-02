@@ -83,7 +83,7 @@ func _physics_process(delta):
 			emit_signal("action_taken")
 
 func _pass_turn():
-	print_debug("Player passes the turn.")
+	#print_debug("Player passes the turn.")
 	emit_signal("action_taken")
 
 func _try_move_or_attack(direction: Vector2):
@@ -101,14 +101,14 @@ func _try_move_or_attack(direction: Vector2):
 		
 		# --- ATTACK LOGIC ---
 		if collider.is_in_group("enemies") and collider.has_method("take_damage"):
-			print("Player attacks ", collider.name)
+			#print("Player attacks ", collider.name)
 			
 			#se houver skill de ataque funciona aqui
 			var incremento = 0
 			for skill in $"../UI/topo/skills".get_children():
 				if skill.tipo == Goblais.tipo_skill.ATAQUE:
 					if skill.usar() :
-						print ("aumenta dano")
+			#			print ("aumenta dano")
 						incremento = skill.quantidade
 						
 						
@@ -210,3 +210,48 @@ func set_can_act(value: bool):
 func _on_efeitos_animation_finished() -> void:
 	
 	pass # Replace with function body.
+
+
+func _on_button_button_up() -> void:
+	var ev  = InputEventAction.new()
+	ev.action = "ui_down"
+	ev.pressed = true
+	Input.parse_input_event(ev)	
+	await get_tree().create_timer(.1).timeout
+	ev.action = "ui_down"
+	ev.pressed = false
+	Input.parse_input_event(ev)		
+
+
+func _on_buttonleft_button_up() -> void:
+	var ev  = InputEventAction.new()
+	ev.action = "ui_left"
+	ev.pressed = true
+	Input.parse_input_event(ev)	
+	await get_tree().create_timer(.1).timeout
+	ev.action = "ui_left"
+	ev.pressed = false
+	Input.parse_input_event(ev)			
+
+
+func _on_buttonright_pressed() -> void:
+	var ev  = InputEventAction.new()
+	ev.action = "ui_right"
+	ev.pressed = true
+	Input.parse_input_event(ev)	
+	await get_tree().create_timer(.1).timeout
+	ev.action = "ui_right"
+	ev.pressed = false
+	Input.parse_input_event(ev)			
+
+
+func _on_buttonup_button_up() -> void:
+	
+	var ev  = InputEventAction.new()
+	ev.action = "ui_up"
+	ev.pressed = true
+	Input.parse_input_event(ev)	
+	await get_tree().create_timer(.1).timeout
+	ev.action = "ui_up"
+	ev.pressed = false
+	Input.parse_input_event(ev)			
